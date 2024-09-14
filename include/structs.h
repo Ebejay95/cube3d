@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/14 11:13:10 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/14 11:28:33 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ typedef struct s_map
 	int				height;
 }					t_map;
 
-typedef struct s_exit
-{
-	mlx_texture_t	*texture_closed;
-	mlx_texture_t	*texture_open;
-	mlx_image_t		*image_closed;
-	mlx_image_t		*image_open;
-	t_pos			*pos;
-}					t_exit;
 
 typedef struct s_mini
 {
@@ -54,40 +46,14 @@ typedef struct s_mini
 	t_delta			*delta;
 }					t_mini;
 
-typedef struct s_player
-{
-	mlx_texture_t	*texture;
-	mlx_image_t		*image;
-	t_pos			*pos;
-	mlx_image_t		*move_image;
-	int				moves;
-}					t_player;
-
-typedef struct s_enemy
-{
-	mlx_texture_t	*texture;
-	mlx_image_t		*image;
-	t_pos			*pos;
-}					t_enemy;
-
-typedef struct s_item
-{
-	mlx_texture_t	*texture;
-	mlx_image_t		*image;
-	t_pos			*pos;
-	int				collected;
-}					t_item;
 
 typedef struct s_game
 {
 	t_map			*map;
-	mlx_t			*game_window;
+	mlx_t			*game_mlx;
 	mlx_image_t		*game_image;
-	t_exit			*exit;
-	t_player		*player;
-	int				frame;
-	t_enemy			*enemy;
 	t_mini			*minimap;
+	int				frame;
 }					t_game;
 
 #endif

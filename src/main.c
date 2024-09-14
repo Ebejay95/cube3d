@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/14 11:16:33 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/14 11:31:46 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_game	*ft_initialize_game(t_map *map)
 	if (!game)
 		return (NULL);
 	game->map = map;
-	game->game_window = NULL;
+	game->game_mlx = NULL;
 	game->game_image = NULL;
 	game->frame = 0;
 	return (game);
@@ -77,11 +77,11 @@ mlx_t	*ft_init_window(t_game *game)
 {
 	// game->map->width = ft_strlen(game->map->map_as_arr[0]) * PIXEL;
 	// game->map->height = get_height(game->map->map_as_arr) * PIXEL;
-	game->game_window = mlx_init(game->map->width, game->map->height,
+	game->game_mlx = mlx_init(game->map->width, game->map->height,
 			NAME_WINDOW, true);
-	if (!game->game_window)
+	if (!game->game_mlx)
 		return (NULL);
-	return (game->game_window);
+	return (game->game_mlx);
 }
 t_game	*ft_initialize(t_map *map)
 {
@@ -103,7 +103,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 
 	game = param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(game->game_window);
+		mlx_close_window(game->game_mlx);
 
 	return ;
 }
@@ -113,9 +113,9 @@ void	start_game(t_game *game)
 	if (game)
 	{
 		mlx_set_setting(MLX_STRETCH_IMAGE, 1);
-		mlx_key_hook(game->game_window, &my_keyhook, game);
-		mlx_loop(game->game_window);
-		mlx_terminate(game->game_window);
+		mlx_key_hook(game->game_mlx, &my_keyhook, game);
+		mlx_loop(game->game_mlx);
+		mlx_terminate(game->game_mlx);
 	}
 }
 
