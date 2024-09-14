@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/14 11:12:43 by ajehle           ###   ########.fr        #
+#    Updated: 2024/09/14 12:13:14 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ vpath %.h $(INC_DIR)
 
 # INTERNAL FUNCTIONS
 FUNCTIONS	=	$(SRC_DIR)/main.c \
+				$(SRC_DIR)/ft_exit.c \
+				$(SRC_DIR)/ft_init.c \
+				$(SRC_DIR)/utils.c \
 
 # BONUS INTERNAL FUNCTIONS
 B_FUNCTIONS			=	#$(B_SRC_DIR)/animation.c \
