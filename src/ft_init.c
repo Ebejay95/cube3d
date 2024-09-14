@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/14 12:17:07 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/14 12:26:33 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_mini	*ft_initialize_minimap(t_map* map)
 	return (minimap);
 }
 
-t_game	*ft_initialize_game(t_map *map, t_mini* mini)
+t_game	*ft_initialize_game(void)
 {
 	t_game	*game;
 
@@ -57,8 +57,8 @@ t_game	*ft_initialize_game(t_map *map, t_mini* mini)
 	game = ft_calloc(sizeof(t_game), 1);
 	if (!game)
 		return (NULL);
-	game->map = map;
-	game->minimap = mini;
+	game->map = NULL;
+	game->minimap = NULL;
 	game->game_mlx = NULL;
 	game->frame = 0;
 	return (game);
@@ -104,14 +104,14 @@ mlx_t	*ft_init_window(t_game *game)
 }
 t_game	*ft_init(t_map *map, t_mini* mini)
 {
-	t_game	*game;
+	// t_game	*game;
 
-	game = ft_initialize_game(map, mini);
-	if (!game)
-		return (NULL);
-	if (start_minimap(game, map))
-		return (ft_printf("Error\n"), call_exit(game), NULL);
-	if (!ft_init_window(game))
-		return (ft_printf("Error\n"), call_exit(game), NULL);
-	return (game);
+
+	// if (!game)
+	// 	return (NULL);
+	// if (start_minimap(game, map))
+	// 	return (ft_printf("Error\n"), call_exit(game), NULL);
+	// if (!ft_init_window(game))
+	// 	return (ft_printf("Error\n"), call_exit(game), NULL);
+	// return (game);
 }

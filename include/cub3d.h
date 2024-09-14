@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/14 12:17:46 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/14 12:25:47 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	call_exit(t_game *game);
 
 // ft_init
 t_mini	*ft_initialize_minimap(t_map* map);
-t_game	*ft_initialize_game(t_map *map, t_mini* mini);
+t_game	*ft_initialize_game(void);
 t_map	*ft_initialize_map(char* string);
 t_mini	*ft_initialize_mini(void);
 mlx_t	*ft_init_window(t_game *game);
@@ -48,6 +48,11 @@ int	start_minimap(t_game *game, t_map *map);
 // utils
 void	print_2d_arr(char **map_in_arr);
 t_pos	*get_pos_unique(char **map_as_arr, char c);
+
+// loop
+void	my_keyhook(mlx_key_data_t keydata, void *param);
+void	start_game(t_game *game);
+
 
 
 
