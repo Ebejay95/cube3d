@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/17 14:58:31 by jeberle           #+#    #+#              #
-#    Updated: 2024/09/17 15:12:25 by jeberle          ###   ########.fr        #
+#    Updated: 2024/09/18 17:15:40 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,12 +73,21 @@ vpath %.d $(DEP_DIR)
 #--------------                        LIBS                       -------------#
 #------------------------------------------------------------------------------#
 
-LIBFT_DIR=libft
-LIBFT=libft.a
-LIBFT_LIB=$(LIBFT_DIR)/$(LIBFT)
-LIBFTFLAGS=-L$(LIBFT_DIR) -lft
+LIBFT_DIR = libft
+LIBFT = libft.a
+LIBFT_LIB = $(LIBFT_DIR)/$(LIBFT)
+LIBFTFLAGS = -L$(LIBFT_DIR) -lft
+LIBFT_REPO = https://github.com/Ebejay95/libft.git
 
-SYSLIBFLAGS=
+MLXFT_DIR = ./mlx42
+MLXFT = libmlx42.a
+MLXFT_BUILD_DIR = ./mlx_build
+MLXFT_LIB = $(MLXFT_BUILD_DIR)/$(MLXFT)
+MLXFTFLAGS = -L$(MLXFT_BUILD_DIR) -lmlx42 -lglfw
+MLXFT_REPO = https://github.com/codam-coding-college/MLX42.git
+
+
+SYSLIBFLAGS =
 
 #------------------------------------------------------------------------------#
 #--------------                        SRC                        -------------#
@@ -100,11 +109,11 @@ BONUS_OBJECTS := $(addprefix $(OBJ_DIR)/, $(BONUS_SRCS:%.c=%.o))
 #--------------                      COMPILE                      -------------#
 #------------------------------------------------------------------------------#
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re libft mlx init-submodules remove-submodules
 
-all: $(LIBFT_LIB) $(NAME)
+all: init-submodules $(NAME)
 
-bonus: $(LIBFT_LIB) $(NAME_BONUS)
+bonus: init-submodules $(NAME_BONUS)
 
 -include $(OBJECTS:.o=.d)
 -include $(BONUS_OBJECTS:.o=.d)
@@ -113,27 +122,70 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
-$(LIBFT_LIB):
-	@git submodule update --init --recursive --remote > /dev/null 2>&1
-	@$(MAKE) -C $(LIBFT_DIR)
+init-submodules: init-libft init-mlx
 
-$(NAME): $(OBJECTS)
-	@$(CC) -o $@ $^ $(LIBFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
+init-libft:
+	@if [ ! -d "$(LIBFT_DIR)" ]; then \
+		git submodule add -q $(LIBFT_REPO) $(LIBFT_DIR) > /dev/null 2>&1; \
+	elif [ -z "$$(ls -A $(LIBFT_DIR) 2>/dev/null)" ]; then \
+		git submodule update --init --recursive -q $(LIBFT_DIR) > /dev/null 2>&1; \
+	fi
+
+remove-submodules: remove-libft remove-mlx
+
+remove-libft:
+	@if [ -d "$(LIBFT_DIR)" ]; then \
+		git submodule deinit -q -f $(LIBFT_DIR) > /dev/null 2>&1; \
+		git rm -q -f $(LIBFT_DIR) > /dev/null 2>&1; \
+		rm -rf .git/modules/$(LIBFT_DIR) > /dev/null 2>&1; \
+	fi
+
+remove-mlx:
+	@if [ -d "$(MLXFT_DIR)" ]; then \
+		git submodule deinit -q -f $(MLXFT_DIR) > /dev/null 2>&1; \
+		git rm -q -f $(MLXFT_DIR) > /dev/null 2>&1; \
+		rm -rf .git/modules/$(MLXFT_DIR) > /dev/null 2>&1; \
+	fi
+
+$(LIBFT_LIB): init-libft
+	@if [ -d "$(LIBFT_DIR)" ] && [ -f "$(LIBFT_DIR)/Makefile" ]; then \
+		$(MAKE) -C $(LIBFT_DIR); \
+	else \
+		exit 1; \
+	fi
+
+init-mlx:
+	@if [ ! -d "$(MLXFT_DIR)" ]; then \
+		git submodule add -q $(MLXFT_REPO) $(MLXFT_DIR) > /dev/null 2>&1 || (echo "$(RED)Failed to add MLX42 submodule$(X)" && exit 1); \
+	elif [ -z "$$(ls -A $(MLXFT_DIR) 2>/dev/null)" ]; then \
+		git submodule update --init --recursive -q $(MLXFT_DIR) > /dev/null 2>&1 || (echo "$(RED)Failed to update MLX42 submodule$(X)" && exit 1); \
+	fi
+
+$(MLXFT_LIB): init-mlx
+	@if [ ! -f "$(MLXFT_LIB)" ]; then \
+		echo "$(YELLOW)Building MLX42...$(X)"; \
+		mkdir -p $(MLXFT_BUILD_DIR); \
+		cmake -S $(MLXFT_DIR) -B $(MLXFT_BUILD_DIR) && \
+		cmake --build $(MLXFT_BUILD_DIR) --parallel || \
+		(echo "$(RED)Failed to build MLX42$(X)" && exit 1); \
+	fi
+
+$(NAME): $(LIBFT_LIB) $(MLXFT_LIB) $(OBJECTS)
+	@$(CC) -o $@ $(OBJECTS) $(LIBFTFLAGS) $(MLXFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
 	@echo "$(SUCCESS)"
 
-$(NAME_BONUS): $(BONUS_OBJECTS)
-	@$(CC) -o $@ $^ $(LIBFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
+$(NAME_BONUS): $(LIBFT_LIB) $(MLXFT_LIB) $(BONUS_OBJECTS)
+	@$(CC) -o $@ $(BONUS_OBJECTS) $(LIBFTFLAGS) $(MLXFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
 	@echo "$(SUCCESS)"
 
-clean:
+clean: remove-submodules
 	@rm -rf $(OBJ_DIR)
-	@$(MAKE) -C $(LIBFT_DIR) clean
-	@echo "$(RED)objects deleted$(X)"
+	@rm -rf $(MLXFT_BUILD_DIR)
+	@echo "$(RED)Objects deleted$(X)"
 
 fclean: clean
 	@rm -rf $(NAME_BONUS)
 	@rm -rf $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@echo "$(RED)cube3d deleted$(X)"
 
 re: fclean all

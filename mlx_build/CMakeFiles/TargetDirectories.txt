@@ -1,0 +1,7 @@
+/Users/jeberle/Documents/42curriculum/cube3d/mlx_build/CMakeFiles/mlx42.dir
+/Users/jeberle/Documents/42curriculum/cube3d/mlx_build/CMakeFiles/edit_cache.dir
+/Users/jeberle/Documents/42curriculum/cube3d/mlx_build/CMakeFiles/rebuild_cache.dir
+/Users/jeberle/Documents/42curriculum/cube3d/mlx_build/CMakeFiles/list_install_components.dir
+/Users/jeberle/Documents/42curriculum/cube3d/mlx_build/CMakeFiles/install.dir
+/Users/jeberle/Documents/42curriculum/cube3d/mlx_build/CMakeFiles/install/local.dir
+/Users/jeberle/Documents/42curriculum/cube3d/mlx_build/CMakeFiles/install/strip.dir
