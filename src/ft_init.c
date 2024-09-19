@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 09:26:02 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 10:03:40 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ t_mini*	ft_initialize_minimap(void)
 	mini->delta_x = 0;
 	mini->delta_y = 0;
 	mini->angle = 0;
-	mini->height = 100;
-	mini->width = 200;
+	mini->px_height = 100;
+	mini->px_width = 200;
+	mini->map_height = 9;
+	mini->map_width = 9;
 	return (mini);
 }
 
