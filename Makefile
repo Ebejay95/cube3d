@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/19 10:52:07 by jeberle          ###   ########.fr        #
+#    Updated: 2024/09/19 14:24:20 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ SRCS=	src/ft_exit.c \
 		src/ft_init.c \
 		src/load_textures_mini.c \
 		src/loop.c \
+		src/map_validation.c \
 		src/main.c \
 		src/textures.c \
 		src/utils.c \

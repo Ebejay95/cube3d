@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:21:20 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:43:03 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ int	main(int argc, char **argv)
 {
 	(void) argc;
 	(void) argv;
-	char* map_as_string = "1111111111\n1P00000001\n1000001001\n1000000001\n1000000001\n1000000001\n1111100001\n1000000001\n1111111111";
-	atexit(check_leaks);
+	//atexit(check_leaks);
 	t_game*	game;
 
 	game = NULL;
-	game = ft_initialize(map_as_string);
+	game = ft_initialize(get_mapstr(argc, argv));
 	if (!game)
-		return (ft_printf("Error initialize\n"), call_exit(game), 0);
+		return (call_exit(game), 0);
 	// TODO
 	// if(assign_data())
 	// 	return (ft_printf("Error assign data\n"), call_exit(game), 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:13:18 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 08:57:05 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:30:57 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	print_2d_arr(char **map_in_arr)
 	int	i;
 	int	j;
 
+	if (!map_in_arr)
+		return ;
 	i = 0;
 	j = 0;
 	ft_printf("	[0][1][2][3][4][5][6][7][8][9][10]\n");

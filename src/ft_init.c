@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:21:36 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:40:41 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_mini*	ft_initialize_minimap(void)
 	return (mini);
 }
 
-t_map	*ft_initialize_map(char* map_as_string)
+t_map	*ft_initialize_map(char** map_in)
 {
 	t_map*	map;
 
@@ -54,8 +54,7 @@ t_map	*ft_initialize_map(char* map_as_string)
 	map = ft_calloc(sizeof(t_map), 1);
 	if (!map)
 		return (NULL);
-	map->map_as_string = map_as_string;
-	map->map_as_arr = ft_split(map->map_as_string, '\n');
+	map->map_as_arr = map_in;
 	map->width = 1000;
 	map->height = 650;
 	print_2d_arr(map->map_as_arr);
@@ -77,13 +76,16 @@ t_game	*ft_initialize_game(void)
 	return (game);
 }
 
-t_game* ft_initialize(char* map_as_string)
+t_game* ft_initialize(char** map_in)
 {
 	t_game	*game;
+
+	if (!map_in)
+		return (NULL);
 	game = ft_initialize_game();
 	if(!game)
 		return (ft_printf("Error\n"), call_exit(game), NULL);
-	game->map = ft_initialize_map(map_as_string);
+	game->map = ft_initialize_map(map_in);
 	if(!game->map)
 		return (ft_printf("Error\n"), call_exit(game), NULL);
 	game->minimap = ft_initialize_minimap();

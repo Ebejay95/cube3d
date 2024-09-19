@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:50:52 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/19 14:23:32 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	call_exit(t_game *game);
 // ft_init
 mlx_t	*ft_init_window(t_game *game);
 t_mini*	ft_initialize_minimap(void);
-t_map	*ft_initialize_map(char* map_as_string);
+t_map	*ft_initialize_map(char** map_in);
 t_game	*ft_initialize_game(void);
-t_game* ft_initialize(char* map_as_string);
+t_game* ft_initialize(char** map_as_string);
 
 
 // utils
@@ -50,6 +50,8 @@ void	start_game(t_game *game);
 // load_textures_cub
 int		ft_load_textures_minimap(t_game *game);
 
+// map_validation
+char	**get_mapstr(int argc, char **argv);
 
 // load_textures_mini
 int		ft_overlay(t_game* game);

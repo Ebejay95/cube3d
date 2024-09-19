@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:27 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 08:43:30 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 14:41:28 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ void	call_exit_map(t_map *map)
 	i = 0;
 	if (map)
 	{
-		// if (map->map_as_string)
-		// {
-		// 	free(map->map_as_string);
-		// }
 		if (map->map_as_arr)
 		{
 			while (map->map_as_arr[i])
@@ -43,11 +39,12 @@ void	call_exit_map(t_map *map)
 		free(map);
 	}
 }
-
 void	call_exit(t_game *game)
 {
-	call_exit_map(game->map);
-	call_exit_minimap(game->minimap);
 	if (game)
+	{
+		call_exit_map(game->map);
+		call_exit_minimap(game->minimap);
 		free(game);
+	}
 }
