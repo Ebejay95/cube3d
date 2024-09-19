@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/14 12:25:47 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 09:05:10 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,22 @@
 
 
 // ft_exit
-void	ft_exit_pos(t_pos *pos);
-void	ft_exit_delta(t_delta *delta);
-void	ft_exit_minimap(t_mini *minimap);
+
+void	call_exit_minimap(t_mini *minimap);
 void	call_exit_map(t_map *map);
 void	call_exit(t_game *game);
 
 // ft_init
-t_mini	*ft_initialize_minimap(t_map* map);
-t_game	*ft_initialize_game(void);
-t_map	*ft_initialize_map(char* string);
-t_mini	*ft_initialize_mini(void);
 mlx_t	*ft_init_window(t_game *game);
-t_game	*ft_init(t_map *map, t_mini* mini);
-int	start_minimap(t_game *game, t_map *map);
+t_mini*	ft_initialize_minimap(void);
+t_map	*ft_initialize_map(char* map_as_string);
+t_game	*ft_initialize_game(void);
+t_game* ft_initialize(char* map_as_string);
+
 
 
 // utils
 void	print_2d_arr(char **map_in_arr);
-t_pos	*get_pos_unique(char **map_as_arr, char c);
 
 // loop
 void	my_keyhook(mlx_key_data_t keydata, void *param);

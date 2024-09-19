@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/14 11:55:04 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 08:43:28 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 # define STRUCTS_H
 
 # include "cub3d.h"
-
-typedef struct s_pos
-{
-	int			x;
-	int			y;
-}					t_pos;
-
-typedef struct s_delta
-{
-	float		x;
-	float		y;
-	float		a;
-}					t_delta;
 
 typedef struct s_map
 {
@@ -41,8 +28,11 @@ typedef struct s_mini
 	mlx_image_t*	image;
 	mlx_image_t*	img_dir;
 	mlx_image_t*	overlay;
-	t_pos*			pos;
-	t_delta*		delta;
+	int			pos_x;
+	int			pos_y;
+	float		delta_x;
+	float		delta_y;
+	float		angle;
 }					t_mini;
 
 
@@ -50,8 +40,7 @@ typedef struct s_game
 {
 	t_map*			map;
 	t_mini*			minimap;
-	mlx_t*			game_mlx;
-	int				frame;
+	mlx_t*			mlx;
 }					t_game;
 
 #endif

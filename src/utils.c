@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:13:18 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/14 12:17:36 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 08:57:05 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,28 @@ void	print_2d_arr(char **map_in_arr)
 	}
 }
 
-t_pos	*get_pos_unique(char **map_as_arr, char c)
-{
-	t_pos	*pos;
-	int		x;
-	int		y;
+// t_pos	*get_pos_unique(char **map_as_arr, char c)
+// {
+// 	t_pos	*pos;
+// 	int		x;
+// 	int		y;
 
-	pos = NULL;
-	y = 0;
-	pos = ft_calloc(1, sizeof(t_pos));
-	if (!pos)
-		return (NULL);
-	while (map_as_arr[y])
-	{
+// 	pos = NULL;
+// 	y = 0;
+// 	pos = ft_calloc(1, sizeof(t_pos));
+// 	if (!pos)
+// 		return (NULL);
+// 	while (map_as_arr[y])
+// 	{
 
-		x = 0;
-		while (map_as_arr[y][x])
-		{
-			if (map_as_arr[y][x] == c)
-				return (pos->x = x, pos->y = y, pos);
-			x++;
-		}
-		y++;
-	}
-	return (pos);
-}
+// 		x = 0;
+// 		while (map_as_arr[y][x])
+// 		{
+// 			if (map_as_arr[y][x] == c)
+// 				return (pos->x = x, pos->y = y, pos);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (pos);
+// }
