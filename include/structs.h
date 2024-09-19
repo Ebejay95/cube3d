@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 14:23:57 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:53:44 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,18 @@
 typedef struct s_map
 {
 	char**			map_as_arr;
-	int				width;
-	int				height;
+	mlx_texture_t	*tex_west;
+	mlx_image_t		*img_west;
+	mlx_texture_t	*tex_east;
+	mlx_image_t		*img_east;
+	mlx_texture_t	*tex_north;
+	mlx_image_t		*img_north;
+	mlx_texture_t	*tex_south;
+	mlx_image_t		*img_south;
+	uint32_t		ceiling;
+	uint32_t		floor;
+	int				ceiling_set;
+	int				floor_set;
 }					t_map;
 
 typedef struct s_mini

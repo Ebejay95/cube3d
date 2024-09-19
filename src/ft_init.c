@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 14:40:41 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:31:47 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_game	*ft_initialize_game(void)
 	return (game);
 }
 
-t_game* ft_initialize(char** map_in)
+t_game* ft_initialize(t_map	*map_in)
 {
 	t_game	*game;
 

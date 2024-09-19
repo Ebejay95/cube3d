@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 14:43:03 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/19 15:32:05 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	t_game*	game;
 
 	game = NULL;
-	game = ft_initialize(get_mapstr(argc, argv));
+	game = ft_initialize(get_map(argc, argv));
 	if (!game)
 		return (call_exit(game), 0);
 	// TODO
