@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/19 09:10:11 by ajehle           ###   ########.fr        #
+#    Updated: 2024/09/19 10:09:24 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ B_SRC_DIR	= bonus
 B_OBJ_DIR	= ./obj_bonus
 INC_DIR		= include
 MLX42_DIR	= ./MLX42
-CFLAGS		= #-Wall -Werror -Wextra -I $(INC_DIR)
+CFLAGS		= -Wall -Werror -Wextra -I $(INC_DIR)
 LIBXFLAGS_MAC	= -framework Cocoa -framework OpenGL -framework IOKit
 LIBXFLAGS_LINUX	= -Iinclude -ldl -lglfw -pthread -lm
 MLX_INCLUDE	= MLX42/build/libmlx42.a -Iinclude -lglfw

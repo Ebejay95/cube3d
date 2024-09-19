@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 09:27:38 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 10:20:39 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void ft_set_color_minimap_char(mlx_image_t *image, uint32_t color)
 {
-	int x;
-	int y;
+	uint32_t x;
+	uint32_t y;
 
 	x = 0;
 	y = 0;
@@ -38,29 +38,26 @@ int ft_load_map(t_game *game, char c, int color)
 
 	x = 0;
 	y = 0;
-	mlx_image_t* image = mlx_new_image(game->mlx, PIXEL - 1, PIXEL - 1);
+	mlx_image_t* image = mlx_new_image(game->mlx, PIXEL_MINI - 1, PIXEL_MINI - 1);
 
 	ft_set_color_minimap_char(image, color);
-	// printf("height %i, width %i\n",game->map->height / PIXEL, game->map->width / PIXEL);
-	printf("height %i, width %i\n",game->minimap->height , game->minimap->width);
-	// while (x < game->map->width / PIXEL)
-	while (x < game->minimap->width)
+	if(DEBUG)
+		printf("height %i, width %i\n",game->minimap->map_height , game->minimap->map_width);
+	while (y <= game->minimap->map_width)
 	{
-	printf("x %i, y %i\n",x , y);
-
-		// while (y < game->map->height / PIXEL)
-		while (y < game->minimap->height)
+		if(DEBUG)
+			printf("x %i, y %i\n",x , y);
+		while (x <= game->minimap->map_height)
 		{
-			// if(game->map->map_as_arr[x][y] == c)
-			// {
-			// 	// if (mlx_image_to_window(game->mlx, image, x * PIXEL, y * PIXEL) == -1)
-				if (mlx_image_to_window(game->mlx, image, x, y ) == -1)
+			if(game->map->map_as_arr[x][y] == c)
+			{
+				if (mlx_image_to_window(game->mlx, image, y * PIXEL_MINI, x * PIXEL_MINI) == -1)
 					return (1);
-			// }
-			y++;
+			}
+			x++;
 		}
-		y = 0;
-		x++;
+		x = 0;
+		y++;
 	}
 	return (0);
 }
@@ -71,6 +68,7 @@ int ft_load_minimap(t_game *game)
 
 	i = 0;
 	i += ft_load_map(game, '0', 0x100000FF);
+	i += ft_load_map(game, 'P', 0x100000FF);
 	i += ft_load_map(game, '1', 0x1FF000FF);
 	return(i);
 }
@@ -82,13 +80,12 @@ int	ft_load_mini_char(t_game *game)
 
 	pos_x = game->minimap->pos_x;
 	pos_y = game->minimap->pos_y;
-	game->minimap->image = mlx_new_image(game->mlx, PIXEL / 2, PIXEL / 2);
+	game->minimap->image = mlx_new_image(game->mlx, PIXEL_MINI / 2, PIXEL_MINI / 2);
 	if (!game->minimap->image)
 		return (1);
-	if (mlx_image_to_window(game->mlx, game->minimap->image, (pos_x * PIXEL) + (PIXEL / OFFSET), (pos_y * PIXEL) + (PIXEL / OFFSET)) == -1)
+	if (mlx_image_to_window(game->mlx, game->minimap->image, (pos_x * PIXEL_MINI) + (PIXEL_MINI / OFFSET), (pos_y * PIXEL_MINI) + (PIXEL_MINI / OFFSET)) == -1)
 		return (1);
 	ft_set_color_minimap_char(game->minimap->image, 0xFF00FFFF);
-
 	return (0);
 }
 
