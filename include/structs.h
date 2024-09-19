@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 08:43:28 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 09:16:21 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_mini
 	mlx_image_t*	image;
 	mlx_image_t*	img_dir;
 	mlx_image_t*	overlay;
+	int				width;
+	int				height;
 	int			pos_x;
 	int			pos_y;
 	float		delta_x;

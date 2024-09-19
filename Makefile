@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/14 12:22:39 by ajehle           ###   ########.fr        #
+#    Updated: 2024/09/19 09:10:11 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ FUNCTIONS	=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/ft_init.c \
 				$(SRC_DIR)/utils.c \
 				$(SRC_DIR)/loop.c \
+				$(SRC_DIR)/textures.c \
+				$(SRC_DIR)/load_textures_mini.c \
 
 # BONUS INTERNAL FUNCTIONS
 B_FUNCTIONS			=	#$(B_SRC_DIR)/animation.c \

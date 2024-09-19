@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 09:04:08 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 09:26:02 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_mini*	ft_initialize_minimap(void)
 	mini->delta_x = 0;
 	mini->delta_y = 0;
 	mini->angle = 0;
+	mini->height = 100;
+	mini->width = 200;
 	return (mini);
 }
 
@@ -79,9 +81,11 @@ t_game* ft_initialize(char* map_as_string)
 	game = ft_initialize_game();
 	if(!game)
 		return (ft_printf("Error\n"), call_exit(game), NULL);
-	game->minimap = ft_initialize_minimap();
 	game->map = ft_initialize_map(map_as_string);
-	if(!game->minimap || !game->map)
+	if(!game->map)
+		return (ft_printf("Error\n"), call_exit(game), NULL);
+	game->minimap = ft_initialize_minimap();
+	if(!game->minimap)
 		return (ft_printf("Error\n"), call_exit(game), NULL);
 	return	game;
 }
