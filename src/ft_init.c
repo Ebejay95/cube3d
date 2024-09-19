@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:21:36 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 12:30:53 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_mini*	ft_initialize_minimap(void)
 	mini->image = NULL;
 	mini->img_dir = NULL;
 	mini->overlay = NULL;
-	mini->pos_x = 0;
-	mini->pos_y = 0;
+	mini->pos_x = 1;
+	mini->pos_y = 1;
 	mini->delta_x = 0;
 	mini->delta_y = 0;
 	mini->angle = 0;

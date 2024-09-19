@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:07:59 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 12:22:23 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include "cub3d.h"
 
 # define DEBUG 1
-// # define PIXEL 32
+# define PIXEL 64
+# define PLAYER_STEP 1
 # define PIXEL_MINI 16
+# define CELLSIZE 64
 # define OFFSET 4
 # define PI 3.14159265359
 

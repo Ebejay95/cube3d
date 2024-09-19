@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:21:20 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 12:02:10 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,20 @@ int	main(int argc, char **argv)
 
 
 
+/*
+TODO
+	horizontal intersections
+	ys = cellsize
+	xs = ys / tan(angle)
+	yn = player.y - ((player.y/cellsize) * cellsize)
+	xn = yn / tan(angle)
+
+	vertical instersections
+	xs = cellsize
+	ys = xs / tan(angle)
+	xn = cellsize - ((player.x/cellsize) * cellsize)
+	yn = xn / tan(angle)
+
+	find nearest intersections
+	
+*/

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 08:57:16 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 13:50:16 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		mlx_close_window(game->mlx);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		game->minimap->image->instances[0].y -= 5;
+		check_move_up(game);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		game->minimap->image->instances[0].y += 5;
+		check_move_down(game);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 	{
-		game->minimap->image->instances[0].x -= 5;
+		check_move_left(game);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{
-		game->minimap->image->instances[0].x += 5;
+		check_move_right(game);
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{

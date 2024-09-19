@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 09:13:09 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 12:23:02 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,11 @@ void	ft_set_color_minimap_char(mlx_image_t *image, uint32_t color);
 
 // textures
 int		load_textures(t_game *game);
+
+// moves
+int			check_move_up(t_game *game);
+int			check_move_down(t_game *game);
+int			check_move_left(t_game *game);
+int			check_move_right(t_game *game);
 
 #endif
