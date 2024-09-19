@@ -3,129 +3,195 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
+#    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/19 10:09:24 by ajehle           ###   ########.fr        #
+#    Updated: 2024/09/19 10:52:07 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= cub3d
-CC			= gcc
-REMOVE		= rm -rf
-SRC_DIR		= src
-OBJ_DIR		= ./obj
-B_SRC_DIR	= bonus
-B_OBJ_DIR	= ./obj_bonus
-INC_DIR		= include
-MLX42_DIR	= ./MLX42
-CFLAGS		= -Wall -Werror -Wextra -I $(INC_DIR)
-LIBXFLAGS_MAC	= -framework Cocoa -framework OpenGL -framework IOKit
-LIBXFLAGS_LINUX	= -Iinclude -ldl -lglfw -pthread -lm
-MLX_INCLUDE	= MLX42/build/libmlx42.a -Iinclude -lglfw
+#------------------------------------------------------------------------------#
+#--------------                       PRINT                       -------------#
+#------------------------------------------------------------------------------#
 
-#LIBXFLAGS	= -lmlx -framework OpenGL -framework AppKit -lmlx -lXext -lX11
-#LIBXFLAGS	= -lmlx -lGL -lXext -lX11
+BLACK := \033[90m
+RED := \033[31m
+GREEN := \033[32m
+YELLOW := \033[33m
+BLUE := \033[34m
+MAGENTA := \033[35m
+CYAN := \033[36m
+X := \033[0m
 
-# looking for files in subdirectories
-vpath %.c $(SRC_DIR)
-vpath %.h $(INC_DIR)
+SUCCESS := \n$(BLACK)\
+█████████████████████████████████████████████████████████████$(X)\n\
+$(X)\n\
+███████  █     █  ███████  ███████           ███████  ██████  $(X)\n\
+█        █     █  █     █  █                       █  █     █ $(X)\n\
+█        █     █  ██████   ███████  ███████  ██████   █     █ $(X)\n\
+█        █     █  █     █  █                       █  █     █ $(X)\n\
+███████  ███████  ███████  ███████           ███████  ██████  $(X)\n\
+$(X)\n\
+$(BLACK)█████████████████████████████████████████████████████████████$(X)\n\
 
-# INTERNAL FUNCTIONS
-FUNCTIONS	=	$(SRC_DIR)/main.c \
-				$(SRC_DIR)/ft_exit.c \
-				$(SRC_DIR)/ft_init.c \
-				$(SRC_DIR)/utils.c \
-				$(SRC_DIR)/loop.c \
-				$(SRC_DIR)/textures.c \
-				$(SRC_DIR)/load_textures_mini.c \
+#------------------------------------------------------------------------------#
+#--------------                      GENERAL                      -------------#
+#------------------------------------------------------------------------------#
 
-# BONUS INTERNAL FUNCTIONS
-B_FUNCTIONS			=	#$(B_SRC_DIR)/animation.c \
+NAME=cube3d
+NAME_BONUS=cube3d_bonus
 
-# INTERNAL OBJECT
-OBJECTS				= $(addprefix $(OBJ_DIR)/, $(notdir $(FUNCTIONS:.c=.o)))
+#------------------------------------------------------------------------------#
+#--------------                       FLAGS                       -------------#
+#------------------------------------------------------------------------------#
 
-# BONUS INTERNAL OBJECT
-B_OBJECTS			= $(addprefix $(B_OBJ_DIR)/, $(notdir $(B_FUNCTIONS:.c=.o)))
+CC=cc
+CFLAGS=-Wall -Wextra -Werror
+LDFLAGS=
 
-# --- EXTERNAL LIBRARYS START --- #
-# FT_PRINTF Resources
-FT_PRINTF_DIR		= libs/ft_printf
-FT_PRINTF			= $(FT_PRINTF_DIR)/libftprintf.a
+ifeq ($(DEBUG), 1)
+	CFLAGS += -fsanitize=address -g
+endif
 
-# FT_LIBFT Resources
-FT_LIBFT_DIR		= libs/libft
-FT_LIBFT			= $(FT_LIBFT_DIR)/libft.a
+DEPFLAGS=-MMD -MP
 
-# GET_NEXT_LINE Resources
-GET_NEXT_LINE_DIR	= libs/get_next_line
-GET_NEXT_LINE		= $(GET_NEXT_LINE_DIR)/libget_next_line.a
+#------------------------------------------------------------------------------#
+#--------------                        DIR                        -------------#
+#------------------------------------------------------------------------------#
 
-# EXTERNAL LIBRARY
-LIB_FT_PRINTF		= -L$(FT_PRINTF_DIR) -lftprintf
-LIB_FT_LIBFT		= -L$(FT_LIBFT_DIR) -lft
-LIB_GET_NEXT_LINE	= -L$(GET_NEXT_LINE_DIR) -lget_next_line
+OBJ_DIR := ./obj
+DEP_DIR := $(OBJ_DIR)/.deps
+INC_DIRS := .
+SRC_DIRS := .
 
-# ALL LIBS
-LIBS				= $(LIB_FT_PRINTF) $(LIB_FT_LIBFT) $(LIB_GET_NEXT_LINE)
-LIBS_NAME			= $(FT_PRINTF) $(FT_LIBFT) $(GET_NEXT_LINE)
-# --- EXTERNAL LIBRARYS END --- #
+vpath %.c $(SRC_DIRS)
+vpath %.h $(INC_DIRS)
+vpath %.d $(DEP_DIR)
 
-all : mlx_clone $(NAME)
+#------------------------------------------------------------------------------#
+#--------------                        LIBS                       -------------#
+#------------------------------------------------------------------------------#
 
-# INTERNAL RULE
-$(NAME) : $(LIBS_NAME) $(OBJECTS) $(B_OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) $(B_OBJECTS) $(LIBS) $(MLX_INCLUDE) $(LIBXFLAGS_LINUX) -o $(NAME)
+LIBFT_DIR = libft
+LIBFT = libft.a
+LIBFT_LIB = $(LIBFT_DIR)/$(LIBFT)
+LIBFTFLAGS = -L$(LIBFT_DIR) -lft
+LIBFT_REPO = https://github.com/Ebejay95/libft.git
 
-# EXTERNAL LIBRARYS RULE (1 for each lib)
-$(FT_PRINTF) :
-	$(MAKE) -C $(FT_PRINTF_DIR)
-$(FT_LIBFT) :
-	$(MAKE) bonus -C $(FT_LIBFT_DIR)
-$(GET_NEXT_LINE) :
-	$(MAKE) -C $(GET_NEXT_LINE_DIR)
-	$(MAKE) bonus -C $(GET_NEXT_LINE_DIR)
+MLXFT_DIR = ./mlx42
+MLXFT = libmlx42.a
+MLXFT_BUILD_DIR = ./mlx_build
+MLXFT_LIB = $(MLXFT_BUILD_DIR)/$(MLXFT)
+MLXFTFLAGS = -L$(MLXFT_BUILD_DIR) -lmlx42 -lglfw
+MLXFT_REPO = https://github.com/codam-coding-college/MLX42.git
 
-# DIRECTORY
-$(OBJ_DIR) :
-	mkdir $(OBJ_DIR)
 
-# BONUS DIRECTORY
-$(B_OBJ_DIR) :
-	mkdir $(B_OBJ_DIR)
+SYSLIBFLAGS =
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/so_long/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+#------------------------------------------------------------------------------#
+#--------------                        SRC                        -------------#
+#------------------------------------------------------------------------------#
 
-$(B_OBJ_DIR)/%.o: $(B_SRC_DIR)/%.c | $(B_OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+SRCS=	src/ft_exit.c \
+		src/ft_init.c \
+		src/load_textures_mini.c \
+		src/loop.c \
+		src/main.c \
+		src/textures.c \
+		src/utils.c \
 
-mlx_clone :
-	@if [ -d "MLX42" ]; then \
-		echo "MLX42 directory already exists. Skipping cloning."; \
-	else \
-		git clone https://github.com/codam-coding-college/MLX42.git; \
-		cd MLX42 && cmake -B build && cd build && make && cd ../..;\
+BONUS_SRCS= \
+# bonus/cube3d_bonus.c \
+
+#------------------------------------------------------------------------------#
+#--------------                      OBJECTS                      -------------#
+#------------------------------------------------------------------------------#
+
+OBJECTS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
+BONUS_OBJECTS := $(addprefix $(OBJ_DIR)/, $(BONUS_SRCS:%.c=%.o))
+
+#------------------------------------------------------------------------------#
+#--------------                      COMPILE                      -------------#
+#------------------------------------------------------------------------------#
+
+.PHONY: all clean fclean re libft mlx init-submodules remove-submodules
+
+all: init-submodules $(NAME)
+
+bonus: init-submodules $(NAME_BONUS)
+
+-include $(OBJECTS:.o=.d)
+-include $(BONUS_OBJECTS:.o=.d)
+
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
+
+init-submodules: init-libft init-mlx
+
+init-libft:
+	@if [ ! -d "$(LIBFT_DIR)" ]; then \
+		git submodule add -q $(LIBFT_REPO) $(LIBFT_DIR) > /dev/null 2>&1; \
+	elif [ -z "$$(ls -A $(LIBFT_DIR) 2>/dev/null)" ]; then \
+		git submodule update --init --recursive -q $(LIBFT_DIR) > /dev/null 2>&1; \
 	fi
 
-clean :
-#	$(MAKE) -C $(FT_LIBFT_DIR) clean
-#	$(MAKE) -C $(FT_PRINTF_DIR) clean
-#	$(MAKE) -C $(GET_NEXT_LINE_DIR) clean
-	$(REMOVE) $(OBJECTS)
-	$(REMOVE) $(OBJ_DIR)
-	$(REMOVE) $(B_OBJ_DIR)
-#	$(REMOVE) $(MLX42_DIR)
+remove-submodules: remove-libft remove-mlx
 
-fclean : clean
-#	$(MAKE) -C $(FT_LIBFT_DIR) fclean
-#	$(MAKE) -C $(FT_PRINTF_DIR) fclean
-#	$(MAKE) -C $(GET_NEXT_LINE_DIR) fclean
-	$(REMOVE) $(NAME)
+remove-libft:
+	@if [ -d "$(LIBFT_DIR)" ]; then \
+		git submodule deinit -q -f $(LIBFT_DIR) > /dev/null 2>&1; \
+		git rm -q -f $(LIBFT_DIR) > /dev/null 2>&1; \
+		rm -rf .git/modules/$(LIBFT_DIR) > /dev/null 2>&1; \
+	fi
 
-re : fclean all
+remove-mlx:
+	@if [ -d "$(MLXFT_DIR)" ]; then \
+		git submodule deinit -q -f $(MLXFT_DIR) > /dev/null 2>&1; \
+		git rm -q -f $(MLXFT_DIR) > /dev/null 2>&1; \
+		rm -rf .git/modules/$(MLXFT_DIR) > /dev/null 2>&1; \
+		rm -rf ./mlx42 > /dev/null 2>&1; \
+	fi
 
-.PHONY : all mlx_clone clean fclean re
+$(LIBFT_LIB): init-libft
+	@if [ -d "$(LIBFT_DIR)" ] && [ -f "$(LIBFT_DIR)/Makefile" ]; then \
+		$(MAKE) -C $(LIBFT_DIR); \
+	else \
+		exit 1; \
+	fi
+
+init-mlx:
+	@if [ ! -d "$(MLXFT_DIR)" ]; then \
+		git submodule add -q $(MLXFT_REPO) $(MLXFT_DIR) > /dev/null 2>&1 || (echo "$(RED)Failed to add MLX42 submodule$(X)" && exit 1); \
+	elif [ -z "$$(ls -A $(MLXFT_DIR) 2>/dev/null)" ]; then \
+		git submodule update --init --recursive -q $(MLXFT_DIR) > /dev/null 2>&1 || (echo "$(RED)Failed to update MLX42 submodule$(X)" && exit 1); \
+	fi
+
+$(MLXFT_LIB): init-mlx
+	@if [ ! -f "$(MLXFT_LIB)" ]; then \
+		echo "$(YELLOW)Building MLX42...$(X)"; \
+		mkdir -p $(MLXFT_BUILD_DIR); \
+		cmake -S $(MLXFT_DIR) -B $(MLXFT_BUILD_DIR) && \
+		cmake --build $(MLXFT_BUILD_DIR) --parallel || \
+		(echo "$(RED)Failed to build MLX42$(X)" && exit 1); \
+	fi
+
+$(NAME): $(LIBFT_LIB) $(MLXFT_LIB) $(OBJECTS)
+	@$(CC) -o $@ $(OBJECTS) $(LIBFTFLAGS) $(MLXFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
+	@echo "$(SUCCESS)"
+
+$(NAME_BONUS): $(LIBFT_LIB) $(MLXFT_LIB) $(BONUS_OBJECTS)
+	@$(CC) -o $@ $(BONUS_OBJECTS) $(LIBFTFLAGS) $(MLXFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
+	@echo "$(SUCCESS)"
+
+clean: remove-submodules
+	@rm -rf $(OBJ_DIR)
+	@rm -rf $(MLXFT_BUILD_DIR)
+	@echo "$(RED)Objects deleted$(X)"
+
+fclean: clean
+	@rm -rf $(NAME_BONUS)
+	@rm -rf $(NAME)
+	@echo "$(RED)cube3d deleted$(X)"
+
+re: fclean all
