@@ -6,13 +6,13 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:18:19 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 15:19:50 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 10:53:46 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	check_move_up(t_game *game)
+int	check_move_up1(t_game *game)
 {
 	char	c;
 	int		y;
@@ -32,13 +32,12 @@ int	check_move_up(t_game *game)
 	return (1);
 }
 
-int	check_move_down(t_game *game)
+int	check_move_down1(t_game *game)
 {
 	char	c;
 	int		y;
 	int		x;
 
-	printf("HERERERERERERERRE\n");
 	y = game->minimap->pos_y + 1;
 	x = game->minimap->pos_x;
 	c = game->map->map_as_arr[y][x];
@@ -53,7 +52,7 @@ int	check_move_down(t_game *game)
 	return (1);
 }
 
-int	check_move_left(t_game *game)
+int	check_move_left1(t_game *game)
 {
 	char	c;
 	int		y;
@@ -74,7 +73,7 @@ int	check_move_left(t_game *game)
 
 }
 
-int	check_move_right(t_game *game)
+int	check_move_right1(t_game *game)
 {
 	char	c;
 	int		y;

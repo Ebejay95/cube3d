@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 10:37:33 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 10:57:05 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int	draw_direction(t_game* game)
 	int pos_x;
 	int pos_y;
 
-	pos_x = (game->minimap->image->instances[0].x / PIXEL_MINI);
-	pos_y = (game->minimap->image->instances[0].y / PIXEL_MINI);
+	pos_x = game->minimap->image->instances[0].x + (PIXEL_MINI / 4);
+	pos_y = game->minimap->image->instances[0].y + (PIXEL_MINI / 4) ;
+	game->minimap->delta_x = cos(game->minimap->angle) * 5;
+	game->minimap->delta_y = sin(game->minimap->angle) * 5;
 	if(ft_overlay(game))
 		return(1);
 	draw_line(game->minimap->overlay, pos_x, pos_y, game->minimap->angle, 20, 0xFFFFFF, game->minimap->delta_x, game->minimap->delta_y);
@@ -78,16 +80,16 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		game->minimap->angle += 0.1;
 		if(game->minimap->angle >  2 * PI)
 			game->minimap->angle -= 2 * PI;
-		game->minimap->delta_x = cos(game->minimap->angle) * 5;
-		game->minimap->delta_y = sin(game->minimap->angle) * 5;
+		// game->minimap->delta_x = cos(game->minimap->angle) * 5;
+		// game->minimap->delta_y = sin(game->minimap->angle) * 5;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
 		game->minimap->angle -= 0.1;
 		if(game->minimap->angle < 0)
 			game->minimap->angle += 2 * PI;
-		game->minimap->delta_x = cos(game->minimap->angle) * 5;
-		game->minimap->delta_y = sin(game->minimap->angle) * 5;
+		// game->minimap->delta_x = cos(game->minimap->angle) * 5;
+		// game->minimap->delta_y = sin(game->minimap->angle) * 5;
 	}
 	if(draw_direction(game))
 		return;//return value_!_!_!__!_!

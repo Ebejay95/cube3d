@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 12:23:02 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 10:55:21 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	print_2d_arr(char **map_in_arr);
 // loop
 void	my_keyhook(mlx_key_data_t keydata, void *param);
 void	start_game(t_game *game);
+int	draw_direction(t_game* game);
 
 // load_textures_cub
 int		ft_load_textures_minimap(t_game *game);
