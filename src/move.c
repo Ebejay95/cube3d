@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:18:19 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 16:22:17 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 11:24:37 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_move_up(t_game *game)
 {
 	if(game->minimap->image->instances[0].y - PLAYER_STEP >= PIXEL_MINI)
 	{
-		// printf("---------->X:%i Y:%i\n",((((game->minimap->image->instances[0].x + PLAYER_STEP) + (PIXEL_MINI / 2)) / (PIXEL / 2)) + 1), ((((game->minimap->image->instances[0].y + PLAYER_STEP) + (PIXEL_MINI / 2)) / (PIXEL / 2)) + 1);
+		printf("---------->X:%i Y:%i\n",((((game->minimap->image->instances[0].x + PLAYER_STEP) + (PIXEL_MINI / 2)) / (PIXEL / 2)) + 1), ((((game->minimap->image->instances[0].y + PLAYER_STEP) + (PIXEL_MINI / 2)) / (PIXEL / 2)) + 1));
 		// if(game->map->map_as_arr[game->minimap->pos_x][((game->minimap->pos_y - PLAYER_STEP) * PIXEL_MINI) / 32] != '1')
 		// {
 			// printf("											[%i][%i]\n",game->minimap->pos_x, (((game->minimap->pos_y - PLAYER_STEP) * PIXEL_MINI) / 32));
