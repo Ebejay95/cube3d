@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move.c                                             :+:      :+:    :+:   */
+/*   move copy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:18:19 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 14:01:02 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:19:50 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	check_move_down(t_game *game)
 	int		y;
 	int		x;
 
+	printf("HERERERERERERERRE\n");
 	y = game->minimap->pos_y + 1;
 	x = game->minimap->pos_x;
 	c = game->map->map_as_arr[y][x];

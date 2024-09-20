@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:20:39 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 10:41:21 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ int ft_overlay(t_game* game)
 {
 	if(game->minimap->overlay)
 		mlx_delete_image(game->mlx,game->minimap->overlay);
-	game->minimap->overlay = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
+	game->minimap->overlay = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);//width and height musst only be as big as minimap? but can be left for the whole to show some other things
 	if (!game->minimap->overlay)
 		return (1);
 	if (mlx_image_to_window(game->mlx, game->minimap->overlay, 0, 0) == -1)
 		return (1);
-	ft_set_color_minimap_char(game->minimap->overlay, 0x00000000);
+	ft_set_color_minimap_char(game->minimap->overlay, 0x00000001);
 	return(0);
 }
 
@@ -107,8 +107,8 @@ int	ft_load_textures_minimap(t_game *game)
 	int	i;
 
 	i = 0;
-	i += ft_overlay(game);
 	i += ft_load_minimap(game);
 	i += ft_load_mini_char(game);
+	i += ft_overlay(game);
 	return (i);
 }

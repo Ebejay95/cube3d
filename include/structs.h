@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:03:21 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:10:28 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ typedef struct s_map
 {
 	char*			map_as_string;
 	char**			map_as_arr;
-	int				width;
-	int				height;
+
 }					t_map;
 
 typedef struct s_mini
@@ -32,11 +31,11 @@ typedef struct s_mini
 	int				px_height;
 	int				map_width;
 	int				map_height;
-	int			pos_x;
-	int			pos_y;
-	float		delta_x;
-	float		delta_y;
-	float		angle;
+	int				pos_x;
+	int				pos_y;
+	float			delta_x;
+	float			delta_y;
+	float			angle;
 }					t_mini;
 
 

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 12:02:10 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:45:54 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 {
 	(void) argc;
 	(void) argv;
-	char* map_as_string = "1111111111\n1P00000001\n1000001001\n1000000001\n1000000001\n1000000001\n1111100001\n1000000001\n1111111111";
+	char* map_as_string = "1111111111\n1P00000001\n1010001001\n1000000001\n1000000001\n1000000001\n1111100001\n1000000001\n1111111111";
 	atexit(check_leaks);
 	t_game*	game;
 
@@ -59,5 +59,5 @@ TODO
 	yn = xn / tan(angle)
 
 	find nearest intersections
-	
+
 */

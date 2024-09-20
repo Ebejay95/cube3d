@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 12:30:53 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/19 15:10:37 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 mlx_t	*ft_init_window(t_game *game)
 {
-	game->mlx = mlx_init(game->map->width, game->map->height,
+	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT,
 			NAME_WINDOW, true);
 	if (!game->mlx)
 		return (NULL);
@@ -39,6 +39,8 @@ t_mini*	ft_initialize_minimap(void)
 	mini->delta_x = 0;
 	mini->delta_y = 0;
 	mini->angle = 0;
+	mini->delta_x = cos(mini->angle) * 5;
+	mini->delta_y = sin(mini->angle) * 5;
 	mini->px_height = 100;
 	mini->px_width = 200;
 	mini->map_height = 8;
@@ -56,8 +58,6 @@ t_map	*ft_initialize_map(char* map_as_string)
 		return (NULL);
 	map->map_as_string = map_as_string;
 	map->map_as_arr = ft_split(map->map_as_string, '\n');
-	map->width = 1000;
-	map->height = 650;
 	print_2d_arr(map->map_as_arr);
 
 	return (map);
