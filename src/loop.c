@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 12:14:08 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 13:54:53 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	draw_direction(t_game* game)
 
 	if(ft_overlay(game))
 		return(1);
-	draw_line(5, 0xFFFFFF, game);
+	draw_line(20, 0xFFFFFF, game);
 	return(0);
 
 }
@@ -52,14 +52,14 @@ void	calc_delta(t_game* game, char operator)
 		if(game->minimap->angle >  2 * PI)
 			game->minimap->angle -= 2 * PI;
 	}
-	if(operator == '-')
+	else if(operator == '-')
 	{
 		game->minimap->angle -= 0.1;
 		if(game->minimap->angle < 0)
 			game->minimap->angle += 2 * PI;
 	}
-	game->minimap->delta_x = cos(game->minimap->angle) * 5;
-	game->minimap->delta_y = sin(game->minimap->angle) * 5;
+	game->minimap->delta_x = cos(game->minimap->angle);
+	game->minimap->delta_y = sin(game->minimap->angle);
 }
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)
@@ -83,6 +83,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		calc_delta(game, '-');
 	if(draw_direction(game))
 		return;//return value_!_!_!__!_!
+	// printf("DX:%f DY:%f A:%f\n",game->minimap->delta_x, game->minimap->delta_y, game->minimap->angle);
 	return ;
 }
 

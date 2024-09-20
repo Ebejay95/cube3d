@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 12:31:00 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 13:22:21 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define DEBUG 0
 # define DEBUG_COLLISION 1
 # define PIXEL 64
+# define SPEED 5
 # define PLAYER_STEP 1
 # define PIXEL_MINI 32
 # define PIXEL_MINI_CHAR (PIXEL_MINI / 2)
