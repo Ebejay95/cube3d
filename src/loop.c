@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 11:21:39 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 11:57:21 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	if(draw_direction(game))
 		return;//return value_!_!_!__!_!
 	// printf("X:%i	Y:%i	DX:%f	DY:%f	A:%f\n",game->minimap->image->instances[0].x,game->minimap->image->instances[0].y, game->minimap->delta_x, game->minimap->delta_y, game->minimap->angle);
-	// printf("TEST:X:%i	Y:%i	\n", game->minimap->pos_x, game->minimap->pos_y);
+	// printf("X:%i	Y:%i	POSX:%i	POSY:%i	\n",game->minimap->image->instances[0].x,game->minimap->image->instances[0].y, game->minimap->pos_x, game->minimap->pos_y);
 
 	return ;
 }

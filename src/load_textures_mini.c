@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 11:23:53 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 11:33:27 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_load_mini_char(t_game *game)
 
 	pos_x = game->minimap->pos_x;
 	pos_y = game->minimap->pos_y;
-	game->minimap->image = mlx_new_image(game->mlx, PIXEL_MINI / 2, PIXEL_MINI / 2);
+	game->minimap->image = mlx_new_image(game->mlx, PIXEL_MINI_CHAR, PIXEL_MINI_CHAR);
 	if (!game->minimap->image)
 		return (1);
 	if (mlx_image_to_window(game->mlx, game->minimap->image, (pos_x * PIXEL_MINI) + (PIXEL_MINI / OFFSET), (pos_y * PIXEL_MINI) + (PIXEL_MINI / OFFSET)) == -1)

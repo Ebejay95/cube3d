@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:18:19 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 11:24:37 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 12:10:29 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,63 +14,62 @@
 
 int	check_move_up(t_game *game)
 {
-	if(game->minimap->image->instances[0].y - PLAYER_STEP >= PIXEL_MINI)
+	char c = game->map->map_as_arr[game->minimap->pos_x][(game->minimap->image->instances[0].y - PLAYER_STEP) / PIXEL_MINI];
+	int x = game->minimap->pos_x;
+	int y = (game->minimap->image->instances[0].y - PLAYER_STEP) / PIXEL_MINI;
+	printf("%c %i %i \n",c, x,y);
+
+	if('1' != game->map->map_as_arr[game->minimap->pos_x][(game->minimap->image->instances[0].y - PLAYER_STEP) / PIXEL_MINI] )
 	{
-		printf("---------->X:%i Y:%i\n",((((game->minimap->image->instances[0].x + PLAYER_STEP) + (PIXEL_MINI / 2)) / (PIXEL / 2)) + 1), ((((game->minimap->image->instances[0].y + PLAYER_STEP) + (PIXEL_MINI / 2)) / (PIXEL / 2)) + 1));
-		// if(game->map->map_as_arr[game->minimap->pos_x][((game->minimap->pos_y - PLAYER_STEP) * PIXEL_MINI) / 32] != '1')
-		// {
-			// printf("											[%i][%i]\n",game->minimap->pos_x, (((game->minimap->pos_y - PLAYER_STEP) * PIXEL_MINI) / 32));
-			game->minimap->image->instances[0].y -= PLAYER_STEP;
-			game->minimap->pos_y -= PLAYER_STEP;
-		// }
+		game->minimap->image->instances[0].y -= PLAYER_STEP;
+		game->minimap->pos_y = game->minimap->image->instances[0].y / PIXEL_MINI;
 	}
 	return (1);
 }
 
 int	check_move_down(t_game *game)
 {
-	if(game->minimap->image->instances[0].y + PLAYER_STEP <= ((PIXEL_MINI * 8) - (PIXEL_MINI / 2)))
-	{
-		printf("---------->X:%i Y:%i\n",((game->minimap->image->instances[0].x + PLAYER_STEP + (PIXEL_MINI / 2)) / (PIXEL / 2) + 1), (game->minimap->image->instances[0].y + PLAYER_STEP + (PIXEL_MINI / 2)) / (PIXEL / 2) + 1);
-		// if(game->map->map_as_arr[game->minimap->pos_x][((game->minimap->pos_y + PLAYER_STEP) * PIXEL_MINI) / 32] != '1')
-		// {
-			// printf("											[%i][%i]\n",game->minimap->pos_x, (((game->minimap->pos_y + PLAYER_STEP) * PIXEL_MINI) / 32));
-			game->minimap->image->instances[0].y += PLAYER_STEP;
-			game->minimap->pos_y += PLAYER_STEP;
-		// }
-	}
 
+	char c = game->map->map_as_arr[game->minimap->pos_x][(game->minimap->image->instances[0].y + PIXEL_MINI_CHAR + PLAYER_STEP) / PIXEL_MINI];
+	int x = game->minimap->pos_x;
+	int y = (game->minimap->image->instances[0].y + PIXEL_MINI_CHAR + PLAYER_STEP) / PIXEL_MINI;
+	printf("%c %i %i \n",c, x,y);
+
+	if('1' != game->map->map_as_arr[game->minimap->pos_x][(game->minimap->image->instances[0].y + PIXEL_MINI_CHAR + PLAYER_STEP) / PIXEL_MINI] )
+	{
+		game->minimap->image->instances[0].y += PLAYER_STEP;
+		game->minimap->pos_y = (game->minimap->image->instances[0].y + PIXEL_MINI_CHAR + PLAYER_STEP) / PIXEL_MINI;
+	}
 	return (1);
 }
 
 int	check_move_left(t_game *game)
 {
-	if(game->minimap->image->instances[0].x - PLAYER_STEP >= PIXEL_MINI)
+	char c = game->map->map_as_arr[(game->minimap->image->instances[0].x - PLAYER_STEP) / PIXEL_MINI][game->minimap->pos_y];
+	int x = (game->minimap->image->instances[0].x - PLAYER_STEP) / PIXEL_MINI;
+	int y = game->minimap->pos_y;
+	printf("%c %i %i \n",c, x,y);
+
+	if('1' != game->map->map_as_arr[(game->minimap->image->instances[0].x - PLAYER_STEP) / PIXEL_MINI][game->minimap->pos_y] )
 	{
-		printf("---------->X:%i Y:%i\n",((game->minimap->image->instances[0].x + PLAYER_STEP + (PIXEL_MINI / 2)) / (PIXEL / 2) + 1), (game->minimap->image->instances[0].y + PLAYER_STEP + (PIXEL_MINI / 2)) / (PIXEL / 2) + 1);
-		// if(game->map->map_as_arr[((game->minimap->pos_x - PLAYER_STEP) * PIXEL_MINI) / 32][game->minimap->pos_y] != '1')
-		// {
-			// printf("											[%i][%i]\n",(((game->minimap->pos_x - PLAYER_STEP) * PIXEL_MINI) / 32), game->minimap->pos_y);
-			game->minimap->image->instances[0].x -= PLAYER_STEP;
-			game->minimap->pos_x -= PLAYER_STEP;
-		// }
+		game->minimap->image->instances[0].x -= PLAYER_STEP;
+		game->minimap->pos_x = game->minimap->image->instances[0].x / PIXEL_MINI;
 	}
 	return (1);
-
 }
 
 int	check_move_right(t_game *game)
 {
+	char c = game->map->map_as_arr[(game->minimap->image->instances[0].x + PIXEL_MINI_CHAR + PLAYER_STEP - 1) / PIXEL_MINI][game->minimap->pos_y];
+	int x = (game->minimap->image->instances[0].x + PIXEL_MINI_CHAR + PLAYER_STEP - 1) / PIXEL_MINI;
+	int y = game->minimap->pos_y;
+	printf("%c %i %i \n",c, x,y);
 
-	if(game->minimap->image->instances[0].x + PLAYER_STEP <= ((PIXEL_MINI * 9) - (PIXEL_MINI / 2)))
+	if('1' != game->map->map_as_arr[(game->minimap->image->instances[0].x + PIXEL_MINI_CHAR + PLAYER_STEP - 1) / PIXEL_MINI][game->minimap->pos_y] )
 	{
-		printf("---------->X:%i Y:%i\n",((game->minimap->image->instances[0].x + PLAYER_STEP + (PIXEL_MINI / 2)) / (PIXEL / 2) + 1), (game->minimap->image->instances[0].y + PLAYER_STEP + (PIXEL_MINI / 2)) / (PIXEL / 2) + 1);
-		// if(game->map->map_as_arr[((game->minimap->pos_x + PLAYER_STEP) * PIXEL_MINI) / 32][game->minimap->pos_y] != '1')
-		// {
-			// printf("											[%i][%i]\n",(((game->minimap->pos_x + PLAYER_STEP) * PIXEL_MINI) / 32), game->minimap->pos_y);
-			game->minimap->image->instances[0].x += PLAYER_STEP;
-			game->minimap->pos_x += PLAYER_STEP;
-		// }
+		game->minimap->image->instances[0].x += PLAYER_STEP;
+		game->minimap->pos_x = (game->minimap->image->instances[0].x + PIXEL_MINI_CHAR + PLAYER_STEP - 1) / PIXEL_MINI;
 	}
+
 	return (1);
 }

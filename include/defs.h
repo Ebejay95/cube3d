@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 10:56:00 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 11:33:21 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 # define DEBUG 0
 # define PIXEL 64
-# define PLAYER_STEP 5
+# define PLAYER_STEP 1
 # define PIXEL_MINI 32
+# define PIXEL_MINI_CHAR (PIXEL_MINI / 2)
 # define CELLSIZE 64
 # define OFFSET 4
 # define PI 3.14159265359
