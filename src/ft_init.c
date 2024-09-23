@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 16:13:20 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 17:00:09 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 mlx_t	*ft_init_window(t_game *game)
 {
-	game->mlx = mlx_init(1000, 1000,
+	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT,
 			NAME_WINDOW, true);
 	if (!game->mlx)
 		return (NULL);
@@ -32,11 +32,13 @@ t_mini	*ft_initialize_minimap(void)
 	mini->image = NULL;
 	mini->img_dir = NULL;
 	mini->overlay = NULL;
-	mini->pos_x = 0;
-	mini->pos_y = 0;
+	mini->pos_x = 1;
+	mini->pos_y = 1;
 	mini->delta_x = 0;
 	mini->delta_y = 0;
 	mini->angle = 0;
+	mini->delta_x = cos(mini->angle) * 5;
+	mini->delta_y = sin(mini->angle) * 5;
 	mini->px_height = 100;
 	mini->px_width = 200;
 	mini->map_height = 8;

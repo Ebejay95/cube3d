@@ -1,0 +1,4 @@
+*.o
+cub3d
+.vscode
+notes.txt

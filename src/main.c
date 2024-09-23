@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 16:21:21 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:59:29 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,23 @@ int	main(int argc, char **argv)
 	call_exit(&game);
 	return (0);
 }
+
+
+
+/*
+TODO
+	horizontal intersections
+	ys = cellsize
+	xs = ys / tan(angle)
+	yn = player.y - ((player.y/cellsize) * cellsize)
+	xn = yn / tan(angle)
+
+	vertical instersections
+	xs = cellsize
+	ys = xs / tan(angle)
+	xn = cellsize - ((player.x/cellsize) * cellsize)
+	yn = xn / tan(angle)
+
+	find nearest intersections
+
+*/

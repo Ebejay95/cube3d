@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 15:32:27 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 17:01:17 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 
 # include "cub3d.h"
 
-# define DEBUG 1
-// # define PIXEL 32
-# define PIXEL_MINI 16
+# define DEBUG 0
+# define DEBUG_COLLISION 1
+# define PIXEL 64
+# define SPEED 5
+# define PLAYER_STEP 1
+# define PIXEL_MINI 32
+# define PIXEL_MINI_CHAR (PIXEL_MINI / 2)
+# define CELLSIZE 64
 # define OFFSET 4
 # define PI 3.14159265359
 
-# define MOVES_POS_X PIXEL
-# define MOVES_POS_Y 0
-
-# define ITEM_POS_X 0
-# define ITEM_POS_Y 0
+# define WINDOW_WIDTH 1000
+# define WINDOW_HEIGHT 650
 
 # define FRAME 20
 

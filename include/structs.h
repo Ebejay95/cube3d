@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 13:06:22 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 17:01:25 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ typedef struct s_mini
 	int				px_height;
 	int				map_width;
 	int				map_height;
-	int			pos_x;
-	int			pos_y;
-	float		delta_x;
-	float		delta_y;
-	float		angle;
+	int				pos_x;
+	int				pos_y;
+	float			delta_x;
+	float			delta_y;
+	float			angle;
 }					t_mini;
 
 

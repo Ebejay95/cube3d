@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 16:37:03 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 17:01:07 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void		print_map_error(t_map *map, int ey, int ex);
 void		print_2d_arr(char **map_in_arr);
 
 // loop
-void		my_keyhook(mlx_key_data_t keydata, void *param);
-void		start_game(t_game *game);
+void	my_keyhook(mlx_key_data_t keydata, void *param);
+void	start_game(t_game *game);
+int	draw_direction(t_game* game);
+void	calc_delta(t_game* game, char operator);
 
 // load_textures_cub
 int			ft_load_textures_minimap(t_game *game);
@@ -125,5 +127,11 @@ void		ft_set_color_minimap_char(mlx_image_t *image, uint32_t color);
 
 // textures
 int			load_textures(t_game *game);
+
+// moves
+int			check_move_up(t_game *game);
+int			check_move_down(t_game *game);
+int			check_move_left(t_game *game);
+int			check_move_right(t_game *game);
 
 #endif

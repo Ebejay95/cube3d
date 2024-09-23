@@ -6,13 +6,61 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 08:57:16 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 13:54:53 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/cub3d.h"
 
+void	draw_line(int length, int color,t_game* game )
+{
+	double  x;
+	double  y;
+	mlx_image_t* image;
+
+	x = game->minimap->image->instances[0].x + (PIXEL_MINI / 4);
+	y = game->minimap->image->instances[0].y + (PIXEL_MINI / 4);
+	image = game->minimap->overlay;
+	for (int i = 0; i < length; i++)
+	{
+		if(x > 1 && x < image->width - 1 && y > 1 && y < image->height - 1)
+			mlx_put_pixel(image, x, y, color);
+		x += game->minimap->delta_x;
+		y += game->minimap->delta_y;
+	}
+}
+
+int	draw_direction(t_game* game)
+{
+	int pos_x;
+	int pos_y;
+
+
+	if(ft_overlay(game))
+		return(1);
+	draw_line(20, 0xFFFFFF, game);
+	return(0);
+
+}
+
+void	calc_delta(t_game* game, char operator)
+{
+	if(operator == '+')
+	{
+		game->minimap->angle += 0.1;
+		if(game->minimap->angle >  2 * PI)
+			game->minimap->angle -= 2 * PI;
+	}
+	else if(operator == '-')
+	{
+		game->minimap->angle -= 0.1;
+		if(game->minimap->angle < 0)
+			game->minimap->angle += 2 * PI;
+	}
+	game->minimap->delta_x = cos(game->minimap->angle);
+	game->minimap->delta_y = sin(game->minimap->angle);
+}
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
@@ -22,41 +70,20 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		mlx_close_window(game->mlx);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-	{
-		game->minimap->image->instances[0].y -= 5;
-	}
+		check_move_up(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-	{
-		game->minimap->image->instances[0].y += 5;
-	}
+		check_move_down(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-	{
-		game->minimap->image->instances[0].x -= 5;
-	}
+		check_move_left(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-	{
-		game->minimap->image->instances[0].x += 5;
-	}
+		check_move_right(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
-	{
-		// game->minimap->delta->a += 0.1;
-		// if(game->minimap->delta->a >  2 * PI)
-		// 	game->minimap->delta->a -= 2 * PI;
-		// game->minimap->delta->x = cos(game->minimap->delta->a) * 5;
-		// game->minimap->delta->y = sin(game->minimap->delta->a) * 5;
-
-	}
+		calc_delta(game, '+');
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
-	{
-		// game->minimap->delta->a -= 0.1;
-		// if(game->minimap->delta->a < 0)
-		// 	game->minimap->delta->a += 2 * PI;
-		// game->minimap->delta->x = cos(game->minimap->delta->a) * 5;
-		// game->minimap->delta->y = sin(game->minimap->delta->a) * 5;
-	}
-	// draw_direction(game);
-	// printf("X:%i	Y:%i	DX:%f	DY:%f	A:%f\n",game->minimap->image->instances[0].x,game->minimap->image->instances[0].y, game->minimap->delta->x, game->minimap->delta->y, game->minimap->delta->a);
-
+		calc_delta(game, '-');
+	if(draw_direction(game))
+		return;//return value_!_!_!__!_!
+	// printf("DX:%f DY:%f A:%f\n",game->minimap->delta_x, game->minimap->delta_y, game->minimap->angle);
 	return ;
 }
 

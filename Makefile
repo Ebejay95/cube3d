@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/23 15:15:51 by jeberle          ###   ########.fr        #
+#    Updated: 2024/09/23 17:00:46 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ SRCS=	src/ft_exit.c \
 		src/map_parser.c \
 		src/map_printers.c \
 		src/main.c \
+		src/move.c \
 		src/textures.c \
 		src/utils.c \
 
