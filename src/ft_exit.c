@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:27 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 14:41:28 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 09:08:06 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,67 @@ void	call_exit_minimap(t_mini *minimap)
 	}
 }
 
-void	call_exit_map(t_map *map)
+void	call_exit_map_textrs(t_game *game, t_map *map)
+{
+	if (map->tex_west)
+		mlx_delete_texture(map->tex_west);
+	if (map->tex_east)
+		mlx_delete_texture(map->tex_east);
+	if (map->tex_north)
+		mlx_delete_texture(map->tex_north);
+	if (map->tex_south)
+		mlx_delete_texture(map->tex_south);
+	if (map->img_west)
+		mlx_delete_image(game->mlx, map->img_west);
+	if (map->img_east)
+		mlx_delete_image(game->mlx, map->img_east);
+	if (map->img_north)
+		mlx_delete_image(game->mlx, map->img_north);
+	if (map->img_south)
+		mlx_delete_image(game->mlx, map->img_south);
+	map->tex_west = NULL;
+	map->tex_east = NULL;
+	map->tex_north = NULL;
+	map->tex_south = NULL;
+	map->img_west = NULL;
+	map->img_east = NULL;
+	map->img_north = NULL;
+	map->img_south = NULL;
+}
+
+void	call_exit_map(t_game *game)
 {
 	int	i;
 
 	i = 0;
-	if (map)
+	if (game)
 	{
-		if (map->map_as_arr)
+		if (game->map)
 		{
-			while (map->map_as_arr[i])
+			if (game->map->content)
 			{
-				free(map->map_as_arr[i]);
-				i++;
+				while (game->map->content[i])
+				{
+					free(game->map->content[i]);
+					game->map->content[i] = NULL;
+					i++;
+				}
+				free(game->map->content);
+				game->map->content = NULL;
 			}
-			free(map->map_as_arr);
+			call_exit_map_textrs(game, game->map);
+			free(game->map);
+			game->map = NULL;
 		}
-		free(map);
 	}
 }
+
 void	call_exit(t_game *game)
 {
 	if (game)
 	{
-		call_exit_map(game->map);
+		call_exit_map(game);
 		call_exit_minimap(game->minimap);
-		free(game);
+		game = NULL;
 	}
 }

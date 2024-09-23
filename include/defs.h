@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:07:59 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 15:32:27 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@
 # define PATH_EXIT_OPEN "./assets/32x32/stair_nextlevel.png"
 # define PATH_ITEM "./assets/32x32/key_silver.png"
 # define PATH_ENEMY "./assets/32x32/ghost.png"
+
+# define MAP_CNT_CHARS "01 NEWS\n"
 
 #endif

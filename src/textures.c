@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:08:29 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:10:55 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 14:44:51 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-
 
 int	load_textures(t_game *game)
 {

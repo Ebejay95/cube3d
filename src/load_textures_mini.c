@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures_mini.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 10:20:39 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/20 16:04:30 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int ft_load_map(t_game *game, char c, int color)
 			printf("x %i, y %i\n",x , y);
 		while (x <= game->minimap->map_height)
 		{
-			if(game->map->map_as_arr[x][y] == c)
+			if(game->map->content[x][y] == c)
 			{
 				if (mlx_image_to_window(game->mlx, image, y * PIXEL_MINI, x * PIXEL_MINI) == -1)
 					return (1);

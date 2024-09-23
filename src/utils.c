@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:13:18 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/19 14:30:57 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/20 16:04:30 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_2d_arr(char **map_in_arr)
 	}
 }
 
-// t_pos	*get_pos_unique(char **map_as_arr, char c)
+// t_pos	*get_pos_unique(char **content, char c)
 // {
 // 	t_pos	*pos;
 // 	int		x;
@@ -47,13 +47,13 @@ void	print_2d_arr(char **map_in_arr)
 // 	pos = ft_calloc(1, sizeof(t_pos));
 // 	if (!pos)
 // 		return (NULL);
-// 	while (map_as_arr[y])
+// 	while (content[y])
 // 	{
 
 // 		x = 0;
-// 		while (map_as_arr[y][x])
+// 		while (content[y][x])
 // 		{
-// 			if (map_as_arr[y][x] == c)
+// 			if (content[y][x] == c)
 // 				return (pos->x = x, pos->y = y, pos);
 // 			x++;
 // 		}
