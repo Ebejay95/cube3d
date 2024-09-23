@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:50:56 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/23 09:01:18 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:36:32 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,30 @@ void	free_splits(char **splits)
 	free(splits);
 }
 
-char	**parse_map_array(char **splits)
+void	parse_map_array(t_map *map, char **splits)
 {
-	int		max_len;
-	int		num_rows;
 	char	**rect_array;
+	int		start;
+	int		end;
 
-	get_map_dimensions(splits, &max_len, &num_rows);
-	rect_array = allocate_rect_array(num_rows);
+	find_map_bounds(splits, &start, &end);
+	if (start != -1 && end != -1)
+		trim_map_lines(splits, start, end);
+	get_map_dimensions(splits, &(map->width), &(map->height));
+	rect_array = allocate_rect_array(map->height);
 	if (rect_array == NULL)
-		return (NULL);
-	if (!fill_rect_array(rect_array, splits, max_len, num_rows))
 	{
+		map->content = NULL;
 		free_splits(splits);
-		return (NULL);
+		return ;
+	}
+	if (!fill_rect_array(rect_array, splits, map->width, map->height))
+	{
+		free_rect_array(rect_array, map->height);
+		free_splits(splits);
+		map->content = NULL;
+		return ;
 	}
 	free_splits(splits);
-	return (rect_array);
+	map->content = rect_array;
 }

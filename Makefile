@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/23 08:57:32 by jeberle          ###   ########.fr        #
+#    Updated: 2024/09/23 15:15:51 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,12 +96,17 @@ SRCS=	src/ft_exit.c \
 		src/ft_init.c \
 		src/load_textures_mini.c \
 		src/loop.c \
+		src/map_content_check_spot.c \
+		src/map_content_flood.c \
+		src/map_content_spawn.c \
 		src/map_content_validations.c \
 		src/map_meta_parser.c \
 		src/map_meta_validations.c \
 		src/map_validation.c \
 		src/map_parser_rect.c \
+		src/map_parser_trimmer.c \
 		src/map_parser.c \
+		src/map_printers.c \
 		src/main.c \
 		src/textures.c \
 		src/utils.c \

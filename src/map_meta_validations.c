@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:02:27 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/20 15:32:14 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:51:14 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	retreive_meta(char *line, int *err, t_game *game)
 			ft_fprintf(2, " this seems to be map content: \n %s\n"D, line);
 		}
 		else
-			ft_fprintf(2, RED"Received Meta Data in wrong format\n");
+			ft_fprintf(2, RED"Received Meta Data in wrong format\n"D);
 		(*err)++;
 	}
 }
@@ -110,6 +110,10 @@ void	get_map_meta(int fd, int *err, t_game *game)
 			allfound = check_all_meta(game);
 		}
 		free(line);
-		line = get_next_line(fd);
+		line = NULL;
+		if (!allfound)
+			line = get_next_line(fd);
 	}
+	free(line);
+	line = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:51:37 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/23 09:01:18 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 14:25:47 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,17 @@ char	**allocate_rect_array(int num_rows)
 	return (rect_array);
 }
 
-char	**map_split(const char *str)
+char	**map_split(char *str)
 {
 	size_t	count;
+	char	*trimmed_map;
+	char	**result;
 
-	count = count_lines(str);
-	return (split_lines(str, count));
+	trimmed_map = ft_strtrim(str, "\n");
+	count = count_lines(trimmed_map);
+	result = split_lines(trimmed_map, count);
+	free(trimmed_map);
+	return (result);
 }
 
 int	fill_rect_array(char **rect_array, char **splits, int max_len, int num_rows)

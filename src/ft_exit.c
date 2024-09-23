@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:27 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 09:08:06 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:27:58 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,5 @@ void	call_exit(t_game *game)
 	{
 		call_exit_map(game);
 		call_exit_minimap(game->minimap);
-		game = NULL;
 	}
 }

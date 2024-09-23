@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 08:59:04 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:37:03 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 
 
 // ft_exit
-
 void		call_exit_minimap(t_mini *minimap);
 void		call_exit_map(t_game *game);
 void		call_exit(t_game *game);
@@ -36,9 +35,9 @@ void		call_exit(t_game *game);
 mlx_t		*ft_init_window(t_game *game);
 t_mini*		ft_initialize_minimap(void);
 t_map		*ft_initialize_map(char** map_in);
-t_game		*ft_initialize_game(void);
-t_game* 	ft_initialize(int argc, char **argv);
-
+void		ft_initialize_game(t_game	*game);
+void		ft_initialize(t_game *game, int argc, char **argv);
+void		print_map_error(t_map *map, int ey, int ex);
 
 // utils
 void		print_2d_arr(char **map_in_arr);
@@ -49,6 +48,26 @@ void		start_game(t_game *game);
 
 // load_textures_cub
 int			ft_load_textures_minimap(t_game *game);
+
+// map_content_check_spot.c
+void	check_the_spot_down(t_map *map, int ydex, int xdex, int *err);
+void	check_the_spot_up(t_map *map, int ydex, int xdex, int *err);
+void	check_the_spot_left(t_map *map, int ydex, int xdex, int *err);
+void	check_the_spot_right(t_map *map, int ydex, int xdex, int *err);
+void	check_the_spot(t_map *map, int ydex, int xdex, int *err);
+
+// map_content_flood.c
+void	init_flood(t_map *map);
+void	flood_one(char *ref, int *check, char *work);
+int		check_xy_nexts(t_map *map, int ydex, int xdex);
+void	flood(t_map *map);
+
+// map_content_spawn.c
+void	set_spawn_point(t_map *map, int x, int y);
+void	handle_multiple_spawns(t_map *map, int y, int x, int *err);
+void	check_spawn_cell(t_map *map, int y, int x, int *err);
+void	handle_no_spawns(t_map *map, int *err);
+void	check_spawn(t_map *map, int *err);
 
 // map_content_validation
 void		get_map_content(int fd, int *err, t_game *game);
@@ -73,17 +92,29 @@ void		get_map(t_game *game, int argc, char **argv);
 
 // map_parser_rect
 char			**allocate_result(size_t count);
-int				allocate_and_copy_line(char **result, size_t j, const char *start, size_t len);
+int				alloc_and_cpy_line(char **result, size_t j, const char *start, size_t len);
 char			**allocate_rect_array(int num_rows);
-char			**map_split(const char *str);
+char			**map_split(char *str);
 int				fill_rect_array(char **rect_array, char **splits, int max_len, int num_rows);
+
+// map_parser_trimmer
+int		is_map_line(const char *line);
+void	find_map_bounds(char **splits, int *start, int *end);
+void	trim_line(char *line);
+void	trim_map_lines(char **splits, int start, int end);
+void	free_rect_array(char **rect_array, int num_rows);
 
 // map_parser
 size_t			count_lines(const char *str);
 char			**split_lines(const char *str, size_t count);
 void			get_map_dimensions(char **splits, int *max_len, int *num_rows);
 void			free_splits(char **splits);
-char			**parse_map_array(char **splits);
+void			parse_map_array(t_map *map, char **splits);
+
+// map_printers.c
+void	ft_printmetas(t_map *map);
+void	print_map(t_map *map);
+void	print_map_error(t_map *map, int ey, int ex);
 
 // load_textures_mini
 int			ft_overlay(t_game* game);

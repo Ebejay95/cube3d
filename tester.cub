@@ -1,0 +1,10 @@
+
+EA assets/textr/east.png
+NO assets/textr/north.png
+WE assets/textr/west.png
+SO assets/textr/south.png
+F 220,100,0
+C 225,30,0
+    11111111111
+    1000000000S1
+    11111111111

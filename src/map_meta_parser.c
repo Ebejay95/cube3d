@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:03:02 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/20 15:10:38 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 16:49:45 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ uint32_t	parse_color(char *str, int start, int *err)
 	split = ft_split(str + start, ',');
 	if (!split || !split[0] || !split[1] || !split[2] || split[3])
 	{
+		ft_array_free(split);
 		*err = 1;
 		return (0);
 	}
@@ -110,7 +111,7 @@ void	set_textr_meta(int *err, char *line, t_game *g, char ornttn)
 		g->map->tex_south = mlx_load_png(path);
 	if (*err)
 	{
-		ft_fprintf(2, RED"Error loading texture in map meta definition: ");
+		ft_fprintf(2, RED"Error loading texture in map meta definition: "D);
 		ft_fprintf(2, "%s\n", path);
 	}
 	free(path);

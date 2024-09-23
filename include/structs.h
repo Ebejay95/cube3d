@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 16:04:25 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/23 13:06:22 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ typedef struct s_map
 	uint32_t		floor;
 	int				ceiling_set;
 	int				floor_set;
+	int				width;
+	int				height;
+	int				spawn_x;
+	int				spawn_y;
+	char			spawn;
 }					t_map;
 
 typedef struct s_mini
