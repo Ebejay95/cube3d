@@ -6,11 +6,21 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 06:50:28 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 13:59:58 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	ft_initialize_player(t_game *game)
+{
+	game->player = malloc(sizeof(t_player));
+	if (!game->player)
+		return ;
+	game->player->x = game->map->spawn_x * CELL + (CELL / 2);
+	game->player->y = game->map->spawn_y * CELL + (CELL / 2);
+	game->player->angle = 0;
+}
 
 mlx_t	*ft_init_window(t_game *game)
 {
@@ -29,8 +39,8 @@ t_mini	*ft_initialize_minimap(t_game *game)
 	mini = ft_calloc(sizeof(t_mini), 1);
 	if (!mini)
 		return (NULL);
-	mini->image = NULL;
-	mini->img_dir = NULL;
+	mini->player = NULL;
+	mini->plyr_dir = NULL;
 	mini->overlay = NULL;
 	mini->pos_x = 1;
 	mini->pos_y = 1;
@@ -61,6 +71,7 @@ void	ft_initialize(t_game *game, int argc, char **argv)
 		call_exit(game);
 	print_map(game->map);
 	game->minimap = ft_initialize_minimap(game);
+	ft_initialize_player(game);
 	if (!game->minimap)
 		call_exit(game);
 }

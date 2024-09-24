@@ -1,0 +1,1510 @@
+
+#include "../include/cub3d.h"
+
+void	call_exit_minimap(t_mini *minimap)
+{
+	if (minimap)
+	{
+		free(minimap);
+	}
+}
+
+void	call_exit_map_textrs(t_game *game, t_map *map)
+{
+	if (map->tex_west)
+		mlx_delete_texture(map->tex_west);
+	if (map->tex_east)
+		mlx_delete_texture(map->tex_east);
+	if (map->tex_north)
+		mlx_delete_texture(map->tex_north);
+	if (map->tex_south)
+		mlx_delete_texture(map->tex_south);
+	if (map->img_west)
+		mlx_delete_image(game->mlx, map->img_west);
+	if (map->img_east)
+		mlx_delete_image(game->mlx, map->img_east);
+	if (map->img_north)
+		mlx_delete_image(game->mlx, map->img_north);
+	if (map->img_south)
+		mlx_delete_image(game->mlx, map->img_south);
+	map->tex_west = NULL;
+	map->tex_east = NULL;
+	map->tex_north = NULL;
+	map->tex_south = NULL;
+	map->img_west = NULL;
+	map->img_east = NULL;
+	map->img_north = NULL;
+	map->img_south = NULL;
+}
+
+void	call_exit_map(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	if (game)
+	{
+		if (game->map)
+		{
+			if (game->map->content)
+			{
+				while (game->map->content[i])
+				{
+					free(game->map->content[i]);
+					game->map->content[i] = NULL;
+					i++;
+				}
+				free(game->map->content);
+				game->map->content = NULL;
+			}
+			call_exit_map_textrs(game, game->map);
+			free(game->map);
+			game->map = NULL;
+		}
+	}
+}
+
+void	call_exit(t_game *game)
+{
+	if (game)
+	{
+		call_exit_map(game);
+		call_exit_minimap(game->minimap);
+	}
+}
+
+
+#include "../include/cub3d.h"
+
+void	ft_initialize_player(t_game *game)
+{
+	game->player = malloc(sizeof(t_player));
+	if (!game->player)
+		return ;
+	game->player->x = game->map->spawn_x * CELL + (CELL / 2);
+	game->player->y = game->map->spawn_y * CELL + (CELL / 2);
+	game->player->angle = 0;
+}
+
+mlx_t	*ft_init_window(t_game *game)
+{
+	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT,
+			NAME_WINDOW, true);
+	if (!game->mlx)
+		return (NULL);
+	return (game->mlx);
+}
+
+t_mini	*ft_initialize_minimap(t_game *game)
+{
+	t_mini	*mini;
+
+	mini = NULL;
+	mini = ft_calloc(sizeof(t_mini), 1);
+	if (!mini)
+		return (NULL);
+	mini->player = NULL;
+	mini->plyr_dir = NULL;
+	mini->overlay = NULL;
+	mini->pos_x = 1;
+	mini->pos_y = 1;
+	mini->delta_x = 0;
+	mini->delta_y = 0;
+	mini->angle = 0;
+	mini->delta_x = cos(mini->angle) * 5;
+	mini->delta_y = sin(mini->angle) * 5;
+	mini->px_height = 100;
+	mini->px_width = 200;
+	mini->map_height = game->map->height;
+	mini->map_width = game->map->width;
+	return (mini);
+}
+
+void	ft_initialize_game(t_game	*game)
+{
+	game->map = NULL;
+	game->minimap = NULL;
+	game->mlx = NULL;
+}
+
+void	ft_initialize(t_game *game, int argc, char **argv)
+{
+	ft_initialize_game(game);
+	get_map(game, argc, argv);
+	if (!game->map)
+		call_exit(game);
+	print_map(game->map);
+	game->minimap = ft_initialize_minimap(game);
+	ft_initialize_player(game);
+	if (!game->minimap)
+		call_exit(game);
+}
+
+
+#include "../include/cub3d.h"
+
+void	ft_set_color_minimap_char(mlx_image_t *image, uint32_t color)
+{
+	uint32_t	x;
+	uint32_t	y;
+
+	x = 0;
+	y = 0;
+	while (x < image->width)
+	{
+		while (y < image->height)
+		{
+			mlx_put_pixel(image, x, y, color);
+			y++;
+		}
+		y = 0;
+		x++;
+	}
+}
+
+int	ft_load_map(t_game *game, char c, int color)
+{
+	int				x;
+	int				y;
+	mlx_image_t		*image;
+
+	x = 0;
+	y = 0;
+	image = mlx_new_image(game->mlx, MCELL - 1, MCELL - 1);
+	if (!image)
+		return (1);
+	(void) c;
+	ft_set_color_minimap_char(image, color);
+	while (x < game->minimap->map_width)
+	{
+		y = 0;
+		while (y < game->minimap->map_height)
+		{
+			if (game->map->content[y] && game->map->content[y][x] == c)
+			{
+				if (mlx_image_to_window(game->mlx, image, x * MCELL, y * MCELL) == -1)
+					return (1);
+			}
+			y++;
+		}
+		x++;
+	}
+	return (0);
+}
+
+int ft_load_minimap(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	i += ft_load_map(game, '0', 0x100000FF);
+	i += ft_load_map(game, 'N', 0x100000FF);
+	i += ft_load_map(game, 'E', 0x100000FF);
+	i += ft_load_map(game, 'W', 0x100000FF);
+	i += ft_load_map(game, 'S', 0x100000FF);
+	i += ft_load_map(game, '1', 0x1FF000FF);
+	return(i);
+}
+
+int ft_load_minimap_entities(t_game *game)
+{
+	float	pos_x, pos_y;
+
+	pos_x = game->player->x * (MCELL / (float)CELL);
+	pos_y = game->player->y * (MCELL / (float)CELL);
+	game->minimap->player = mlx_new_image(game->mlx, PLAYER_SIZE, PLAYER_SIZE);
+	if (!game->minimap->player)
+		return (1);
+	if (mlx_image_to_window(game->mlx, game->minimap->player, pos_x - PLAYER_SIZE / 2, pos_y - PLAYER_SIZE / 2) == -1)
+		return (1);
+	ft_set_color_minimap_char(game->minimap->player, 0xFF00FFFF);
+	if (game->minimap->player->instances)
+	{
+		game->minimap->player->instances[0].x = pos_x - PLAYER_SIZE / 2;
+		game->minimap->player->instances[0].y = pos_y - PLAYER_SIZE / 2;
+	}
+	return (0);
+}
+
+int ft_overlay(t_game* game)
+{
+	if(game->minimap->overlay)
+		mlx_delete_image(game->mlx,game->minimap->overlay);
+	game->minimap->overlay = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
+	if (!game->minimap->overlay)
+		return (1);
+	if (mlx_image_to_window(game->mlx, game->minimap->overlay, 0, 0) == -1)
+		return (1);
+	ft_set_color_minimap_char(game->minimap->overlay, 0x00000001);
+	return (0);
+}
+
+int	ft_load_textures_minimap(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	i += ft_load_minimap(game);
+	i += ft_load_minimap_entities(game);
+	//i += ft_overlay(game);
+	return (i);
+}
+
+
+
+#include "../include/cub3d.h"
+
+void draw_minimapline(int length, int color, t_game* game)
+{
+    double  x;
+    double  y;
+    mlx_image_t* image;
+
+    // Calculate the center point of the player on the minimap
+    x = (game->player->x * (MCELL / (float)CELL));
+    y = (game->player->y * (MCELL / (float)CELL));
+
+    image = game->minimap->overlay;
+    for (int i = 0; i < length; i++)
+    {
+        if(x > 1 && x < image->width - 1 && y > 1 && y < image->height - 1)
+            mlx_put_pixel(image, x, y, color);
+        x += game->minimap->delta_x;
+        y += game->minimap->delta_y;
+    }
+}
+
+int	draw_the_ray(t_game* game)
+{
+	printf("Player at: %i %i, %f\n", game->player->y, game->player->x, game->player->angle);
+	return(0);
+}
+
+int	draw_direction(t_game* game)
+{
+	if(ft_overlay(game))
+		return(1);
+	draw_minimapline(20, 0xFFFFFF, game);
+	return(0);
+}
+
+void calc_delta(t_game* game, char operator)
+{
+    float angle_increment = 0.1; // You might want to adjust this value
+
+    if(operator == '+')
+    {
+        game->player->angle += angle_increment;
+        if(game->player->angle > 2 * PI)
+            game->player->angle -= 2 * PI;
+    }
+    else if(operator == '-')
+    {
+        game->player->angle -= angle_increment;
+        if(game->player->angle < 0)
+            game->player->angle += 2 * PI;
+    }
+    ft_printf("calc_delta: %i %i, %f\n", game->player->y, game->player->x, game->player->angle);
+    game->minimap->delta_x = cos(game->player->angle);
+    game->minimap->delta_y = sin(game->player->angle);
+    game->minimap->angle = game->player->angle;
+}
+
+void	my_keyhook(mlx_key_data_t keydata, void *param)
+{
+	t_game	*game;
+
+	game = param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(game->mlx);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+		check_move_up(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
+		check_move_down(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
+		check_move_left(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		check_move_right(game);
+	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
+		calc_delta(game, '+');
+	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
+		calc_delta(game, '-');
+	if(draw_direction(game))
+		return;
+	if(draw_the_ray(game))
+		return;//return value_!_!_!__!_!
+	// printf("DX:%f DY:%f A:%f\n",game->minimap->delta_x, game->minimap->delta_y, game->minimap->angle);
+	return ;
+}
+
+
+void	start_game(t_game *game)
+{
+	if (game)
+	{
+		mlx_set_setting(MLX_STRETCH_IMAGE, 1);
+		mlx_key_hook(game->mlx, &my_keyhook, game);
+		mlx_loop(game->mlx);
+		mlx_terminate(game->mlx);
+	}
+}
+
+
+#include "../include/cub3d.h"
+
+void	check_leaks(void)
+{
+	system("leaks cub3d");
+}
+
+int	main(int argc, char **argv)
+{
+	t_game	game;
+
+	atexit(check_leaks);
+	ft_initialize(&game, argc, argv);
+	if (!game.map)
+	{
+		call_exit(&game);
+		return (1);
+	}
+	if (!ft_init_window(&game))
+		return (ft_printf("Error init window\n"), call_exit(&game), 0);
+	if (load_textures(&game))
+		return (ft_printf("Error\nLoading textures \n"), 0);
+	start_game(&game);
+	call_exit(&game);
+	return (0);
+}
+
+/*
+TODO
+	horizontal intersections
+	ys = CELL
+	xs = ys / tan(angle)
+	yn = player.y - ((player.y/CELL) * CELL)
+	xn = yn / tan(angle)
+
+	vertical instersections
+	xs = CELL
+	ys = xs / tan(angle)
+	xn = CELL - ((player.x/CELL) * CELL)
+	yn = xn / tan(angle)
+
+	find nearest intersections
+
+*/
+
+
+#include "../include/cub3d.h"
+
+void	check_the_spot_down(t_map *map, int ydex, int xdex, int *err)
+{
+	int	y;
+
+	y = ydex;
+	while (y < map->height)
+	{
+		if (map->content[y][xdex] == '1')
+			return ;
+		y++;
+	}
+	(*err)++;
+	ft_fprintf(2, RED"The map content is not closed - detected here:\n"D);
+	print_map_error(map, ydex, xdex);
+}
+
+void	check_the_spot_up(t_map *map, int ydex, int xdex, int *err)
+{
+	int	y;
+
+	y = ydex;
+	while (y >= 0)
+	{
+		if (map->content[y][xdex] == '1')
+			return ;
+		y--;
+	}
+	(*err)++;
+	ft_fprintf(2, RED"The map content is not closed - detected here:\n"D);
+	print_map_error(map, ydex, xdex);
+}
+
+void	check_the_spot_left(t_map *map, int ydex, int xdex, int *err)
+{
+	int	x;
+
+	x = xdex;
+	while (x >= 0)
+	{
+		if (map->content[ydex][x] == '1')
+			return ;
+		x--;
+	}
+	(*err)++;
+	ft_fprintf(2, RED"The map content is not closed - detected here:\n"D);
+	print_map_error(map, ydex, xdex);
+}
+
+void	check_the_spot_right(t_map *map, int ydex, int xdex, int *err)
+{
+	int	x;
+
+	x = xdex;
+	while (x < map->width)
+	{
+		if (map->content[ydex][x] == '1')
+			return ;
+		x++;
+	}
+	(*err)++;
+	ft_fprintf(2, RED"The map content is not closed - detected here:\n"D);
+	print_map_error(map, ydex, xdex);
+}
+
+void	check_the_spot(t_map *map, int ydex, int xdex, int *err)
+{
+	if (!(*err))
+		check_the_spot_up(map, ydex, xdex, err);
+	if (!(*err))
+		check_the_spot_down(map, ydex, xdex, err);
+	if (!(*err))
+		check_the_spot_left(map, ydex, xdex, err);
+	if (!(*err))
+		check_the_spot_right(map, ydex, xdex, err);
+}
+
+
+#include "../include/cub3d.h"
+
+void	init_flood(t_map *map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (map->content[y][x] == '0')
+				map->content[y][x] = 'X';
+			x++;
+		}
+		y++;
+	}
+}
+
+void	flood_one(char *ref, int *check, char *work)
+{
+	if (ft_strchr(ref, *work))
+	{
+		*work = 'X';
+		(*check)--;
+	}
+}
+
+int	check_xy_nexts(t_map *map, int ydex, int xdex)
+{
+	int		check;
+	char	*ref;
+
+	check = 0;
+	ref = ft_strdup("0 ");
+	if (ydex != 0)
+		flood_one(ref, &check, &map->content[ydex - 1][xdex]);
+	if (xdex != 0)
+		flood_one(ref, &check, &map->content[ydex][xdex - 1]);
+	if (ydex != (map->height - 1))
+		flood_one(ref, &check, &map->content[ydex + 1][xdex]);
+	if (xdex != (map->width - 1))
+		flood_one(ref, &check, &map->content[ydex][xdex + 1]);
+	free(ref);
+	return (check);
+}
+
+void	flood(t_map *map)
+{
+	int		check;
+	int		xdex;
+	int		ydex;
+
+	check = -1;
+	while (check < 0)
+	{
+		check = 0;
+		ydex = 0;
+		while (ydex < map->height)
+		{
+			xdex = 0;
+			while (xdex < map->width)
+			{
+				if ('X' == map->content[ydex][xdex])
+					check = check + check_xy_nexts(map, ydex, xdex);
+				xdex++;
+			}
+			ydex++;
+		}
+	}
+}
+
+
+#include "../include/cub3d.h"
+
+void	set_spawn_point(t_map *map, int x, int y)
+{
+	map->spawn = map->content[y][x];
+	map->spawn_x = x;
+	map->spawn_y = y;
+	map->content[y][x] = '0';
+}
+
+void	handle_multiple_spawns(t_map *map, int y, int x, int *err)
+{
+	(*err)++;
+	ft_fprintf(2, RED"multiple spawns detected:\n"D);
+	print_map_error(map, y, x);
+}
+
+void	check_spawn_cell(t_map *map, int y, int x, int *err)
+{
+	if (ft_strchr("NEWS", map->content[y][x]) != NULL)
+	{
+		if (map->spawn == '-')
+			set_spawn_point(map, x, y);
+		else
+			handle_multiple_spawns(map, y, x, err);
+	}
+}
+
+void	handle_no_spawns(t_map *map, int *err)
+{
+	(*err)++;
+	ft_fprintf(2, RED"no spawns detected:\n"D);
+	print_map_error(map, 0, 0);
+}
+
+void	check_spawn(t_map *map, int *err)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < map->height && !(*err))
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			check_spawn_cell(map, y, x, err);
+			x++;
+		}
+		y++;
+	}
+	if (map->spawn == '-' && !(*err))
+		handle_no_spawns(map, err);
+}
+
+
+#include "../include/cub3d.h"
+
+void	check_chars(t_map *map, int *err)
+{
+	int	y;
+
+	y = 0;
+	while (y < map->height && !(*err))
+	{
+		if (map->width != (int)ft_strspn(map->content[y], MAP_CNT_CHARS))
+		{
+			(*err)++;
+			ft_fprintf(2, RED"Invalid char in map:\n"D);
+			print_map_error(map, y, ft_strspn(map->content[y], MAP_CNT_CHARS));
+		}
+		y++;
+	}
+}
+
+int	has_defined_insides(t_map *map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (map->content[y][x] == '0')
+				return (1);
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+void	map_validation(t_map *map, int *err)
+{
+	int	y;
+	int	x;
+
+	check_chars(map, err);
+	check_spawn(map, err);
+	while (has_defined_insides(map) && !(*err))
+	{
+		init_flood(map);
+		flood(map);
+	}
+	y = 0;
+	while (y < map->height && !(*err))
+	{
+		x = 0;
+		while (x < map->width && !(*err))
+		{
+			if (map->content[y][x] == 'X')
+				check_the_spot(map, y, x, err);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	clear_validation(t_map *map)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < map->height)
+	{
+		x = 0;
+		while (x < map->width)
+		{
+			if (y == map->spawn_y && x == map->spawn_x)
+				map->content[y][x] = map->spawn;
+			if (map->content[y][x] == 'X')
+				map->content[y][x] = '0';
+			x++;
+		}
+		y++;
+	}
+}
+
+void	get_map_content(int fd, int *err, t_game *game)
+{
+	char	*line;
+	char	*content;
+	char	*temp;
+
+	content = ft_strdup("");
+	line = get_next_line(fd);
+	while (line != NULL && !(*err))
+	{
+		temp = ft_strjoin(content, line);
+		free(content);
+		content = temp;
+		free(line);
+		line = get_next_line(fd);
+	}
+	parse_map_array(game->map, map_split(content));
+	map_validation(game->map, err);
+	clear_validation(game->map);
+	free(content);
+	free(line);
+	line = NULL;
+}
+
+
+#include "../include/cub3d.h"
+
+char	*get_textr_path(char *line, size_t size, int *err)
+{
+	size_t	i;
+	size_t	j;
+	size_t	new_size;
+	char	*path;
+
+	i = 0;
+	while (line[i] && i < size)
+		i++;
+	if (i < size)
+		(*err)++;
+	new_size = i;
+	while (line[new_size] && line[new_size] != '\n' && line[new_size] != ' ')
+		new_size++;
+	new_size = new_size - i;
+	path = malloc(sizeof(char) * (new_size + 1));
+	if (!path)
+		return ((*err)++, NULL);
+	j = 0;
+	while (j < new_size)
+	{
+		path[j] = line[j + i];
+		j++;
+	}
+	path[new_size] = '\0';
+	return (path);
+}
+
+uint32_t	parse_color(char *str, int start, int *err)
+{
+	char		**split;
+	int			r;
+	int			g;
+	int			b;
+	uint32_t	color;
+
+	split = ft_split(str + start, ',');
+	if (!split || !split[0] || !split[1] || !split[2] || split[3])
+	{
+		ft_array_free(split);
+		*err = 1;
+		return (0);
+	}
+	r = ft_atoi(split[0]);
+	g = ft_atoi(split[1]);
+	b = ft_atoi(split[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	{
+		*err = 1;
+		return (0);
+	}
+	color = (r << 24) | (g << 16) | (b << 8) | 0xFF;
+	ft_array_free(split);
+	return (color);
+}
+
+void	set_color_meta(int *err, char *line, t_game *g, char kind)
+{
+	if (kind == 'f')
+	{
+		g->map->floor = parse_color(line, 2, err);
+		if (!(*err))
+			g->map->floor_set = 1;
+	}
+	if (kind == 'c')
+	{
+		g->map->ceiling = parse_color(line, 2, err);
+		if (!(*err))
+			g->map->ceiling_set = 1;
+	}
+	if (*err)
+	{
+		ft_fprintf(2, RED"Error loading color in map meta definition: ");
+		ft_fprintf(2, "%s\n"D, line);
+	}
+}
+
+void	set_textr_meta(int *err, char *line, t_game *g, char ornttn)
+{
+	char	*path;
+	int		fd;
+
+	path = get_textr_path(line, 3, err);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		(*err)++;
+	else
+		close(fd);
+	if (ornttn == 'w')
+		g->map->tex_west = mlx_load_png(path);
+	if (ornttn == 'n')
+		g->map->tex_north = mlx_load_png(path);
+	if (ornttn == 'e')
+		g->map->tex_east = mlx_load_png(path);
+	if (ornttn == 's')
+		g->map->tex_south = mlx_load_png(path);
+	if (*err)
+	{
+		ft_fprintf(2, RED"Error loading texture in map meta definition: "D);
+		ft_fprintf(2, "%s\n", path);
+	}
+	free(path);
+}
+
+
+#include "../include/cub3d.h"
+
+int	check_all_meta(t_game *game)
+{
+	if (!game->map->tex_west)
+		return (0);
+	if (!game->map->tex_east)
+		return (0);
+	if (!game->map->tex_north)
+		return (0);
+	if (!game->map->tex_south)
+		return (0);
+	if (!game->map->floor_set)
+		return (0);
+	if (!game->map->ceiling_set)
+		return (0);
+	return (1);
+}
+
+int	check_line_format(const char *s1, size_t n)
+{
+	size_t	i;
+
+	i = (n + 1);
+	while (s1[i])
+	{
+		if (ft_isspace(s1[i]) && s1[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	got_meta_line(t_game *game, const char *s1, const char *s2, size_t n)
+{
+	if (!ft_strncmp(s1, s2, n))
+	{
+		if (!check_line_format(s1, n))
+			return (0);
+		if (!ft_strcmp(s2, "NO ") && !game->map->tex_north)
+			return (1);
+		if (!ft_strcmp(s2, "SO ") && !game->map->tex_south)
+			return (1);
+		if (!ft_strcmp(s2, "WE ") && !game->map->tex_west)
+			return (1);
+		if (!ft_strcmp(s2, "EA ") && !game->map->tex_east)
+			return (1);
+		if (!ft_strcmp(s2, "F ") && !game->map->floor_set)
+			return (1);
+		if (!ft_strcmp(s2, "C ") && !game->map->ceiling_set)
+			return (1);
+		ft_fprintf(2, RED"a Meta define is not unique\n"D);
+		return (0);
+	}
+	return (0);
+}
+
+void	retreive_meta(char *line, int *err, t_game *game)
+{
+	if (got_meta_line(game, line, "NO ", 3))
+		set_textr_meta(err, line, game, 'n');
+	else if (got_meta_line(game, line, "SO ", 3))
+		set_textr_meta(err, line, game, 's');
+	else if (got_meta_line(game, line, "WE ", 3))
+		set_textr_meta(err, line, game, 'w');
+	else if (got_meta_line(game, line, "EA ", 3))
+		set_textr_meta(err, line, game, 'e');
+	else if (got_meta_line(game, line, "F ", 2))
+		set_color_meta(err, line, game, 'f');
+	else if (got_meta_line(game, line, "C ", 2))
+		set_color_meta(err, line, game, 'c');
+	else
+	{
+		if (ft_strlen(line) == ft_strspn(line, MAP_CNT_CHARS))
+		{
+			ft_fprintf(2, RED"Received Meta Data in wrong format ");
+			ft_fprintf(2, "or a mandatory Meta is missing because");
+			ft_fprintf(2, " this seems to be map content: \n %s\n"D, line);
+		}
+		else
+			ft_fprintf(2, RED"Received Meta Data in wrong format\n"D);
+		(*err)++;
+	}
+}
+
+void	get_map_meta(int fd, int *err, t_game *game)
+{
+	int		allfound;
+	char	*line;
+
+	allfound = 0;
+	line = get_next_line(fd);
+	while (line != NULL && !allfound && !(*err))
+	{
+		if (ft_strcmp(line, "\n"))
+		{
+			retreive_meta(line, err, game);
+			allfound = check_all_meta(game);
+		}
+		free(line);
+		line = NULL;
+		if (!allfound)
+			line = get_next_line(fd);
+	}
+	free(line);
+	line = NULL;
+}
+
+
+#include "../include/cub3d.h"
+
+size_t	count_lines(const char *str)
+{
+	size_t	count;
+	size_t	i;
+
+	count = 1;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+char	**split_lines(const char *str, size_t count)
+{
+	char		**result;
+	const char	*start;
+	size_t		i;
+	size_t		j;
+	size_t		len;
+
+	result = allocate_result(count);
+	if (!result)
+		return (NULL);
+	start = str;
+	j = 0;
+	i = 0;
+	while (i <= ft_strlen(str))
+	{
+		if (str[i] == '\n' || str[i] == '\0')
+		{
+			len = &str[i] - start;
+			if (!alloc_and_cpy_line(result, j, start, len))
+				return (NULL);
+			start = &str[i + 1];
+			j++;
+		}
+		i++;
+	}
+	return (result);
+}
+
+void	get_map_dimensions(char **splits, int *max_len, int *num_rows)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	*max_len = 0;
+	*num_rows = 0;
+	while (splits[i] != NULL)
+	{
+		len = ft_strlen(splits[i]);
+		if (len > *max_len)
+			*max_len = len;
+		(*num_rows)++;
+		i++;
+	}
+}
+
+void	free_splits(char **splits)
+{
+	int	i;
+
+	i = 0;
+	while (splits[i] != NULL)
+	{
+		free(splits[i]);
+		i++;
+	}
+	free(splits);
+}
+
+void	parse_map_array(t_map *map, char **splits)
+{
+	char	**rect_array;
+	int		start;
+	int		end;
+
+	find_map_bounds(splits, &start, &end);
+	if (start != -1 && end != -1)
+		trim_map_lines(splits, start, end);
+	get_map_dimensions(splits, &(map->width), &(map->height));
+	rect_array = allocate_rect_array(map->height);
+	if (rect_array == NULL)
+	{
+		map->content = NULL;
+		free_splits(splits);
+		return ;
+	}
+	if (!fill_rect_array(rect_array, splits, map->width, map->height))
+	{
+		free_rect_array(rect_array, map->height);
+		free_splits(splits);
+		map->content = NULL;
+		return ;
+	}
+	free_splits(splits);
+	map->content = rect_array;
+}
+
+
+#include "../include/cub3d.h"
+
+char	**allocate_result(size_t count)
+{
+	char	**result;
+
+	result = (char **)malloc((count + 1) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	result[count] = NULL;
+	return (result);
+}
+
+int	alloc_and_cpy_line(char **result, size_t j, const char *start, size_t len)
+{
+	result[j] = (char *)malloc((len + 1) * sizeof(char));
+	if (!result[j])
+	{
+		while (j > 0)
+			free(result[--j]);
+		free(result);
+		return (0);
+	}
+	ft_strncpy(result[j], start, len);
+	result[j][len] = '\0';
+	return (1);
+}
+
+char	**allocate_rect_array(int num_rows)
+{
+	char	**rect_array;
+
+	rect_array = (char **)malloc((num_rows + 1) * sizeof(char *));
+	if (rect_array == NULL)
+		return (NULL);
+	rect_array[num_rows] = NULL;
+	return (rect_array);
+}
+
+char	**map_split(char *str)
+{
+	size_t	count;
+	char	*trimmed_map;
+	char	**result;
+
+	trimmed_map = ft_strtrim(str, "\n");
+	count = count_lines(trimmed_map);
+	result = split_lines(trimmed_map, count);
+	free(trimmed_map);
+	return (result);
+}
+
+int	fill_rect_array(char **rect_array, char **splits, int max_len, int num_rows)
+{
+	int	i;
+	int	j;
+	int	orig_len;
+
+	i = 0;
+	while (i < num_rows)
+	{
+		rect_array[i] = (char *)malloc((max_len + 1) * sizeof(char));
+		if (rect_array[i] == NULL)
+		{
+			while (i > 0)
+				free(rect_array[--i]);
+			free(rect_array);
+			return (0);
+		}
+		ft_strcpy(rect_array[i], splits[i]);
+		orig_len = ft_strlen(splits[i]);
+		j = orig_len;
+		while (j < max_len)
+			rect_array[i][j++] = ' ';
+		rect_array[i][max_len] = '\0';
+		i++;
+	}
+	return (1);
+}
+
+
+#include "../include/cub3d.h"
+
+int	is_map_line(const char *line)
+{
+	int	has_wall;
+
+	has_wall = 0;
+	while (*line)
+	{
+		if (*line == '1')
+			has_wall = 1;
+		if (ft_strchr(MAP_CNT_CHARS, *line) == NULL)
+			return (0);
+		line++;
+	}
+	return (has_wall);
+}
+
+void	find_map_bounds(char **splits, int *start, int *end)
+{
+	int	i;
+
+	*start = -1;
+	*end = -1;
+	i = 0;
+	while (splits[i])
+	{
+		if (is_map_line(splits[i]))
+		{
+			if (*start == -1)
+				*start = i;
+			*end = i;
+		}
+		else if (*start != -1)
+			break ;
+		i++;
+	}
+}
+
+void	trim_line(char *line)
+{
+	int	start;
+	int	end;
+	int	len;
+
+	len = ft_strlen(line);
+	start = 0;
+	while (start < len && line[start] == ' ')
+		start++;
+	end = len - 1;
+	while (end > start && line[end] == ' ')
+		end--;
+	if (start > 0 || end < len - 1)
+	{
+		ft_memmove(line, line + start, end - start + 1);
+		line[end - start + 1] = '\0';
+	}
+}
+
+void	trim_map_lines(char **splits, int start, int end)
+{
+	int	i;
+
+	i = start;
+	while (i <= end)
+	{
+		trim_line(splits[i]);
+		i++;
+	}
+}
+
+void	free_rect_array(char **rect_array, int num_rows)
+{
+	int	i;
+
+	if (rect_array == NULL)
+		return ;
+	i = 0;
+	while (i < num_rows)
+	{
+		free(rect_array[i]);
+		i++;
+	}
+	free(rect_array);
+}
+
+
+#include "../include/cub3d.h"
+
+void	ft_printmetas(t_map *map)
+{
+	ft_printf("\nTexture Pointers:\n");
+	ft_printf("West: %p\n", (void *)map->tex_west);
+	ft_printf("East: %p\n", (void *)map->tex_east);
+	ft_printf("North: %p\n", (void *)map->tex_north);
+	ft_printf("South: %p\n", (void *)map->tex_south);
+	ft_printf("\nImage Pointers:\n");
+	ft_printf("West: %p\n", (void *)map->img_west);
+	ft_printf("East: %p\n", (void *)map->img_east);
+	ft_printf("North: %p\n", (void *)map->img_north);
+	ft_printf("South: %p\n", (void *)map->img_south);
+	ft_printf("\nColors:\n");
+	ft_printf("Ceiling: 0x%08X\n", map->ceiling);
+	ft_printf("Floor: 0x%08X\n", map->floor);
+	ft_printf("\nFlags:\n");
+	ft_printf("Ceiling set: %d\n", map->ceiling_set);
+	ft_printf("Floor set: %d\n", map->floor_set);
+	ft_printf(G"------------------------------------\n");
+	ft_printf("MAP VALID >>> START GAME\n");
+	ft_printf("------------------------------------\n\n"D);
+}
+
+void	print_map(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (!map)
+		return ;
+	if (map->content)
+	{
+		while (map->content[i])
+		{
+			j = 0;
+			while (map->content[i][j])
+			{
+				ft_printf(G"%c"D, map->content[i][j]);
+				j++;
+			}
+			ft_printf("\n");
+			i++;
+		}
+	}
+	ft_printmetas(map);
+}
+
+void	print_map_error(t_map *map, int ey, int ex)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (map->content)
+	{
+		while (map->content[i])
+		{
+			j = 0;
+			while (map->content[i][j])
+			{
+				if (i == ey && j == ex)
+					ft_fprintf(2, RED"%c"D, map->content[i][j]);
+				else
+					ft_fprintf(2, B"%c"D, map->content[i][j]);
+				j++;
+			}
+			ft_fprintf(2, "\n");
+			i++;
+		}
+	}
+}
+
+
+#include "../include/cub3d.h"
+
+int	validate_map(t_game *game, char *filename)
+{
+	int		fd;
+	int		problem;
+
+	problem = 0;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	get_map_meta(fd, &problem, game);
+	get_map_content(fd, &problem, game);
+	close(fd);
+	if (problem)
+		call_exit(game);
+	return (0);
+}
+
+int	validate_input(int argc, char **argv)
+{
+	if (argc != 2)
+	{
+		ft_putstr_fd(2, RED"./cube3d [map.cub]\n"D);
+		return (1);
+	}
+	if (!ft_strendswith(argv[1], ".cub"))
+	{
+		ft_putstr_fd(2, RED"map must be .cub file\n"D);
+		return (1);
+	}
+	if (access(argv[1], R_OK) != 0)
+	{
+		ft_putstr_fd(2, RED"cannot read from map file\n"D);
+		return (1);
+	}
+	return (0);
+}
+
+void	get_map(t_game *game, int argc, char **argv)
+{
+	game->map = malloc(sizeof(t_map));
+	if (!game->map)
+		return ;
+	game->map->content = NULL;
+	game->map->tex_west = NULL;
+	game->map->img_west = NULL;
+	game->map->tex_east = NULL;
+	game->map->img_east = NULL;
+	game->map->tex_north = NULL;
+	game->map->img_north = NULL;
+	game->map->tex_south = NULL;
+	game->map->img_south = NULL;
+	game->map->ceiling = 0;
+	game->map->floor = 0;
+	game->map->ceiling_set = 0;
+	game->map->floor_set = 0;
+	game->map->width = 0;
+	game->map->height = 0;
+	game->map->spawn_x = -1;
+	game->map->spawn_y = -1;
+	game->map->spawn = '-';
+	if (validate_input(argc, argv) > 0)
+		call_exit(game);
+	if (validate_map(game, argv[1]) > 0)
+		call_exit(game);
+}
+
+
+#include "../include/cub3d.h"
+
+char	get_cell_char(t_game *game, int x, int y)
+{
+	int cell_x;
+	int cell_y;
+
+	cell_x = x / CELL;
+	cell_y = y / CELL;
+	return (game->map->content[cell_y][cell_x]);
+}
+
+void i_like_to_move_it_move_it(t_game *game, int new_x, int new_y)
+{
+    game->player->x = new_x;
+    game->player->y = new_y;
+    if (game->minimap && game->minimap->player && game->minimap->player->instances)
+    {
+        float minimap_x = (new_x * (MCELL / (float)CELL));
+        float minimap_y = (new_y * (MCELL / (float)CELL));
+
+        game->minimap->player->instances[0].x = minimap_x - (PLAYER_SIZE / 2);
+        game->minimap->player->instances[0].y = minimap_y - (PLAYER_SIZE / 2);
+    }
+}
+
+int check_collision(t_game *game, int new_x, int new_y)
+{
+    int player_radius = (PLAYER_SIZE / 2) + 1;  // +1 as buffer
+
+    if (get_cell_char(game, new_x - player_radius, new_y - player_radius) == '1') return 1;
+    if (get_cell_char(game, new_x + player_radius, new_y - player_radius) == '1') return 1;
+    if (get_cell_char(game, new_x - player_radius, new_y + player_radius) == '1') return 1;
+    if (get_cell_char(game, new_x + player_radius, new_y + player_radius) == '1') return 1;
+
+    return 0;
+}
+
+int	check_move_up(t_game *game)
+{
+	int new_x;
+	int new_y;
+
+	new_x = game->player->x;
+	new_y = game->player->y - PLYR_STEP;
+	if (!check_collision(game, new_x, new_y))
+		i_like_to_move_it_move_it(game, new_x, new_y);
+	return (1);
+}
+
+int	check_move_down(t_game *game)
+{
+	int new_x;
+	int new_y;
+
+	new_x = game->player->x;
+	new_y = game->player->y + PLYR_STEP;
+	if (!check_collision(game, new_x, new_y))
+		i_like_to_move_it_move_it(game, new_x, new_y);
+	return (1);
+}
+
+int	check_move_left(t_game *game)
+{
+	int new_x;
+	int new_y;
+
+	new_x = game->player->x - PLYR_STEP;
+	new_y = game->player->y;
+	if (!check_collision(game, new_x, new_y))
+		i_like_to_move_it_move_it(game, new_x, new_y);
+	return (1);
+}
+
+int	check_move_right(t_game *game)
+{
+	int new_x;
+	int new_y;
+
+	new_x = game->player->x + PLYR_STEP;
+	new_y = game->player->y;
+	if (!check_collision(game, new_x, new_y))
+		i_like_to_move_it_move_it(game, new_x, new_y);
+	return (1);
+}
+
+
+#include "../include/cub3d.h"
+
+int	load_textures(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	calc_delta(game, ' ');
+	i += ft_load_textures_minimap(game);
+	if (i)
+		return (call_exit(game), 1);
+	return (i);
+}
+
+
+#include "../include/cub3d.h"
+
+void	print_2d_arr(char **map_in_arr)
+{
+	int	i;
+	int	j;
+
+	if (!map_in_arr)
+		return ;
+	i = 0;
+	j = 0;
+	ft_printf("	[0][1][2][3][4][5][6][7][8][9][10]\n");
+	while (map_in_arr[i])
+	{
+		ft_printf("[%i]	", i);
+		while (map_in_arr[i][j])
+		{
+			ft_printf(" %c ", map_in_arr[i][j]);
+			j++;
+		}
+		ft_printf("\n");
+		j = 0;
+		i++;
+	}
+}
+
+// t_pos	*get_pos_unique(char **content, char c)
+// {
+// 	t_pos	*pos;
+// 	int		x;
+// 	int		y;
+
+// 	pos = NULL;
+// 	y = 0;
+// 	pos = ft_calloc(1, sizeof(t_pos));
+// 	if (!pos)
+// 		return (NULL);
+// 	while (content[y])
+// 	{
+
+// 		x = 0;
+// 		while (content[y][x])
+// 		{
+// 			if (content[y][x] == c)
+// 				return (pos->x = x, pos->y = y, pos);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	return (pos);
+// }
+

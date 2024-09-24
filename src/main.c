@@ -6,10 +6,9 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 06:41:47 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 12:06:19 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/cub3d.h"
 
@@ -20,11 +19,9 @@ void	check_leaks(void)
 
 int	main(int argc, char **argv)
 {
-	(void) argc;
-	(void) argv;
-	atexit(check_leaks);
 	t_game	game;
 
+	atexit(check_leaks);
 	ft_initialize(&game, argc, argv);
 	if (!game.map)
 	{
@@ -40,20 +37,18 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-
-
 /*
 TODO
 	horizontal intersections
-	ys = cellsize
+	ys = CELL
 	xs = ys / tan(angle)
-	yn = player.y - ((player.y/cellsize) * cellsize)
+	yn = player.y - ((player.y/CELL) * CELL)
 	xn = yn / tan(angle)
 
 	vertical instersections
-	xs = cellsize
+	xs = CELL
 	ys = xs / tan(angle)
-	xn = cellsize - ((player.x/cellsize) * cellsize)
+	xn = CELL - ((player.x/CELL) * CELL)
 	yn = xn / tan(angle)
 
 	find nearest intersections
