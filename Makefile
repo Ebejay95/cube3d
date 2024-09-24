@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/23 17:00:46 by jeberle          ###   ########.fr        #
+#    Updated: 2024/09/24 14:52:31 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,9 +143,9 @@ init-submodules: init-libft init-mlx
 
 init-libft:
 	@if [ ! -d "$(LIBFT_DIR)" ]; then \
-		git submodule add -q $(LIBFT_REPO) $(LIBFT_DIR) > /dev/null 2>&1; \
+		git submodule add $(LIBFT_REPO) $(LIBFT_DIR) || (echo "$(RED)Failed to add libft submodule$(X)" && exit 1); \
 	elif [ -z "$$(ls -A $(LIBFT_DIR) 2>/dev/null)" ]; then \
-		git submodule update --init --recursive -q $(LIBFT_DIR) > /dev/null 2>&1; \
+		git submodule update --init --recursive $(LIBFT_DIR) || (echo "$(RED)Failed to update libft submodule$(X)" && exit 1); \
 	fi
 
 remove-submodules: remove-libft remove-mlx
@@ -199,6 +199,7 @@ $(NAME_BONUS): $(LIBFT_LIB) $(MLXFT_LIB) $(BONUS_OBJECTS)
 clean: remove-submodules
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(MLXFT_BUILD_DIR)
+	@rm -rf $(LIBFT_DIR)
 	@echo "$(RED)Objects deleted$(X)"
 
 fclean: clean
