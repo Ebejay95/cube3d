@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:18:19 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 13:15:25 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/23 17:02:55 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	check_move_up(t_game *game)
 	x = game->minimap->pos_x;
 	y = (game->minimap->image->instances[0].y - PLAYER_STEP) / PIXEL_MINI;
 	if(DEBUG_COLLISION)
-		printf("%c %i %i \n",game->map->map_as_arr[y][x], x,y);
+		printf("%c %i %i \n",game->map->content[y][x], x,y);
 
-	if('1' != game->map->map_as_arr[y][x] )
+	if('1' != game->map->content[y][x] )
 	{
 		game->minimap->image->instances[0].y -= PLAYER_STEP;
 		game->minimap->pos_y = y;
@@ -36,8 +36,8 @@ int	check_move_down(t_game *game)
 	x = game->minimap->pos_x;
 	y = (game->minimap->image->instances[0].y + PIXEL_MINI_CHAR + PLAYER_STEP) / PIXEL_MINI;
 	if(DEBUG_COLLISION)
-		printf("%c %i %i \n",game->map->map_as_arr[y][x], x,y);
-	if('1' != game->map->map_as_arr[y][x] )
+		printf("%c %i %i \n",game->map->content[y][x], x,y);
+	if('1' != game->map->content[y][x] )
 	{
 		game->minimap->image->instances[0].y += PLAYER_STEP;
 		game->minimap->pos_y = y;
@@ -52,8 +52,8 @@ int	check_move_left(t_game *game)
 	x = (game->minimap->image->instances[0].x - PLAYER_STEP) / PIXEL_MINI;
 	y = game->minimap->pos_y;
 	if(DEBUG_COLLISION)
-		printf("%c %i %i \n",game->map->map_as_arr[y][x], x,y);
-	if('1' != game->map->map_as_arr[y][x] )
+		printf("%c %i %i \n",game->map->content[y][x], x,y);
+	if('1' != game->map->content[y][x] )
 	{
 		game->minimap->image->instances[0].x -= PLAYER_STEP;
 		game->minimap->pos_x = x;
@@ -68,8 +68,8 @@ int	check_move_right(t_game *game)
 	x = (game->minimap->image->instances[0].x + PIXEL_MINI_CHAR + PLAYER_STEP) / PIXEL_MINI;
 	y = game->minimap->pos_y;
 	if(DEBUG_COLLISION)
-		printf("%c %i %i \n",game->map->map_as_arr[y][x], x,y);
-	if('1' != game->map->map_as_arr[y][x] )
+		printf("%c %i %i \n",game->map->content[y][x], x,y);
+	if('1' != game->map->content[y][x] )
 	{
 		game->minimap->image->instances[0].x += PLAYER_STEP;
 		game->minimap->pos_x = x;

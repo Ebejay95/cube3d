@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move copy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:18:19 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/20 10:53:46 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/23 17:02:55 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	check_move_up1(t_game *game)
 
 	y = game->minimap->pos_y + 1;
 	x = game->minimap->pos_x;
-	c = game->map->map_as_arr[y][x];
-	print_2d_arr(game->map->map_as_arr);
+	c = game->map->content[y][x];
+	print_2d_arr(game->map->content);
 	printf("[X%i] [Y%i] [C%c]\n",x,y,c);
 	if (c != '1')
 	{
@@ -40,8 +40,8 @@ int	check_move_down1(t_game *game)
 
 	y = game->minimap->pos_y + 1;
 	x = game->minimap->pos_x;
-	c = game->map->map_as_arr[y][x];
-	print_2d_arr(game->map->map_as_arr);
+	c = game->map->content[y][x];
+	print_2d_arr(game->map->content);
 	printf("[X%i] [Y%i] [C%c]\n",x,y,c);
 	if (c != '1')
 	{
@@ -60,8 +60,8 @@ int	check_move_left1(t_game *game)
 
 	y = game->minimap->pos_y;
 	x = game->minimap->pos_x - 1;
-	c = game->map->map_as_arr[y][x];
-	print_2d_arr(game->map->map_as_arr);
+	c = game->map->content[y][x];
+	print_2d_arr(game->map->content);
 	printf("[X%i] [Y%i] [C%c]\n",x,y,c);
 	if (c != '1')
 	{
@@ -81,8 +81,8 @@ int	check_move_right1(t_game *game)
 
 	y = game->minimap->pos_y;
 	x = game->minimap->pos_x + 1;
-	c = game->map->map_as_arr[y][x];
-	print_2d_arr(game->map->map_as_arr);
+	c = game->map->content[y][x];
+	print_2d_arr(game->map->content);
 	printf("[X%i] [Y%i] [C%c]\n",x,y,c);
 	if (c != '1')
 	{

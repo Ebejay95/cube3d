@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 17:01:07 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 06:49:42 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		call_exit(t_game *game);
 
 // ft_init
 mlx_t		*ft_init_window(t_game *game);
-t_mini*		ft_initialize_minimap(void);
+t_mini		*ft_initialize_minimap(t_game *game);
 t_map		*ft_initialize_map(char** map_in);
 void		ft_initialize_game(t_game	*game);
 void		ft_initialize(t_game *game, int argc, char **argv);

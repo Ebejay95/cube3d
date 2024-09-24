@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 16:59:35 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 06:58:33 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,33 +33,34 @@ void ft_set_color_minimap_char(mlx_image_t *image, uint32_t color)
 
 int ft_load_map(t_game *game, char c, int color)
 {
-	int x;
-	int y;
+    int x;
+    int y;
 
-	x = 0;
-	y = 0;
-	mlx_image_t* image = mlx_new_image(game->mlx, PIXEL_MINI - 1, PIXEL_MINI - 1);
-
-	ft_set_color_minimap_char(image, color);
-	if(DEBUG)
-		printf("height %i, width %i\n",game->minimap->map_height , game->minimap->map_width);
-	while (y <= game->minimap->map_width)
-	{
-		if(DEBUG)
+    x = 0;
+    y = 0;
+    mlx_image_t* image = mlx_new_image(game->mlx, PIXEL_MINI - 1, PIXEL_MINI - 1);
+    if (!image) {
+        return (1);
+    }
+    (void) c;
+    ft_set_color_minimap_char(image, color);
+    printf("height %i, width %i\n", game->minimap->map_height, game->minimap->map_width);
+    while (x < game->minimap->map_width)
+    {
+        y = 0;
+        while (y < game->minimap->map_height)
+        {
 			printf("x %i, y %i\n",x , y);
-		while (x <= game->minimap->map_height)
-		{
-			if(game->map->content[x][y] == c)
-			{
-				if (mlx_image_to_window(game->mlx, image, y * PIXEL_MINI, x * PIXEL_MINI) == -1)
-					return (1);
-			}
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	return (0);
+            if (game->map->content[y] && game->map->content[y][x] == c)
+            {
+                if (mlx_image_to_window(game->mlx, image, x * PIXEL_MINI, y * PIXEL_MINI) == -1)
+                    return (1);
+            }
+            y++;
+        }
+        x++;
+    }
+    return (0);
 }
 
 int ft_load_minimap(t_game *game)

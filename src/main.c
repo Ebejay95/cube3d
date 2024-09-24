@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 16:59:29 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 06:41:47 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	main(int argc, char **argv)
 		call_exit(&game);
 		return (1);
 	}
-	//if (!ft_init_window(&game))
-	//	return (ft_printf("Error init window\n"), call_exit(&game), 0);
-	//if (load_textures(&game))
-	//	return (ft_printf("Error\nLoading textures \n"), 0);
-	//start_game(&game);
+	if (!ft_init_window(&game))
+		return (ft_printf("Error init window\n"), call_exit(&game), 0);
+	if (load_textures(&game))
+		return (ft_printf("Error\nLoading textures \n"), 0);
+	start_game(&game);
 	call_exit(&game);
 	return (0);
 }
