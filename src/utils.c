@@ -6,11 +6,27 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:13:18 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 16:58:56 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:53:20 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int	check_collision(t_game *game, int new_x, int new_y)
+{
+	int	player_radius;
+
+	player_radius = (PLAYER_SIZE / 2) + 1;
+	if (get_cellchar(game, new_x - player_radius, new_y - player_radius) == '1')
+		return (1);
+	if (get_cellchar(game, new_x + player_radius, new_y - player_radius) == '1')
+		return (1);
+	if (get_cellchar(game, new_x - player_radius, new_y + player_radius) == '1')
+		return (1);
+	if (get_cellchar(game, new_x + player_radius, new_y + player_radius) == '1')
+		return (1);
+	return (0);
+}
 
 void	print_2d_arr(char **map_in_arr)
 {
@@ -34,6 +50,16 @@ void	print_2d_arr(char **map_in_arr)
 		j = 0;
 		i++;
 	}
+}
+
+char	get_cellchar(t_game *game, int x, int y)
+{
+	int	cell_x;
+	int	cell_y;
+
+	cell_x = x / CELL;
+	cell_y = y / CELL;
+	return (game->map->content[cell_y][cell_x]);
 }
 
 // t_pos	*get_pos_unique(char **content, char c)

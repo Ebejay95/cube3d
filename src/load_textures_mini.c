@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 14:15:16 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 16:32:24 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_load_map(t_game *game, char c, int color)
 	return (0);
 }
 
-int ft_load_minimap(t_game *game)
+int	ft_load_minimap(t_game *game)
 {
 	int	i;
 
@@ -72,12 +72,13 @@ int ft_load_minimap(t_game *game)
 	i += ft_load_map(game, 'W', 0x100000FF);
 	i += ft_load_map(game, 'S', 0x100000FF);
 	i += ft_load_map(game, '1', 0x1FF000FF);
-	return(i);
+	return (i);
 }
 
-int ft_load_minimap_entities(t_game *game)
+int	ft_load_minimap_entities(t_game *game)
 {
-	float	pos_x, pos_y;
+	float	pos_x;
+	float	pos_y;
 
 	pos_x = game->player->x * (MCELL / (float)CELL);
 	pos_y = game->player->y * (MCELL / (float)CELL);
@@ -95,10 +96,10 @@ int ft_load_minimap_entities(t_game *game)
 	return (0);
 }
 
-int ft_overlay(t_game* game)
+int	ft_overlay(t_game *game)
 {
-	if(game->minimap->overlay)
-		mlx_delete_image(game->mlx,game->minimap->overlay);
+	if (game->minimap->overlay)
+		mlx_delete_image(game->mlx, game->minimap->overlay);
 	game->minimap->overlay = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
 	if (!game->minimap->overlay)
 		return (1);
@@ -115,6 +116,5 @@ int	ft_load_textures_minimap(t_game *game)
 	i = 0;
 	i += ft_load_minimap(game);
 	i += ft_load_minimap_entities(game);
-	//i += ft_overlay(game);
 	return (i);
 }

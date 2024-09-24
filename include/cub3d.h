@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 06:49:42 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:53:49 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void		ft_initialize(t_game *game, int argc, char **argv);
 void		print_map_error(t_map *map, int ey, int ex);
 
 // utils
+char		get_cellchar(t_game *game, int x, int y);
 void		print_2d_arr(char **map_in_arr);
+int			check_collision(t_game *game, int new_x, int new_y);
 
 // loop
 void	my_keyhook(mlx_key_data_t keydata, void *param);

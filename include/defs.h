@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 14:31:04 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 15:33:35 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 # define DEBUG 0
 # define DEBUG_COLLISION 1
-# define SPEED 5
-# define PLYR_STEP 4
+# define PLYR_STEP 2
 # define CELL 64
 # define MINI_FKT 50
 # define PLAYER_SIZE 4

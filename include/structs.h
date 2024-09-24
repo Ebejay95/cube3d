@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 14:13:05 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/24 16:20:18 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ typedef struct s_player
 	int		y;
 	double	angle;
 }	t_player;
+
+typedef struct s_key_states {
+    bool w_pressed;
+    bool s_pressed;
+    bool a_pressed;
+    bool d_pressed;
+    bool left_pressed;
+    bool right_pressed;
+} t_key_states;
 
 typedef struct s_map
 {
@@ -55,8 +64,8 @@ typedef struct s_mini
 	int				map_height;
 	int				pos_x;
 	int				pos_y;
-	float			delta_x;
-	float			delta_y;
+	float			deltax;
+	float			deltay;
 	float			angle;
 }					t_mini;
 
@@ -67,6 +76,7 @@ typedef struct s_game
 	t_mini*			minimap;
 	mlx_t*			mlx;
 	t_player		*player;
+	t_key_states	key_states;
 }					t_game;
 
 #endif
