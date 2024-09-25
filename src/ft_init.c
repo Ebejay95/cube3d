@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 16:38:13 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 11:15:28 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ void	ft_initialize(t_game *game, int argc, char **argv)
 	ft_initialize_game(game);
 	get_map(game, argc, argv);
 	if (!game->map)
+	{
 		call_exit(game);
+		return ;
+	}
 	print_map(game->map);
 	game->minimap = ft_initialize_minimap(game);
 	ft_initialize_player(game);

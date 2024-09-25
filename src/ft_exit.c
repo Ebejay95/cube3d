@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:27 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/23 16:27:58 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 11:18:32 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	call_exit_minimap(t_mini *minimap)
 {
 	if (minimap)
-	{
 		free(minimap);
-	}
 }
 
 void	call_exit_map_textrs(t_game *game, t_map *map)
