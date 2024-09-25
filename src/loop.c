@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 11:26:49 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 12:55:26 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,16 @@ void	dda_raycast(t_game *game, int *hitx, int *hity)
 	*hity = ray.mapy;
 }
 
+float	angle_check(float angle)
+{
+	if (angle > 2 * PI)
+		return(angle - 2 * PI);
+	else if (angle < 0)
+		return(angle + 2 * PI);
+	else
+		return (angle);
+}
+
 int	draw_direction(t_game *game)
 {
 	float	start_angle;
@@ -145,10 +155,7 @@ int	draw_direction(t_game *game)
 	while (i < NUM_RAYS)
 	{
 		current_angle = start_angle + i * RAY_ANGLE_STEP;
-		while (current_angle < 0)
-			current_angle += 2 * PI;
-		while (current_angle >= 2 * PI)
-			current_angle -= 2 * PI;
+		current_angle = angle_check(current_angle);
 		game->minimap->deltax = cos(current_angle);
 		game->minimap->deltay = sin(current_angle);
 		dda_raycast(game, &hitx, &hity);
@@ -165,15 +172,13 @@ void	calc_delta(t_game *game, char operator)
 	angle_increment = 0.1;
 	if (operator == '+')
 	{
-		game->player->angle += angle_increment;
-		if (game->player->angle > 2 * PI)
-			game->player->angle -= 2 * PI;
+		// game->player->angle += angle_increment;
+		game->player->angle = angle_check(game->player->angle + angle_increment);
 	}
 	else if (operator == '-')
 	{
-		game->player->angle -= angle_increment;
-		if (game->player->angle < 0)
-			game->player->angle += 2 * PI;
+		// game->player->angle -= angle_increment;
+		game->player->angle = angle_check(game->player->angle - angle_increment);
 	}
 	game->minimap->deltax = cos(game->player->angle);
 	game->minimap->deltay = sin(game->player->angle);
@@ -221,7 +226,6 @@ void	update_game_state(void *param)
 	if (game->key_states.right_pressed)
 		calc_delta(game, '+');
 	draw_direction(game);
-	printf("%f\n", game->player->angle);
 }
 
 void	start_game(t_game *game)
