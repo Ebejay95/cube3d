@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
+#    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/24 14:52:31 by jeberle          ###   ########.fr        #
+#    Updated: 2024/09/25 10:55:33 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -198,7 +198,7 @@ $(NAME_BONUS): $(LIBFT_LIB) $(MLXFT_LIB) $(BONUS_OBJECTS)
 
 clean: remove-submodules
 	@rm -rf $(OBJ_DIR)
-	@rm -rf $(MLXFT_BUILD_DIR)
+#	@rm -rf $(MLXFT_BUILD_DIR)
 	@rm -rf $(LIBFT_DIR)
 	@echo "$(RED)Objects deleted$(X)"
 
