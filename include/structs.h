@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 11:26:12 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 14:24:35 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,23 @@
 # define STRUCTS_H
 
 # include "cub3d.h"
+
+typedef struct s_split_context
+{
+	char	*str;
+	size_t	count;
+	size_t	i;
+	size_t	j;
+	char	*start;
+}	t_split_context;
+
+typedef struct s_map_bounds
+{
+	int	start;
+	int	end;
+	int	left;
+	int	right;
+}	t_map_bounds;
 
 typedef struct s_ray {
 	float	start_x;
@@ -47,21 +64,21 @@ typedef struct s_player
 {
 	float		x;
 	float		y;
-	float	angle;
+	float		angle;
 }	t_player;
 
 typedef struct s_key_states {
-    bool w_pressed;
-    bool s_pressed;
-    bool a_pressed;
-    bool d_pressed;
-    bool left_pressed;
-    bool right_pressed;
-} t_key_states;
+	bool	w_pressed;
+	bool	s_pressed;
+	bool	a_pressed;
+	bool	d_pressed;
+	bool	left_pressed;
+	bool	right_pressed;
+}	t_key_states;
 
 typedef struct s_map
 {
-	char**			content;
+	char			**content;
 	mlx_texture_t	*tex_west;
 	mlx_image_t		*img_west;
 	mlx_texture_t	*tex_east;
@@ -83,9 +100,9 @@ typedef struct s_map
 
 typedef struct s_mini
 {
-	mlx_image_t*	player;
-	mlx_image_t*	plyr_dir;
-	mlx_image_t*	overlay;
+	mlx_image_t		*player;
+	mlx_image_t		*plyr_dir;
+	mlx_image_t		*overlay;
 	int				px_width;
 	int				px_height;
 	int				map_width;
@@ -97,12 +114,11 @@ typedef struct s_mini
 	float			angle;
 }					t_mini;
 
-
 typedef struct s_game
 {
-	t_map*			map;
-	t_mini*			minimap;
-	mlx_t*			mlx;
+	t_map			*map;
+	t_mini			*minimap;
+	mlx_t			*mlx;
 	t_player		*player;
 	t_key_states	key_states;
 	int				mouse_locked;

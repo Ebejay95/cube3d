@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 11:26:49 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 14:17:25 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,10 @@ int	draw_direction(t_game *game)
 	i = 0;
 	if (ft_overlay(game))
 		return (1);
-	start_angle = game->player->angle - FOV / 2;
+	start_angle = game->player->angle - (PI / 2) / 2;
 	while (i < NUM_RAYS)
 	{
-		current_angle = start_angle + i * RAY_ANGLE_STEP;
+		current_angle = start_angle + i * ((PI / 2) / NUM_RAYS);
 		while (current_angle < 0)
 			current_angle += 2 * PI;
 		while (current_angle >= 2 * PI)
@@ -162,7 +162,7 @@ void	calc_delta(t_game *game, char operator)
 {
 	float	angle_increment;
 
-	angle_increment = 0.1;
+	angle_increment = 0.06;
 	if (operator == '+')
 	{
 		game->player->angle += angle_increment;

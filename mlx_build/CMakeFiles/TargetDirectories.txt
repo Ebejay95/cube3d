@@ -1,7 +1,0 @@
-/Users/ajehle/Desktop/cub3d_collab/mlx_build/CMakeFiles/mlx42.dir
-/Users/ajehle/Desktop/cub3d_collab/mlx_build/CMakeFiles/edit_cache.dir
-/Users/ajehle/Desktop/cub3d_collab/mlx_build/CMakeFiles/rebuild_cache.dir
-/Users/ajehle/Desktop/cub3d_collab/mlx_build/CMakeFiles/list_install_components.dir
-/Users/ajehle/Desktop/cub3d_collab/mlx_build/CMakeFiles/install.dir
-/Users/ajehle/Desktop/cub3d_collab/mlx_build/CMakeFiles/install/local.dir
-/Users/ajehle/Desktop/cub3d_collab/mlx_build/CMakeFiles/install/strip.dir

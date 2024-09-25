@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
+#    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/25 10:55:33 by ajehle           ###   ########.fr        #
+#    Updated: 2024/09/25 14:26:30 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -162,6 +162,7 @@ remove-mlx:
 		git submodule deinit -q -f $(MLXFT_DIR) > /dev/null 2>&1; \
 		git rm -q -f $(MLXFT_DIR) > /dev/null 2>&1; \
 		rm -rf .git/modules/$(MLXFT_DIR) > /dev/null 2>&1; \
+		rm -rf ./mlx_build > /dev/null 2>&1; \
 		rm -rf ./mlx42 > /dev/null 2>&1; \
 	fi
 

@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:03:02 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/23 16:49:45 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 12:49:07 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,60 @@ char	*get_textr_path(char *line, size_t size, int *err)
 	return (path);
 }
 
+static char	*trim_whitespace_and_newline(char *str)
+{
+	char	*end;
+
+	while (*str && (*str == ' ' || *str == '\t'))
+		str++;
+	end = str + ft_strlen(str) - 1;
+	while (end > str && (*end == ' ' || *end == '\t' || *end == '\n'))
+		end--;
+	*(end + 1) = '\0';
+	ft_printf("DEBUG: After trimming: '%s'\n", str);
+	return (str);
+}
+
+uint32_t	create_color(int r, int g, int b)
+{
+	return (((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff));
+}
+
+int	validate_color_component(char *component)
+{
+	int	i;
+	int	value;
+
+	i = 0;
+	while (component[i])
+	{
+		if (!ft_isdigit(component[i]))
+			return (0);
+		i++;
+	}
+	value = ft_atoi(component);
+	if (value < 0 || value > 255)
+		return (0);
+	return (1);
+}
+
+int	validate_color_split(char **split)
+{
+	if (!split || !split[0] || !split[1] || !split[2] || split[3])
+	{
+		ft_printf("DEBUG: Invalid number of color components\n");
+		return (0);
+	}
+	if (!validate_color_component(split[0])
+		|| !validate_color_component(split[1])
+		|| !validate_color_component(split[2]))
+	{
+		ft_printf("DEBUG: Invalid color component(s)\n");
+		return (0);
+	}
+	return (1);
+}
+
 uint32_t	parse_color(char *str, int start, int *err)
 {
 	char		**split;
@@ -49,8 +103,10 @@ uint32_t	parse_color(char *str, int start, int *err)
 	int			b;
 	uint32_t	color;
 
-	split = ft_split(str + start, ',');
-	if (!split || !split[0] || !split[1] || !split[2] || split[3])
+	ft_printf("DEBUG: Parsing color string: '%s'\n", str);
+	str = trim_whitespace_and_newline(str + start);
+	split = ft_split(str, ',');
+	if (!validate_color_split(split))
 	{
 		ft_array_free(split);
 		*err = 1;
@@ -59,13 +115,9 @@ uint32_t	parse_color(char *str, int start, int *err)
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
 	b = ft_atoi(split[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-	{
-		*err = 1;
-		return (0);
-	}
-	color = (r << 24) | (g << 16) | (b << 8) | 0xFF;
+	color = create_color(r, g, b);
 	ft_array_free(split);
+	ft_printf("DEBUG: Successfully parsed color\n");
 	return (color);
 }
 
@@ -73,13 +125,13 @@ void	set_color_meta(int *err, char *line, t_game *g, char kind)
 {
 	if (kind == 'f')
 	{
-		g->map->floor = parse_color(line, 2, err);
+		g->map->floor = parse_color(line, 1, err);
 		if (!(*err))
 			g->map->floor_set = 1;
 	}
 	if (kind == 'c')
 	{
-		g->map->ceiling = parse_color(line, 2, err);
+		g->map->ceiling = parse_color(line, 1, err);
 		if (!(*err))
 			g->map->ceiling_set = 1;
 	}

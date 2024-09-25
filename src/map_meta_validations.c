@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:02:27 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/23 16:51:14 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 14:23:58 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_all_meta(t_game *game)
 	return (1);
 }
 
-int	check_line_format(const char *s1, size_t n)
+int	check_line_format(char *s1, size_t n)
 {
 	size_t	i;
 
@@ -43,7 +43,7 @@ int	check_line_format(const char *s1, size_t n)
 	return (1);
 }
 
-int	got_meta_line(t_game *game, const char *s1, const char *s2, size_t n)
+int	got_meta_line(t_game *game, char *s1, char *s2, size_t n)
 {
 	if (!ft_strncmp(s1, s2, n))
 	{

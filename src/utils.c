@@ -6,49 +6,38 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:13:18 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 15:53:20 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 13:53:44 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	check_collision(t_game *game, int new_x, int new_y)
+void	check_collision(t_game *game, float *new_x, float *new_y)
 {
-	int	player_radius;
+	int		radius;
+	int		collision;
+	float	old_x;
+	float	old_y;
 
-	player_radius = (PLAYER_SIZE / 2) + 1;
-	if (get_cellchar(game, new_x - player_radius, new_y - player_radius) == '1')
-		return (1);
-	if (get_cellchar(game, new_x + player_radius, new_y - player_radius) == '1')
-		return (1);
-	if (get_cellchar(game, new_x - player_radius, new_y + player_radius) == '1')
-		return (1);
-	if (get_cellchar(game, new_x + player_radius, new_y + player_radius) == '1')
-		return (1);
-	return (0);
-}
-
-void	print_2d_arr(char **map_in_arr)
-{
-	int	i;
-	int	j;
-
-	if (!map_in_arr)
-		return ;
-	i = 0;
-	j = 0;
-	ft_printf("	[0][1][2][3][4][5][6][7][8][9][10]\n");
-	while (map_in_arr[i])
+	radius = (PLAYER_SIZE / 2) + 1;
+	collision = 0;
+	old_x = game->player->x;
+	old_y = game->player->y;
+	if (get_cellchar(game, *new_x - radius, old_y - radius) == '1'
+		|| get_cellchar(game, *new_x + radius, old_y - radius) == '1'
+		|| get_cellchar(game, *new_x - radius, old_y + radius) == '1'
+		|| get_cellchar(game, *new_x + radius, old_y + radius) == '1')
 	{
-		ft_printf("[%i]	", i);
-		while (map_in_arr[i][j])
-		{
-			ft_printf(" %c ", map_in_arr[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		j = 0;
-		i++;
+		*new_x = old_x;
+		collision = 1;
+	}
+	if (get_cellchar(game, old_x - radius, *new_y - radius) == '1'
+		|| get_cellchar(game, old_x + radius, *new_y - radius) == '1'
+		|| get_cellchar(game, old_x - radius, *new_y + radius) == '1'
+		|| get_cellchar(game, old_x + radius, *new_y + radius) == '1')
+	{
+		*new_y = old_y;
+		collision = 1;
 	}
 }
 
@@ -61,29 +50,3 @@ char	get_cellchar(t_game *game, int x, int y)
 	cell_y = y / CELL;
 	return (game->map->content[cell_y][cell_x]);
 }
-
-// t_pos	*get_pos_unique(char **content, char c)
-// {
-// 	t_pos	*pos;
-// 	int		x;
-// 	int		y;
-
-// 	pos = NULL;
-// 	y = 0;
-// 	pos = ft_calloc(1, sizeof(t_pos));
-// 	if (!pos)
-// 		return (NULL);
-// 	while (content[y])
-// 	{
-
-// 		x = 0;
-// 		while (content[y][x])
-// 		{
-// 			if (content[y][x] == c)
-// 				return (pos->x = x, pos->y = y, pos);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	return (pos);
-// }

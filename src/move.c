@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:18:19 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 11:30:53 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 13:04:27 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	check_move_up(t_game *game)
 
 	new_x = game->player->x + cos(game->player->angle) * PLYR_STEP;
 	new_y = game->player->y + sin(game->player->angle) * PLYR_STEP;
-	if (!check_collision(game, new_x, new_y))
-		i_like_to_move_it_move_it(game, new_x, new_y);
+	check_collision(game, &new_x, &new_y);
+	i_like_to_move_it_move_it(game, new_x, new_y);
 	return (1);
 }
 
@@ -48,8 +48,8 @@ int	check_move_down(t_game *game)
 
 	new_x = game->player->x - cos(game->player->angle) * PLYR_STEP;
 	new_y = game->player->y - sin(game->player->angle) * PLYR_STEP;
-	if (!check_collision(game, new_x, new_y))
-		i_like_to_move_it_move_it(game, new_x, new_y);
+	check_collision(game, &new_x, &new_y);
+	i_like_to_move_it_move_it(game, new_x, new_y);
 	return (1);
 }
 
@@ -60,8 +60,8 @@ int	check_move_left(t_game *game)
 
 	new_x = game->player->x + sin(game->player->angle) * PLYR_STEP;
 	new_y = game->player->y - cos(game->player->angle) * PLYR_STEP;
-	if (!check_collision(game, new_x, new_y))
-		i_like_to_move_it_move_it(game, new_x, new_y);
+	check_collision(game, &new_x, &new_y);
+	i_like_to_move_it_move_it(game, new_x, new_y);
 	return (1);
 }
 
@@ -72,7 +72,7 @@ int	check_move_right(t_game *game)
 
 	new_x = game->player->x - sin(game->player->angle) * PLYR_STEP;
 	new_y = game->player->y + cos(game->player->angle) * PLYR_STEP;
-	if (!check_collision(game, new_x, new_y))
-		i_like_to_move_it_move_it(game, new_x, new_y);
+	check_collision(game, &new_x, &new_y);
+	i_like_to_move_it_move_it(game, new_x, new_y);
 	return (1);
 }
