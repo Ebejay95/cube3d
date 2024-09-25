@@ -6,140 +6,153 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 16:30:25 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 09:43:56 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	dda_raycast(t_game *game, int *hitx, int *hity)
+float	calculate_steps(float dx, float dy)
 {
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	int		stepx;
-	int		stepy;
-	int		mapx;
-	int		mapy;
-	int		hit;
-
-	posx = game->player->x;
-	posy = game->player->y;
-	dirx = game->minimap->deltax;
-	diry = game->minimap->deltay;
-	deltadistx = fabs(1 / dirx);
-	deltadisty = fabs(1 / diry);
-	mapx = (int)posx;
-	mapy = (int)posy;
-	hit = 0;
-	if (dirx < 0)
-	{
-		stepx = -1;
-		sidedistx = (posx - mapx) * deltadistx;
-	}
+	if (fabsf(dx) > fabsf(dy))
+		return (fabsf(dx));
 	else
-	{
-		stepx = 1;
-		sidedistx = (mapx + 1.0 - posx) * deltadistx;
-	}
-	if (diry < 0)
-	{
-		stepy = -1;
-		sidedisty = (posy - mapy) * deltadisty;
-	}
-	else
-	{
-		stepy = 1;
-		sidedisty = (mapy + 1.0 - posy) * deltadisty;
-	}
-	while (hit == 0)
-	{
-		if (sidedistx < sidedisty)
-		{
-			sidedistx += deltadistx;
-			mapx += stepx;
-		}
-		else
-		{
-			sidedisty += deltadisty;
-			mapy += stepy;
-		}
-		if (get_cellchar(game, mapx, mapy) == '1')
-			hit = 1;
-	}
-	*hitx = mapx;
-	*hity = mapy;
+		return (fabsf(dy));
 }
 
-void	draw_minimapline(int length, int color, t_game *game)
+void	initialize_ray(t_game *game, int hitx, int hity, t_ray *ray)
 {
-	double			x;
-	double			y;
-	mlx_image_t		*image;
-	int				i;
+	ray->start_x = game->player->x * (MCELL / (float)CELL);
+	ray->start_y = game->player->y * (MCELL / (float)CELL);
+	ray->end_x = hitx * (MCELL / (float)CELL);
+	ray->end_y = hity * (MCELL / (float)CELL);
+	ray->dx = ray->end_x - ray->start_x;
+	ray->dy = ray->end_y - ray->start_y;
+	ray->steps = calculate_steps(ray->dx, ray->dy);
+	ray->x_inc = ray->dx / ray->steps;
+	ray->y_inc = ray->dy / ray->steps;
+}
 
-	x = (game->player->x * (MCELL / (float)CELL));
-	y = (game->player->y * (MCELL / (float)CELL));
-	image = game->minimap->overlay;
-	i = 0;
-	while (i < length)
+void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color)
+{
+	if (x >= 0 && x < image->width && y >= 0 && y < image->height)
 	{
-		if (x > 1 && x < image->width - 1 && y > 1 && y < image->height - 1)
-			mlx_put_pixel(image, x, y, color);
-		x += game->minimap->deltax;
-		y += game->minimap->deltay;
+		mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, color);
+	}
+}
+
+void	draw_ray(t_game *game, int hitx, int hity)
+{
+	t_ray		ray;
+	float		x;
+	float		y;
+	int			i;
+	mlx_image_t	*image;
+
+	initialize_ray(game, hitx, hity, &ray);
+	image = game->minimap->overlay;
+	x = ray.start_x;
+	y = ray.start_y;
+	i = 0;
+	while (i <= ray.steps)
+	{
+		draw_pixel(image, x, y, RAY_COLOR);
+		x += ray.x_inc;
+		y += ray.y_inc;
 		i++;
 	}
 }
 
+void	initialize_ray_data(t_game *game, t_ray_data *ray)
+{
+	ray->posx = game->player->x;
+	ray->posy = game->player->y;
+	ray->dirx = game->minimap->deltax;
+	ray->diry = game->minimap->deltay;
+	ray->deltadistx = fabs(1 / ray->dirx);
+	ray->deltadisty = fabs(1 / ray->diry);
+	ray->mapx = (int)ray->posx;
+	ray->mapy = (int)ray->posy;
+	ray->hit = 0;
+}
+
+void	calculate_step_and_sidedist(t_ray_data *ray)
+{
+	if (ray->dirx < 0)
+	{
+		ray->stepx = -1;
+		ray->sidedistx = (ray->posx - ray->mapx) * ray->deltadistx;
+	}
+	else
+	{
+		ray->stepx = 1;
+		ray->sidedistx = (ray->mapx + 1.0 - ray->posx) * ray->deltadistx;
+	}
+	if (ray->diry < 0)
+	{
+		ray->stepy = -1;
+		ray->sidedisty = (ray->posy - ray->mapy) * ray->deltadisty;
+	}
+	else
+	{
+		ray->stepy = 1;
+		ray->sidedisty = (ray->mapy + 1.0 - ray->posy) * ray->deltadisty;
+	}
+}
+
+void	perform_dda(t_game *game, t_ray_data *ray)
+{
+	while (ray->hit == 0)
+	{
+		if (ray->sidedistx < ray->sidedisty)
+		{
+			ray->sidedistx += ray->deltadistx;
+			ray->mapx += ray->stepx;
+		}
+		else
+		{
+			ray->sidedisty += ray->deltadisty;
+			ray->mapy += ray->stepy;
+		}
+		if (get_cellchar(game, ray->mapx, ray->mapy) == '1')
+			ray->hit = 1;
+	}
+}
+
+void	dda_raycast(t_game *game, int *hitx, int *hity)
+{
+	t_ray_data	ray;
+
+	initialize_ray_data(game, &ray);
+	calculate_step_and_sidedist(&ray);
+	perform_dda(game, &ray);
+	*hitx = ray.mapx;
+	*hity = ray.mapy;
+}
+
 int	draw_direction(t_game *game)
 {
-	int				hitx;
-	int				hity;
-	double			start_x;
-	double			start_y;
-	double			end_x;
-	double			end_y;
-	mlx_image_t		*image;
-	int				dx;
-	int				dy;
-	int				steps;
-	float			x_inc;
-	float			y_inc;
-	float			x;
-	float			y;
-	int				i;
+	double	start_angle;
+	double	current_angle;
+	int		i;
+	int		hitx;
+	int		hity;
 
+	i = 0;
 	if (ft_overlay(game))
 		return (1);
-	dda_raycast(game, &hitx, &hity);
-	start_x = game->player->x * (MCELL / (float)CELL);
-	start_y = game->player->y * (MCELL / (float)CELL);
-	end_x = hitx * (MCELL / (float)CELL);
-	end_y = hity * (MCELL / (float)CELL);
-	image = game->minimap->overlay;
-	dx = fabs(end_x - start_x);
-	dy = fabs(end_y - start_y);
-	if (dx > dy)
-		steps = dx;
-	else
-		steps = dy;
-	x_inc = (end_x - start_x) / (float)steps;
-	y_inc = (end_y - start_y) / (float)steps;
-	x = start_x;
-	y = start_y;
-	i = 0;
-	while (i <= steps)
+	start_angle = game->player->angle - FOV / 2;
+	while (i < NUM_RAYS)
 	{
-		if (x > 1 && x < image->width - 1 && y > 1 && y < image->height - 1)
-			mlx_put_pixel(image, x, y, 0xFFFFFF);
-		x += x_inc;
-		y += y_inc;
+		current_angle = start_angle + i * RAY_ANGLE_STEP;
+		while (current_angle < 0)
+			current_angle += 2 * PI;
+		while (current_angle >= 2 * PI)
+			current_angle -= 2 * PI;
+		game->minimap->deltax = cos(current_angle);
+		game->minimap->deltay = sin(current_angle);
+		dda_raycast(game, &hitx, &hity);
+		draw_ray(game, hitx, hity);
 		i++;
 	}
 	return (0);

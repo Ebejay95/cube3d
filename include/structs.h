@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 16:20:18 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 09:44:15 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,34 @@
 # define STRUCTS_H
 
 # include "cub3d.h"
+
+typedef struct s_ray {
+	float	start_x;
+	float	start_y;
+	float	end_x;
+	float	end_y;
+	float	dx;
+	float	dy;
+	float	steps;
+	float	x_inc;
+	float	y_inc;
+}	t_ray;
+
+typedef struct s_ray_data {
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	int		stepx;
+	int		stepy;
+	int		mapx;
+	int		mapy;
+	int		hit;
+}	t_ray_data;
 
 typedef struct s_player
 {
@@ -77,6 +105,7 @@ typedef struct s_game
 	mlx_t*			mlx;
 	t_player		*player;
 	t_key_states	key_states;
+	int				mouse_locked;
 }					t_game;
 
 #endif

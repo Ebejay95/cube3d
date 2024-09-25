@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 16:32:24 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 09:10:04 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	ft_load_minimap(t_game *game)
 	int	i;
 
 	i = 0;
-	i += ft_load_map(game, '0', 0x100000FF);
-	i += ft_load_map(game, 'N', 0x100000FF);
-	i += ft_load_map(game, 'E', 0x100000FF);
-	i += ft_load_map(game, 'W', 0x100000FF);
-	i += ft_load_map(game, 'S', 0x100000FF);
-	i += ft_load_map(game, '1', 0x1FF000FF);
+	i += ft_load_map(game, '0', ROOM_COLOR);
+	i += ft_load_map(game, 'N', ROOM_COLOR);
+	i += ft_load_map(game, 'E', ROOM_COLOR);
+	i += ft_load_map(game, 'W', ROOM_COLOR);
+	i += ft_load_map(game, 'S', ROOM_COLOR);
+	i += ft_load_map(game, '1', WALL_COLOR);
 	return (i);
 }
 
@@ -87,7 +87,7 @@ int	ft_load_minimap_entities(t_game *game)
 		return (1);
 	if (mlx_image_to_window(game->mlx, game->minimap->player, pos_x - PLAYER_SIZE / 2, pos_y - PLAYER_SIZE / 2) == -1)
 		return (1);
-	ft_set_color_minimap_char(game->minimap->player, 0xFF00FFFF);
+	ft_set_color_minimap_char(game->minimap->player, PLAYER_COLOR);
 	if (game->minimap->player->instances)
 	{
 		game->minimap->player->instances[0].x = pos_x - PLAYER_SIZE / 2;

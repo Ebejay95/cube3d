@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 15:33:35 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 09:11:51 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,22 @@
 
 # include "cub3d.h"
 
+# define RAY_COLOR 0xFFFFBB77
+# define WALL_COLOR 0x999999FF
+# define ROOM_COLOR 0x000000FF
+# define PLAYER_COLOR 0xFF0000FF
+
 # define DEBUG 0
 # define DEBUG_COLLISION 1
 # define PLYR_STEP 2
 # define CELL 64
 # define MINI_FKT 50
-# define PLAYER_SIZE 4
+# define PLAYER_SIZE 6
 # define MCELL (CELL)/(100 / MINI_FKT)
 # define PI 3.14159265359
+# define NUM_RAYS 600
+# define FOV (PI / 2)
+# define RAY_ANGLE_STEP (FOV / NUM_RAYS)
 
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 650
