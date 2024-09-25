@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 11:10:41 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:39:58 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@
 # define PLAYER_SIZE 6
 # define MCELL (CELL)/(100 / MINI_FKT)
 # define PI 3.14159265359
-# define NUM_RAYS 100
+# define NUM_RAYS 1024
 # define FOV (PI / 2)
+# define FOV_RAD (FOX * PI) / 180
 # define RAY_ANGLE_STEP (FOV / NUM_RAYS)
 
-# define WINDOW_WIDTH 1000
+# define WINDOW_WIDTH 1024
 # define WINDOW_HEIGHT 650
+
+// Test Blockheight:
+#define BLOCK_HEIGHT 4000
 
 # define FRAME 20
 

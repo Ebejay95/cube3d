@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 11:26:12 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 14:59:05 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_game
 	t_map*			map;
 	t_mini*			minimap;
 	mlx_t*			mlx;
+	mlx_image_t*	surface;
 	t_player		*player;
 	t_key_states	key_states;
 	int				mouse_locked;

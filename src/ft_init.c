@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/24 16:38:13 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 15:02:02 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	ft_initialize_player(t_game *game)
 	game->player->x = game->map->spawn_x * CELL + (CELL / 2);
 	game->player->y = game->map->spawn_y * CELL + (CELL / 2);
 	if (game->map->spawn == 'E')
-		game->player->angle = M_PI;
+		game->player->angle = 0;
 	else if (game->map->spawn == 'S')
 		game->player->angle = M_PI / 2;
 	else if (game->map->spawn == 'W')
-		game->player->angle = 0;
+		game->player->angle = M_PI;
 	else if (game->map->spawn == 'N')
 		game->player->angle = 3 * M_PI / 2;
 }
@@ -68,6 +68,7 @@ void	ft_initialize_game(t_game	*game)
 	game->map = NULL;
 	game->minimap = NULL;
 	game->mlx = NULL;
+	game->surface = NULL;
 	game->key_states.w_pressed = false;
 	game->key_states.s_pressed = false;
 	game->key_states.a_pressed = false;

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 12:55:26 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:46:54 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,49 @@ void	perform_dda(t_game *game, t_ray_data *ray)
 	}
 }
 
+
+
+
+int	ft_surface(t_game *game)
+{
+	if (game->surface)
+		mlx_delete_image(game->mlx, game->surface);
+	game->surface = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!game->surface)
+		return (1);
+	if (mlx_image_to_window(game->mlx, game->surface, 0, 0) == -1)
+		return (1);
+	ft_set_color_minimap_char(game->surface, 0x000001);
+	return (0);
+}
+
+float to_radian(float angle)
+{
+	return ((angle / 180)  * PI);
+}
+
+void	rendering(t_game *game, int hitx, int hity, float angle, int x)
+{
+	int lenx = hitx - game->player->x;
+	int leny = hity - game->player->y;
+	float rend_len;
+	float len = sqrt((pow(abs(lenx), 2)) + (pow(abs(leny), 2)));
+	rend_len = fabs(len * cos(to_radian(180 - angle)));
+	printf("ANGLE:%f X:%d Y:%d SQRT	[%f] \n",angle, abs(lenx), abs(leny), rend_len);
+
+
+	float start_height = WINDOW_HEIGHT / 2 - BLOCK_HEIGHT / rend_len;
+	float end_height = WINDOW_HEIGHT / 2 + BLOCK_HEIGHT / rend_len;
+	int	y = start_height;
+	printf("start height:%f end height:%f\n",start_height, end_height);
+	while (y < end_height)
+	{
+		draw_pixel(game->minimap->overlay , x, y, RAY_COLOR);
+		y++;
+	}
+}
+
+
 void	dda_raycast(t_game *game, int *hitx, int *hity)
 {
 	t_ray_data	ray;
@@ -147,12 +190,14 @@ int	draw_direction(t_game *game)
 	int		i;
 	int		hitx;
 	int		hity;
-
 	i = 0;
 	if (ft_overlay(game))
 		return (1);
-	start_angle = game->player->angle - FOV / 2;
-	while (i < NUM_RAYS)
+	// if (ft_surface(game))
+	// 	return (1);
+	start_angle = game->player->angle - (FOV / 2);
+	float	angle_begin = -45.0;
+	while (i <= NUM_RAYS)
 	{
 		current_angle = start_angle + i * RAY_ANGLE_STEP;
 		current_angle = angle_check(current_angle);
@@ -160,8 +205,14 @@ int	draw_direction(t_game *game)
 		game->minimap->deltay = sin(current_angle);
 		dda_raycast(game, &hitx, &hity);
 		draw_ray(game, hitx, hity);
+
+		// printf("Angle begin %f iteration:  %i\n", angle_begin, i);
 		i++;
+		angle_begin += (90.0f / (float)NUM_RAYS);
+		rendering(game, hitx, hity, angle_begin, i);
+
 	}
+		printf("\n");
 	return (0);
 }
 
@@ -171,15 +222,9 @@ void	calc_delta(t_game *game, char operator)
 
 	angle_increment = 0.1;
 	if (operator == '+')
-	{
-		// game->player->angle += angle_increment;
 		game->player->angle = angle_check(game->player->angle + angle_increment);
-	}
 	else if (operator == '-')
-	{
-		// game->player->angle -= angle_increment;
 		game->player->angle = angle_check(game->player->angle - angle_increment);
-	}
 	game->minimap->deltax = cos(game->player->angle);
 	game->minimap->deltay = sin(game->player->angle);
 	game->minimap->angle = game->player->angle;
