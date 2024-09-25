@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 14:17:25 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 16:58:59 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,149 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		game->key_states.right_pressed = is_pressed;
 }
 
+void mclear_and_draw_frame(t_game *game)
+{
+	int x, y;
+
+	y = 0;
+	while (y < MAP_FRAME)
+	{
+		x = 0;
+		while (x < MAP_FRAME)
+		{
+			if (x < FRAME_THICKNESS || x >= MAP_FRAME - FRAME_THICKNESS ||
+				y < FRAME_THICKNESS || y >= MAP_FRAME - FRAME_THICKNESS)
+			{
+				mlx_put_pixel(game->minimap->overlay, x, y, FRAME_COLOR);
+			}
+			else
+			{
+				mlx_put_pixel(game->minimap->overlay, x, y, WALL_COLOR);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void mrender_rotated_map(t_game *game, float cos_angle, float sin_angle)
+{
+	int x, y, map_x, map_y;
+	int player_screen_x = MAP_FRAME / 2;
+	int player_screen_y = MAP_FRAME / 2;
+	float rot_x, rot_y;
+
+	y = FRAME_THICKNESS;
+	while (y < MAP_FRAME - FRAME_THICKNESS)
+	{
+		x = FRAME_THICKNESS;
+		while (x < MAP_FRAME - FRAME_THICKNESS)
+		{
+			rot_x = -(y - player_screen_y) * cos_angle + (x - player_screen_x) * sin_angle;
+			rot_y = (y - player_screen_y) * sin_angle + (x - player_screen_x) * cos_angle;
+
+			map_x = (int)((game->player->x / CELL) + (rot_x / (float)MCELL));
+			map_y = (int)((game->player->y / CELL) + (rot_y / (float)MCELL));
+
+			if (map_x >= 0 && map_x < game->map->width && map_y >= 0 && map_y < game->map->height)
+			{
+				if (game->map->content[map_y][map_x] == '1')
+				{
+					mlx_put_pixel(game->minimap->overlay, x, y, WALL_COLOR);
+				}
+				else if (ft_strchr("NEWS0", game->map->content[map_y][map_x]))
+				{
+					mlx_put_pixel(game->minimap->overlay, x, y, ROOM_COLOR);
+				}
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void mdraw_rays(t_game *game, float cos_angle, float sin_angle)
+{
+	float ray_angle = game->player->angle - (PI / 4);
+	int i = 0;
+
+	while (i < NUM_RAYS)
+	{
+		float sin_a = sin(ray_angle);
+		float cos_a = cos(ray_angle);
+		float ray_x = game->player->x;
+		float ray_y = game->player->y;
+
+		while (1)
+		{
+			ray_x += cos_a;
+			ray_y += sin_a;
+
+			int map_ray_x = (int)(ray_x / CELL);
+			int map_ray_y = (int)(ray_y / CELL);
+
+			if (map_ray_x < 0 || map_ray_x >= game->map->width || map_ray_y < 0 || map_ray_y >= game->map->height || game->map->content[map_ray_y][map_ray_x] == '1')
+			{
+				break;
+			}
+
+			float rel_x = ray_x - game->player->x;
+			float rel_y = ray_y - game->player->y;
+			float rot_ray_x = rel_x * cos_angle - rel_y * sin_angle;
+			float rot_ray_y = rel_x * sin_angle + rel_y * cos_angle;
+			float display_x = rot_ray_y;
+			float display_y = -rot_ray_x;
+			int minimap_x = MAP_FRAME / 2 + (int)(display_x * MCELL / CELL);
+			int minimap_y = MAP_FRAME / 2 + (int)(display_y * MCELL / CELL);
+
+			if (minimap_x >= FRAME_THICKNESS && minimap_x < MAP_FRAME - FRAME_THICKNESS &&
+				minimap_y >= FRAME_THICKNESS && minimap_y < MAP_FRAME - FRAME_THICKNESS)
+			{
+				mlx_put_pixel(game->minimap->overlay, minimap_x, minimap_y, RAY_COLOR);
+			}
+		}
+
+		ray_angle += (PI / 2) / NUM_RAYS;
+		i++;
+	}
+}
+
+void mdraw_player(t_game *game)
+{
+	int x, y;
+	int player_screen_x = MAP_FRAME / 2;
+	int player_screen_y = MAP_FRAME / 2;
+
+	y = -2;
+	while (y <= 2)
+	{
+		x = -2;
+		while (x <= 2)
+		{
+			int px = player_screen_x + x;
+			int py = player_screen_y + y;
+			if (px >= FRAME_THICKNESS && px < MAP_FRAME - FRAME_THICKNESS &&
+				py >= FRAME_THICKNESS && py < MAP_FRAME - FRAME_THICKNESS)
+			{
+				mlx_put_pixel(game->minimap->overlay, px, py, PLAYER_COLOR);
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void render_minimap(t_game *game)
+{
+	float cos_angle = cos(-game->player->angle);
+	float sin_angle = sin(-game->player->angle);
+
+	mclear_and_draw_frame(game);
+	mrender_rotated_map(game, cos_angle, sin_angle);
+	mdraw_rays(game, cos_angle, sin_angle);
+	mdraw_player(game);
+}
+
 void	update_game_state(void *param)
 {
 	t_game	*game;
@@ -221,7 +364,7 @@ void	update_game_state(void *param)
 	if (game->key_states.right_pressed)
 		calc_delta(game, '+');
 	draw_direction(game);
-	printf("%f\n", game->player->angle);
+	render_minimap(game);
 }
 
 void	start_game(t_game *game)

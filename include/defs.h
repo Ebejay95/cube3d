@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 14:17:13 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 16:46:47 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "cub3d.h"
 
-# define RAY_COLOR 0xFFFFBB99
+# define RAY_COLOR 0xDDDDBBFF
 # define WALL_COLOR 0x999999FF
 # define ROOM_COLOR 0x000000FF
 # define PLAYER_COLOR 0xFF0000FF
+# define FRAME_COLOR 0xFFFFFFFF
 
 # define DEBUG 0
 # define DEBUG_COLLISION 1
@@ -32,6 +33,7 @@
 
 # define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 650
+# define FRAME_THICKNESS 2
 
 # define FRAME 20
 
@@ -45,4 +47,6 @@
 # define PATH_ENEMY "./assets/32x32/ghost.png"
 
 # define MAP_CNT_CHARS "01 NEWS\n"
+# define MAP_FRAME 250
+
 #endif

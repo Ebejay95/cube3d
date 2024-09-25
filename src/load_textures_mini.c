@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 09:10:04 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 16:51:40 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ int	ft_load_textures_minimap(t_game *game)
 	i = 0;
 	i += ft_load_minimap(game);
 	i += ft_load_minimap_entities(game);
+	ft_printf("init %i\n", game->player->x);
 	return (i);
 }
