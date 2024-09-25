@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 09:11:51 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 11:10:41 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define PLAYER_SIZE 6
 # define MCELL (CELL)/(100 / MINI_FKT)
 # define PI 3.14159265359
-# define NUM_RAYS 600
+# define NUM_RAYS 100
 # define FOV (PI / 2)
 # define RAY_ANGLE_STEP (FOV / NUM_RAYS)
 

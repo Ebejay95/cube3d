@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 09:43:56 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 11:26:49 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ void	dda_raycast(t_game *game, int *hitx, int *hity)
 
 int	draw_direction(t_game *game)
 {
-	double	start_angle;
-	double	current_angle;
+	float	start_angle;
+	float	current_angle;
 	int		i;
 	int		hitx;
 	int		hity;
@@ -221,6 +221,7 @@ void	update_game_state(void *param)
 	if (game->key_states.right_pressed)
 		calc_delta(game, '+');
 	draw_direction(game);
+	printf("%f\n", game->player->angle);
 }
 
 void	start_game(t_game *game)

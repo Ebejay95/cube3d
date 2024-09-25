@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 09:44:15 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/25 11:26:12 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ typedef struct s_ray_data {
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
-	double	angle;
+	float		x;
+	float		y;
+	float	angle;
 }	t_player;
 
 typedef struct s_key_states {
