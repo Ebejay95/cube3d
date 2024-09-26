@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 11:03:59 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 11:07:30 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	rendering(t_game *game, int hitx, int hity, float angle, int x)
 	// printf("start height:%f end height:%f\n",start_height, end_height);
 	while (y < end_height)
 	{
-		draw_pixel(game->surface , x, y, WALL_COLOR2);
+		draw_pixel(game->minimap->overlay , x, y, WALL_COLOR2);
 		y++;
 	}
 }
@@ -191,10 +191,10 @@ int	draw_direction(t_game *game)
 	int		hitx;
 	int		hity;
 	i = 0;
-	if (ft_surface(game))
-		return (1);
 	if (ft_overlay(game))
 		return (1);
+	// if (ft_surface(game))
+	// 	return (1);
 	start_angle = game->player->angle - (FOV / 2);
 	float	angle_begin = -45.0;
 	while (i <= NUM_RAYS)
@@ -204,7 +204,7 @@ int	draw_direction(t_game *game)
 		game->minimap->deltax = cos(current_angle);
 		game->minimap->deltay = sin(current_angle);
 		dda_raycast(game, &hitx, &hity);
-		draw_ray(game, hitx, hity);
+		// draw_ray(game, hitx, hity);
 
 		// printf("Angle begin %f iteration:  %i\n", angle_begin, i);
 		i++;
