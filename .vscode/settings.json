@@ -5,6 +5,7 @@
 		"iosfwd": "c",
 		"fcntl.h": "c",
 		"chrono": "c",
-		"cmath": "c"
+		"cmath": "c",
+		"iterator": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:06:42 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 16:45:40 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 17:12:09 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 		ray->mapx = (int)ray->posx;
 		ray->mapy = (int)ray->posy;
-		
+
 		ray->hit = 0;
 	}
 
@@ -73,7 +73,7 @@
 	}
 
 
-	void	dda_raycast(t_game *game, int *hitx, int *hity, float current_angle)
+	void	cast_ray(t_game *game, int *hitx, int *hity, float current_angle)
 	{
 		t_ray_data	ray;
 
