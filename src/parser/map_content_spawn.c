@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_content_spawn.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:30:07 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/23 14:33:03 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:14:30 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	set_spawn_point(t_map *map, int x, int y)
 {

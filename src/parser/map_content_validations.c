@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_content_validations.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:07:50 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/23 16:47:57 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:14:32 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	check_chars(t_map *map, int *err)
 {

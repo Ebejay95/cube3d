@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/26 11:02:37 by ajehle           ###   ########.fr        #
+#    Updated: 2024/09/26 12:07:44 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,21 +96,25 @@ SRCS=	src/ft_exit.c \
 		src/ft_init.c \
 		src/load_textures_mini.c \
 		src/loop.c \
-		src/map_content_check_spot.c \
-		src/map_content_flood.c \
-		src/map_content_spawn.c \
-		src/map_content_validations.c \
-		src/map_meta_parser.c \
-		src/map_meta_validations.c \
-		src/map_validation.c \
-		src/map_parser_rect.c \
-		src/map_parser_trimmer.c \
-		src/map_parser.c \
-		src/map_printers.c \
 		src/main.c \
 		src/move.c \
 		src/textures.c \
 		src/utils.c \
+		src/dda.c \
+		src/minimap.c \
+		src/raycasting.c \
+		src/raycasting_utils.c \
+		src/parser/map_content_check_spot.c \
+		src/parser/map_content_flood.c \
+		src/parser/map_content_spawn.c \
+		src/parser/map_content_validations.c \
+		src/parser/map_meta_parser.c \
+		src/parser/map_meta_validations.c \
+		src/parser/map_validation.c \
+		src/parser/map_parser_rect.c \
+		src/parser/map_parser_trimmer.c \
+		src/parser/map_parser.c \
+		src/parser/map_printers.c \
 
 BONUS_SRCS= \
 # bonus/cube3d_bonus.c \
@@ -199,7 +203,7 @@ $(NAME_BONUS): $(LIBFT_LIB) $(MLXFT_LIB) $(BONUS_OBJECTS)
 
 clean: remove-submodules
 	@rm -rf $(OBJ_DIR)
-#	@rm -rf $(MLXFT_BUILD_DIR)
+	@rm -rf $(MLXFT_BUILD_DIR)
 	@rm -rf $(LIBFT_DIR)
 	@echo "$(RED)Objects deleted$(X)"
 

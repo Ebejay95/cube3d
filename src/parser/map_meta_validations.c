@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_meta_validations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:02:27 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/25 14:23:58 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:14:38 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int	check_all_meta(t_game *game)
 {

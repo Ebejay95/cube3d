@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 14:25:14 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 12:07:31 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,32 @@ int			check_move_up(t_game *game);
 int			check_move_down(t_game *game);
 int			check_move_left(t_game *game);
 int			check_move_right(t_game *game);
+
+
+// minimap
+void mclear_and_draw_frame(t_game *game);
+void mrender_rotated_map(t_game *game, float cos_angle, float sin_angle);
+void mdraw_rays(t_game *game, float cos_angle, float sin_angle);
+void mdraw_player(t_game *game);
+void render_minimap(t_game *game);
+
+// raycasting
+int	render_game(t_game *game);
+
+
+// raycasting_utils
+
+float	angle_check(float angle);
+float to_radian(float angle);
+int	ft_surface(t_game *game);
+float	calculate_steps(float dx, float dy);
+void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color);
+
+// dda
+void	dda_raycast(t_game *game, int *hitx, int *hity);
+void	initialize_ray_data(t_game *game, t_ray_data *ray);
+void	calculate_step_and_sidedist(t_ray_data *ray);
+void	perform_dda(t_game *game, t_ray_data *ray);
+
 
 #endif

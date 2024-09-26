@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures_mini.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 16:51:40 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:51:56 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,18 @@ int	ft_load_minimap_entities(t_game *game)
 	return (0);
 }
 
-int	ft_overlay(t_game *game)
-{
-	if (game->minimap->overlay)
-		mlx_delete_image(game->mlx, game->minimap->overlay);
-	game->minimap->overlay = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
-	if (!game->minimap->overlay)
-		return (1);
-	if (mlx_image_to_window(game->mlx, game->minimap->overlay, 0, 0) == -1)
-		return (1);
-	ft_set_color_minimap_char(game->minimap->overlay, 0x00000001);
-	return (0);
-}
+// int	ft_overlay(t_game *game)
+// {
+// 	if (game->minimap->overlay)
+// 		mlx_delete_image(game->mlx, game->minimap->overlay);
+// 	game->minimap->overlay = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
+// 	if (!game->minimap->overlay)
+// 		return (1);
+// 	if (mlx_image_to_window(game->mlx, game->minimap->overlay, 0, 0) == -1)
+// 		return (1);
+// 	ft_set_color_minimap_char(game->minimap->overlay, 0x00000001);
+// 	return (0);
+// }
 
 int	ft_load_textures_minimap(t_game *game)
 {

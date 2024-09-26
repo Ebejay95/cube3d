@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_trimmer.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 15:14:44 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/25 14:23:58 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:14:43 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 int	is_map_line(char *line)
 {

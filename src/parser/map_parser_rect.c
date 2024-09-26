@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_rect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 08:51:37 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/25 14:24:58 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:14:41 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 char	**allocate_result(size_t count)
 {

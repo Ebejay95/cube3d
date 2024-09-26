@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_meta_parser.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:03:02 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/25 12:49:07 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:14:36 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 char	*get_textr_path(char *line, size_t size, int *err)
 {

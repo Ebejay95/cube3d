@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_content_check_spot.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:28:00 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/23 14:28:33 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:14:24 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	check_the_spot_down(t_map *map, int ydex, int xdex, int *err)
 {
