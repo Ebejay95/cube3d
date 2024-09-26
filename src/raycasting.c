@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:34 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 14:13:17 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:40:35 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int	render_game(t_game *game)
 		rendering(game, hitx, hity, angle_begin, i);
 
 	}
-		printf("\n");
+		// printf("\n");
 	return (0);
 }

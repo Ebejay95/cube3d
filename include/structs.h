@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 14:29:49 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:43:07 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_map
 
 typedef struct s_mini
 {
-	mlx_image_t		*player;
+	// mlx_image_t		*player;
 	// mlx_image_t		*plyr_dir;
 	// mlx_image_t		*overlay;
 	// int				map_width;
