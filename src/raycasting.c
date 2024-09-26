@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:34 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 14:40:35 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:48:51 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,9 @@ void	rendering(t_game *game, int hitx, int hity, float angle, int x)
 	float rend_len;
 	float len = sqrt((pow(abs(lenx), 2)) + (pow(abs(leny), 2)));
 	rend_len = fabs(len * cos(to_radian(180 - angle)));
-	// printf("ANGLE:%f X:%d Y:%d SQRT	[%f] \n",angle, abs(lenx), abs(leny), rend_len);
-
 	float start_height = WINDOW_HEIGHT / 2 - BLOCK_HEIGHT / rend_len;
 	float end_height = WINDOW_HEIGHT / 2 + BLOCK_HEIGHT / rend_len;
 	int	y = start_height;
-	// printf("start height:%f end height:%f\n",start_height, end_height);
 	while (y < end_height)
 	{
 		draw_pixel(game->surface , x, y, WALL_COLOR2);
@@ -61,6 +58,5 @@ int	render_game(t_game *game)
 		rendering(game, hitx, hity, angle_begin, i);
 
 	}
-		// printf("\n");
 	return (0);
 }

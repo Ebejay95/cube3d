@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 12:07:31 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:46:23 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,11 @@
 # include <math.h>
 
 // ft_exit
-void		call_exit_minimap(t_mini *minimap);
 void		call_exit_map(t_game *game);
 void		call_exit(t_game *game);
 
 // ft_init
 mlx_t		*ft_init_window(t_game *game);
-t_mini		*ft_initialize_minimap(t_game *game);
 t_map		*ft_initialize_map(char **map_in);
 void		ft_initialize_game(t_game	*game);
 void		ft_initialize(t_game *game, int argc, char **argv);

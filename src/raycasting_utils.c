@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 14:18:12 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:48:42 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	ft_surface(t_game *game)
 {
 	if (game->surface)
 		mlx_delete_image(game->mlx, game->surface);
-	// game->surface = mlx_new_image(game->mlx, game->mlx->width, game->mlx->height);
 	game->surface = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!game->surface)
 		return (1);

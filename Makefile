@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/26 12:07:44 by ajehle           ###   ########.fr        #
+#    Updated: 2024/09/26 15:34:16 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,8 +92,8 @@ SYSLIBFLAGS =
 #--------------                        SRC                        -------------#
 #------------------------------------------------------------------------------#
 
-SRCS=	src/ft_exit.c \
-		src/ft_init.c \
+SRCS=	src/utils/ft_exit.c \
+		src/utils/ft_init.c \
 		src/load_textures_mini.c \
 		src/loop.c \
 		src/main.c \
@@ -101,7 +101,6 @@ SRCS=	src/ft_exit.c \
 		src/textures.c \
 		src/utils.c \
 		src/dda.c \
-		src/minimap.c \
 		src/raycasting.c \
 		src/raycasting_utils.c \
 		src/parser/map_content_check_spot.c \
@@ -115,6 +114,7 @@ SRCS=	src/ft_exit.c \
 		src/parser/map_parser_trimmer.c \
 		src/parser/map_parser.c \
 		src/parser/map_printers.c \
+		src/bonus/minimap.c \
 
 BONUS_SRCS= \
 # bonus/cube3d_bonus.c \

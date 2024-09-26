@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 14:43:07 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 15:26:42 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_player
 	float		x;
 	float		y;
 	float		angle;
-	mlx_image_t		*image;
 }	t_player;
 
 typedef struct s_key_states {
@@ -99,21 +98,10 @@ typedef struct s_map
 	char			spawn;
 }					t_map;
 
-typedef struct s_mini
-{
-	// mlx_image_t		*player;
-	// mlx_image_t		*plyr_dir;
-	// mlx_image_t		*overlay;
-	// int				map_width;
-	// int				map_height;
-	// int				pos_x;
-	// int				pos_y;
-}					t_mini;
 
 typedef struct s_game
 {
 	t_map*			map;
-	t_mini*			minimap;
 	mlx_t*			mlx;
 	mlx_image_t*	surface;
 	t_player		*player;

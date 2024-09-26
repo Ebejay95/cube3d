@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:27 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 11:18:32 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 15:32:13 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	call_exit_minimap(t_mini *minimap)
-{
-	if (minimap)
-		free(minimap);
-}
 
 void	call_exit_map_textrs(t_game *game, t_map *map)
 {
@@ -45,6 +40,13 @@ void	call_exit_map_textrs(t_game *game, t_map *map)
 	map->img_north = NULL;
 	map->img_south = NULL;
 }
+
+void	call_exit_player(t_player *player)
+{
+	if(player)
+		free(player);
+}
+
 
 void	call_exit_map(t_game *game)
 {
@@ -77,7 +79,7 @@ void	call_exit(t_game *game)
 {
 	if (game)
 	{
+		call_exit_player(game->player);
 		call_exit_map(game);
-		call_exit_minimap(game->minimap);
 	}
 }

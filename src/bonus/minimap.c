@@ -6,11 +6,11 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:17:54 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 12:04:49 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 15:28:08 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void mclear_and_draw_frame(t_game *game)
 {
