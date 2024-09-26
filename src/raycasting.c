@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:34 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 12:09:46 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:13:17 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	render_game(t_game *game)
 	{
 		current_angle = start_angle + i * RAY_ANGLE_STEP;
 		current_angle = angle_check(current_angle);
-		game->minimap->deltax = cos(current_angle);
-		game->minimap->deltay = sin(current_angle);
+		game->deltax = cos(current_angle);
+		game->deltay = sin(current_angle);
 		dda_raycast(game, &hitx, &hity);
 		i++;
 		angle_begin += (90.0f / (float)NUM_RAYS);

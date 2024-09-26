@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:10 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 12:20:36 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:23:22 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,20 @@ mlx_t	*ft_init_window(t_game *game)
 t_mini	*ft_initialize_minimap(t_game *game)
 {
 	t_mini	*mini;
+	printf("%f\n",game->angle);
 
 	mini = NULL;
 	mini = ft_calloc(sizeof(t_mini), 1);
 	if (!mini)
 		return (NULL);
 	mini->player = NULL;
-	mini->plyr_dir = NULL;
-	mini->overlay = NULL;
-	mini->pos_x = 1;
-	mini->pos_y = 1;
-	mini->deltax = 0;
-	mini->deltay = 0;
-	mini->angle = 0;
-	mini->deltax = cos(mini->angle) * 5;
-	mini->deltay = sin(mini->angle) * 5;
-	mini->px_height = 100;
-	mini->px_width = 200;
-	mini->map_height = game->map->height;
-	mini->map_width = game->map->width;
+	// mini->plyr_dir = NULL;
+	// mini->overlay = NULL;
+	// mini->pos_x = 1;
+	// mini->pos_y = 1;
+
+	// mini->map_height = game->map->height;
+	// mini->map_width = game->map->width;
 	return (mini);
 }
 

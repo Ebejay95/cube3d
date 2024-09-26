@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:06:42 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 12:07:04 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:12:40 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	initialize_ray_data(t_game *game, t_ray_data *ray)
 {
 	ray->posx = game->player->x;
 	ray->posy = game->player->y;
-	ray->dirx = game->minimap->deltax;
-	ray->diry = game->minimap->deltay;
+	ray->dirx = game->deltax;
+	ray->diry = game->deltay;
 	ray->deltadistx = fabs(1 / ray->dirx);
 	ray->deltadisty = fabs(1 / ray->diry);
 	ray->mapx = (int)ray->posx;

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 12:20:39 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:13:05 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	calc_delta(t_game *game, char operator)
 		game->player->angle = angle_check(game->player->angle + angle_increment);
 	else if (operator == '-')
 		game->player->angle = angle_check(game->player->angle - angle_increment);
-	game->minimap->deltax = cos(game->player->angle);
-	game->minimap->deltay = sin(game->player->angle);
-	game->minimap->angle = game->player->angle;
+	game->deltax = cos(game->player->angle);
+	game->deltay = sin(game->player->angle);
+	game->angle = game->player->angle;
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

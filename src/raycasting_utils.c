@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 11:43:53 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 14:18:12 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_surface(t_game *game)
 		return (1);
 	if (mlx_image_to_window(game->mlx, game->surface, 0, 0) == -1)
 		return (1);
-	ft_set_color_minimap_char(game->surface, 0x000001);
+	// ft_set_color_minimap_char(game->surface, 0x000001); //not needed???
 	return (0);
 }
 
