@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 16:46:54 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 17:02:12 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,16 +147,16 @@ void	rendering(t_game *game, int hitx, int hity, float angle, int x)
 	float rend_len;
 	float len = sqrt((pow(abs(lenx), 2)) + (pow(abs(leny), 2)));
 	rend_len = fabs(len * cos(to_radian(180 - angle)));
-	printf("ANGLE:%f X:%d Y:%d SQRT	[%f] \n",angle, abs(lenx), abs(leny), rend_len);
+	// printf("ANGLE:%f X:%d Y:%d SQRT	[%f] \n",angle, abs(lenx), abs(leny), rend_len);
 
 
 	float start_height = WINDOW_HEIGHT / 2 - BLOCK_HEIGHT / rend_len;
 	float end_height = WINDOW_HEIGHT / 2 + BLOCK_HEIGHT / rend_len;
 	int	y = start_height;
-	printf("start height:%f end height:%f\n",start_height, end_height);
+	// printf("start height:%f end height:%f\n",start_height, end_height);
 	while (y < end_height)
 	{
-		draw_pixel(game->minimap->overlay , x, y, RAY_COLOR);
+		draw_pixel(game->surface , x, y, WALL_COLOR2);
 		y++;
 	}
 }
@@ -191,10 +191,10 @@ int	draw_direction(t_game *game)
 	int		hitx;
 	int		hity;
 	i = 0;
+	if (ft_surface(game))
+		return (1);
 	if (ft_overlay(game))
 		return (1);
-	// if (ft_surface(game))
-	// 	return (1);
 	start_angle = game->player->angle - (FOV / 2);
 	float	angle_begin = -45.0;
 	while (i <= NUM_RAYS)

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 16:39:58 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:53:41 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define RAY_COLOR 0xFFFFBB77
 # define WALL_COLOR 0x999999FF
+# define WALL_COLOR2 0x990099FF
 # define ROOM_COLOR 0x000000FF
 # define PLAYER_COLOR 0xFF0000FF
 
