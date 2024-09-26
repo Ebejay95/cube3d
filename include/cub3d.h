@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 14:46:23 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/26 16:46:06 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,8 @@ float	calculate_steps(float dx, float dy);
 void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color);
 
 // dda
-void	dda_raycast(t_game *game, int *hitx, int *hity);
-void	initialize_ray_data(t_game *game, t_ray_data *ray);
+void	dda_raycast(t_game *game, int *hitx, int *hity, float current_angle);
+void	initialize_ray_data(t_game *game, t_ray_data *ray, float current_angle);
 void	calculate_step_and_sidedist(t_ray_data *ray);
 void	perform_dda(t_game *game, t_ray_data *ray);
 
