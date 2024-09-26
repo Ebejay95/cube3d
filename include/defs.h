@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 16:46:47 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/26 11:02:24 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # define RAY_COLOR 0xDDDDBBFF
 # define WALL_COLOR 0x999999FF
+# define WALL_COLOR2 0x990099FF
 # define ROOM_COLOR 0x000000FF
 # define PLAYER_COLOR 0xFF0000FF
 # define FRAME_COLOR 0xFFFFFFFF
@@ -29,11 +30,17 @@
 # define MCELL 32
 # define PLAYER_SIZE 6
 # define PI 3.14159265359
-# define NUM_RAYS 1000
+# define NUM_RAYS 1024
+# define FOV (PI / 2)
+# define FOV_RAD (FOX * PI) / 180
+# define RAY_ANGLE_STEP (FOV / NUM_RAYS)
 
-# define WINDOW_WIDTH 1000
+# define WINDOW_WIDTH 1024
 # define WINDOW_HEIGHT 650
 # define FRAME_THICKNESS 2
+
+// Test Blockheight:
+#define BLOCK_HEIGHT 4000
 
 # define FRAME 20
 
