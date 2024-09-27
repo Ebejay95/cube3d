@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/27 13:28:33 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:00:20 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define NUM_RAYS 1024
 # define FOV (PI / 2)
 # define FOV_RAD (FOX * PI) / 180
-# define RAY_ANGLE_STEP (FOV / NUM_RAYS)
+# define RAY_ANGLE_STEP (FOV / (float)NUM_RAYS)
 
 # define WINDOW_WIDTH 1024
 # define WINDOW_HEIGHT 650

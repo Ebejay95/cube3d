@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:17:54 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 15:28:08 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/27 15:04:33 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void mclear_and_draw_frame(t_game *game)
 			{
 				mlx_put_pixel(game->surface, x, y, WALL_COLOR);
 			}
+			// Draw grid lines based on CELL size
+            if (x % CELL == 0 || y % CELL == 0)
+            {
+                mlx_put_pixel(game->surface, x, y, PLAYER_COLOR); // Choose a color for the grid lines
+            }
 			x++;
 		}
 		y++;
@@ -143,8 +148,8 @@ void render_minimap(t_game *game)
 	cos_angle = cos(-game->player->angle);
 	sin_angle = sin(-game->player->angle);
 
-	mclear_and_draw_frame(game);
-	mrender_rotated_map(game, cos_angle, sin_angle);
+	// mclear_and_draw_frame(game);
+	// mrender_rotated_map(game, cos_angle, sin_angle);
 	mdraw_rays(game, cos_angle, sin_angle);
 	mdraw_player(game);
 }

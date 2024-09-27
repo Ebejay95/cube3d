@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:34 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/27 13:54:15 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/09/27 14:20:53 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,18 @@ float calculate_distance(float player_x, float player_y, int hitx, int hity, flo
 
 	horizontal = fabs(hitx - player_x);
 	vertical = fabs(hity - player_y);
+	printf("H %f V %f\n", horizontal, vertical);
 	distance = sqrt((pow(horizontal, 2)) + (pow(vertical, 2)));
 	// Correct for the fisheye effect by adjusting the distance with the ray angle
-	return fabs(distance * cos(to_radian(180 - ray_angle)));
+	return (distance * cos(to_radian(ray_angle)));
+	// return (distance * cos(to_radian(180 - ray_angle)));
+	// return fabs(distance * cos(to_radian(180 - ray_angle)));
 }
 
 void calculate_wall_slice_height(float distance, float *start_height, float *end_height)
 {
-	float height = 40000 / distance;
+	// float height = CELL / distance;
+	float height = 32000 / distance;
 	*start_height = (WINDOW_HEIGHT / 2) - height / 2;
 	*end_height = (WINDOW_HEIGHT / 2) + height / 2;
 // 	*start_height = WINDOW_HEIGHT / 2 - BLOCK_HEIGHT / distance;
@@ -86,8 +90,8 @@ int	render_game(t_game *game)
 	// float	angle_begin = -45.0;
 	while (ray_index <= NUM_RAYS)
 	{
-		current_angle = start_angle + ray_index * RAY_ANGLE_STEP;
-		current_angle = angle_check(current_angle);
+		// current_angle = angle_check(start_angle + ray_index * RAY_ANGLE_STEP);
+		current_angle = angle_check(start_angle + ray_index * ((float)FOV / (float)NUM_RAYS));
 
 		cast_ray(game, &hitx, &hity, current_angle);
 		// angle_begin += (90.0f / (float)NUM_RAYS);
@@ -96,3 +100,6 @@ int	render_game(t_game *game)
 	}
 	return (0);
 }
+
+
+

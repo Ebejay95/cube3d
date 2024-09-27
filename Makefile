@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/09/26 16:42:55 by ajehle           ###   ########.fr        #
+#    Updated: 2024/09/27 14:22:33 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,7 @@ SRCS=	src/utils/ft_exit.c \
 		src/textures.c \
 		src/utils.c \
 		src/dda.c \
+		src/render.c \
 		src/raycasting.c \
 		src/raycasting_utils.c \
 		src/parser/map_content_check_spot.c \
