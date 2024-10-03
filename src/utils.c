@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: andreasjehle <andreasjehle@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:13:18 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/25 13:53:44 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/09/29 09:41:19 by andreasjehl      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 void	check_collision(t_game *game, float *new_x, float *new_y)
 {
 	int		radius;
-	int		collision;
 	float	old_x;
 	float	old_y;
 
 	radius = (PLAYER_SIZE / 2) + 1;
-	collision = 0;
 	old_x = game->player->x;
 	old_y = game->player->y;
 	if (get_cellchar(game, *new_x - radius, old_y - radius) == '1'
@@ -29,7 +27,6 @@ void	check_collision(t_game *game, float *new_x, float *new_y)
 		|| get_cellchar(game, *new_x + radius, old_y + radius) == '1')
 	{
 		*new_x = old_x;
-		collision = 1;
 	}
 	if (get_cellchar(game, old_x - radius, *new_y - radius) == '1'
 		|| get_cellchar(game, old_x + radius, *new_y - radius) == '1'
@@ -37,7 +34,6 @@ void	check_collision(t_game *game, float *new_x, float *new_y)
 		|| get_cellchar(game, old_x + radius, *new_y + radius) == '1')
 	{
 		*new_y = old_y;
-		collision = 1;
 	}
 }
 
