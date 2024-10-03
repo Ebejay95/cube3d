@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:21:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 11:10:36 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/03 12:39:19 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,58 +91,33 @@ int	ft_load_map(t_game *game, char c, int color)
 //     return horizontal;
 // }
 
+int is_wall(int grid_x, int grid_y, t_game* game) {
+    // For simplicity, assume there's a wall at grid (2, 0)
+	if(game->map->content[grid_y][grid_x])
+    {
+        return 1; // Wall is present
+    }
+    return 0; // No wall
+}
 
 void horizontal(t_game* game)
 {
-	    float horizontal;
-    float vertical;
-
-    // Determine whether the ray is facing up or down based on the angle
-    if (game->player->angle >= M_PI)
-        horizontal = ((int)(game->player->y / CELL)) * CELL - 0.0001;  // Adjust for downward facing ray
-    else
-        horizontal = ((int)(game->player->y / CELL)) * CELL + CELL;    // Adjust for upward facing ray
-    // Clamp horizontal to stay within the map's boundaries
-    if (horizontal < CELL)
-        horizontal = CELL;  // Clamp to the top boundary
-    else if (horizontal > game->map->height * CELL)
-        horizontal = game->map->height * CELL;  // Clamp to the bottom boundary
-
-    // Handle cases where the player is looking directly left or right (angle ≈ π or 0)
-    if (fabs(game->player->angle - M_PI) < 0.0001)  // Player looking West (≈ 180 degrees)
-    {
-        vertical = 0;  // Since ray is parallel to the x-axis, no valid vertical hit
-    }
-    else if (fabs(game->player->angle) < 0.0001 || fabs(game->player->angle - 2 * M_PI) < 0.0001)  // Looking East (≈ 0 or 360 degrees)
-    {
-        vertical = INFINITY;  // No valid vertical hit when looking perfectly east
-    }
-    else
-    {
-        // Otherwise, calculate vertical normally using tan(angle)
-        vertical = game->player->x + (game->player->y - horizontal) / tan(game->player->angle);
-    }
-
-    // Clamp vertical to stay within the map's boundaries
-    if (vertical < CELL)
-        vertical = CELL;  // Clamp to the left boundary
-    else if (vertical > game->map->width * CELL)
-        vertical = game->map->width * CELL;  // Clamp to the right boundary
-
-	float A_x, A_y;
-	// , C_x, C_y, D_x, D_y;
+	float A_x, A_y, C_x, C_y, D_x, D_y;
 	int grid_x, grid_y;
-	// float Ya, Xa;
+	float Ya, Xa;
+	int	look_up =game->player->angle > PI && game->player->angle < 2 * PI;
 
 	// Finding A.y
-	if (game->player->angle > 0 && game->player->angle < PI) //if player is looking up
+	if (look_up) //if player is looking up
 	{
-		A_y = fabs(game->player->y / CELL) * CELL - 1;
-		// A_y = floor(game->player->y / CELL) * CELL - 0.0001;
+	printf("Player is loooking up\n");
+
+		// A_y = fabs(game->player->y / CELL) * CELL - 1;
+		A_y = floor(game->player->y / CELL) * CELL - 0.0001;
 	}
 	else
 	{
-		A_y = fabs(game->player->y / CELL) * CELL + CELL;
+		A_y = floor(game->player->y / CELL) * CELL + CELL;
 	}
 	// Clamp vertical to stay within the map's boundaries
 	if (A_y < CELL)
@@ -152,6 +127,7 @@ void horizontal(t_game* game)
 
 	// Finding A.x
 	A_x = game->player->x + (game->player->y - A_y) / tan(game->player->angle);
+	// A_x = game->player->x + (game->player->y - A_y) / tan(game->player->angle);
 		// Clamp horizontal to stay within the map's boundaries
 	if (A_x < CELL)
 		A_x = CELL;  // Clamp to the top boundary
@@ -159,11 +135,51 @@ void horizontal(t_game* game)
 		A_x = game->map->height * CELL;  // Clamp to the bottom boundary
 	grid_x = (int)(A_x / CELL);
 	grid_y = (int)(A_y / CELL);
-	printf("A coordinates: A_x = %.2f, A_y = %.2f\n", A_x, A_y);
-	printf("A coordinates: A_x = %.2f, A_y = %.2f\n", vertical,horizontal);
+	printf("A coordinates: A_x = %.2f, A_y = %.2f angle = %.2f\n", A_x, A_y, game->player->angle);
 	printf("Grid coordinates of A: (%d, %d)\n", grid_x, grid_y);
+	// Finding Ya
+	if (look_up)
+	{
+		Ya = -CELL;
+	}
+	else
+	{
+		Ya = CELL;
+	}
+
+	// Finding Xa
+	Xa = CELL / tan(game->player->angle);
+
+	// Finding C coordinates
+	C_x = A_x + Xa;
+	C_y = A_y + Ya;
+
+	// Finding grid coordinates of C
+	grid_x = (int)(C_x / CELL);
+	grid_y = (int)(C_y / CELL);
+
+	printf("C coordinates: C_x = %.2f, C_y = %.2f\n", C_x, C_y);
+	printf("Grid coordinates of C: (%d, %d)\n", grid_x, grid_y);
+
+	// Check if there's a wall at C
+	if (is_wall(grid_x, grid_y, game)) {
+		printf("Wall found at C, stopping.\n");
+		return;
+	}
+
+		// Finding D coordinates
+	D_x = C_x + Xa;
+	D_y = C_y + Ya;
+
+	// Finding grid coordinates of D
+	grid_x = (int)(D_x / CELL);
+	grid_y = (int)(D_y / CELL);
+
+	printf("D coordinates: D_x = %.2f, D_y = %.2f\n", D_x, D_y);
+	printf("Grid coordinates of D: (%d, %d)\n", grid_x, grid_y);
 	return;
 }
+
 
 int	render(t_game* game)
 {
