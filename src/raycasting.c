@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:34 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/27 14:20:53 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/03 08:56:55 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,14 @@ int	render_game(t_game *game)
 
 	// distance = 0;
 	ray_index = 0;
-	start_angle = game->player->angle - (FOV / 2);
+	start_angle = game->player->angle - (float)(FOV / 2);
 	// float	angle_begin = -45.0;
 	while (ray_index <= NUM_RAYS)
 	{
 		// current_angle = angle_check(start_angle + ray_index * RAY_ANGLE_STEP);
-		current_angle = angle_check(start_angle + ray_index * ((float)FOV / (float)NUM_RAYS));
+		// current_angle = angle_check(start_angle + ray_index * ((float)FOV / (float)NUM_RAYS));
+
+		current_angle = game->player->angle + atan(start_angle / NUM_RAYS * tan((M_PI / 3) / 1.5));
 
 		cast_ray(game, &hitx, &hity, current_angle);
 		// angle_begin += (90.0f / (float)NUM_RAYS);
@@ -103,3 +105,13 @@ int	render_game(t_game *game)
 
 
 
+		// correction = app->cur_ray - (float)(app->num_rays) / 2;
+		// ray_angle = app->player.angle + atan(correction / app->num_rays * tan(app->fov / 1.5));
+		// ray_angle = norm_ang(ray_angle);
+		// wall.distance = cast_ray(app, ray_angle, &wall);
+		// check_vertical_hit(&wall);
+		// wall.pos_x_cur_tyle = find_tyle_pos(&wall);
+		// wall.wall_height = (int)(app->window_height / (wall.distance));
+		// calc_side(ray_angle, &wall);
+		// draw_ray(app, &wall);
+		// app->cur_ray++;

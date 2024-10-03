@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:17:54 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/27 15:04:33 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/03 08:48:32 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,8 @@ void render_minimap(t_game *game)
 	cos_angle = cos(-game->player->angle);
 	sin_angle = sin(-game->player->angle);
 
-	// mclear_and_draw_frame(game);
-	// mrender_rotated_map(game, cos_angle, sin_angle);
+	mclear_and_draw_frame(game);
+	mrender_rotated_map(game, cos_angle, sin_angle);
 	mdraw_rays(game, cos_angle, sin_angle);
 	mdraw_player(game);
 }
