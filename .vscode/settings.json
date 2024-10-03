@@ -6,6 +6,7 @@
 		"fcntl.h": "c",
 		"chrono": "c",
 		"cmath": "c",
-		"iterator": "c"
+		"iterator": "c",
+		"libft.h": "c"
 	}
 }

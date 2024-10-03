@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:21:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 12:39:19 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/03 16:38:01 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,9 +183,8 @@ void horizontal(t_game* game)
 
 int	render(t_game* game)
 {
-	horizontal(game);
+	printf("Y:%.2f X:%.2f A:%.2f\n",game->player->y,game->player->x,game->player->angle);
+	// horizontal(game);
 
-
-
-	return(0);
+	return 0;
 }
