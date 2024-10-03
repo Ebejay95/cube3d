@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:34 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 08:56:55 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/03 10:13:45 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,18 @@ void	render_wall_slice(t_game *game, int hitx, int hity, float ray_angle, int x)
 	float end_height;
 
 	distance = calculate_distance(game->player->x, game->player->y, hitx, hity, ray_angle);
+	// distance = distance * cos(game->player->angle - ray_angle); //Fisheye correciton!!!!!!!
+
 	calculate_wall_slice_height(distance, &start_height, &end_height);
 	// if(x % 8)
 		draw_wall(game->surface, x, start_height, end_height);
 	// else
 		// draw_wall2(game->surface, x, start_height, end_height);
 }
+
+
+
+
 
 int	render_game(t_game *game)
 {
@@ -86,15 +92,15 @@ int	render_game(t_game *game)
 
 	// distance = 0;
 	ray_index = 0;
-	start_angle = game->player->angle - (float)(FOV / 2);
+	// start_angle = game->player->angle - (float)(FOV / 2);
 	// float	angle_begin = -45.0;
 	while (ray_index <= NUM_RAYS)
 	{
+		start_angle = ray_index - (float)(FOV / 2);
 		// current_angle = angle_check(start_angle + ray_index * RAY_ANGLE_STEP);
 		// current_angle = angle_check(start_angle + ray_index * ((float)FOV / (float)NUM_RAYS));
-
-		current_angle = game->player->angle + atan(start_angle / NUM_RAYS * tan((M_PI / 3) / 1.5));
-
+		current_angle = game->player->angle + atan(start_angle / NUM_RAYS * tan(FOV / 1.1));
+		normalize_angle(&current_angle);
 		cast_ray(game, &hitx, &hity, current_angle);
 		// angle_begin += (90.0f / (float)NUM_RAYS);
 		render_wall_slice(game, hitx, hity, current_angle, ray_index);

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/27 14:24:27 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/03 09:10:51 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ void	initialize_ray_data(t_game *game, t_ray_data *ray, float current_angle);
 void	calculate_step_and_sidedist(t_ray_data *ray);
 void	perform_dda(t_game *game, t_ray_data *ray);
 
+void	normalize_angle(float* angle);
 
 
 int		render(t_game *game);

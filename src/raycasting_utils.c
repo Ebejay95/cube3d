@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/27 13:44:48 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/03 09:10:09 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ float	angle_check(float angle)
 		return(angle + 2 * PI);
 	else
 		return (angle);
+}
+
+void	normalize_angle(float* angle)
+{
+	if (*angle >= 2 * PI)
+		*angle = *angle - 2 * PI;
+	else if (*angle < 0)
+		*angle = *angle + 2 * PI;
 }
 
 

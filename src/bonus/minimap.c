@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:17:54 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 08:48:32 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/03 08:59:52 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ void mclear_and_draw_frame(t_game *game)
 			{
 				mlx_put_pixel(game->surface, x, y, WALL_COLOR);
 			}
-			// Draw grid lines based on CELL size
-            if (x % CELL == 0 || y % CELL == 0)
-            {
-                mlx_put_pixel(game->surface, x, y, PLAYER_COLOR); // Choose a color for the grid lines
-            }
 			x++;
 		}
 		y++;
