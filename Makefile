@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/03 16:36:12 by ajehle           ###   ########.fr        #
+#    Updated: 2024/10/03 19:38:59 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ NAME_BONUS=cub3d_bonus
 #------------------------------------------------------------------------------#
 
 CC=cc
-CFLAGS=-Wall -Wextra -Werror
+CFLAGS=-Wall -Wextra #-Werror
 LDFLAGS=
 
 ifeq ($(DEBUG), 1)

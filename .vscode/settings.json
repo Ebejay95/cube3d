@@ -8,5 +8,6 @@
 		"cmath": "c",
 		"iterator": "c",
 		"libft.h": "c"
-	}
+	},
+	"cmake.sourceDirectory": "/Users/ajehle/Desktop/cub3d_collab/mlx42"
 }
