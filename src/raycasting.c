@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:34 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 11:33:23 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 12:02:44 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,3 @@ int	render_game(t_game *game)
 	}
 	return (0);
 }
-
-
-
-		// correction = app->cur_ray - (float)(app->num_rays) / 2;
-		// ray_angle = app->player.angle + atan(correction / app->num_rays * tan(app->fov / 1.5));
-		// ray_angle = norm_ang(ray_angle);
-		// wall.distance = cast_ray(app, ray_angle, &wall);
-		// check_vertical_hit(&wall);
-		// wall.pos_x_cur_tyle = find_tyle_pos(&wall);
-		// wall.wall_height = (int)(app->window_height / (wall.distance));
-		// calc_side(ray_angle, &wall);
-		// draw_ray(app, &wall);
-		// app->cur_ray++;

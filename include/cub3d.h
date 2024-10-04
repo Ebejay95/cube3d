@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 11:33:32 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 11:58:12 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ float	calculate_len(t_game* game,float x_coordinate,float y_coordinate);
 
 // render
 void	calculate_wall_slice_height(float distance, float *start_height, float *end_height);
-// void	draw_wall(mlx_image_t *surface, int x, float start_height, float end_height);
+void draw_wall(mlx_image_t *surface,int index_of_ray ,int top, int bottom);
 void	rendering_wall(t_game* game, float ray_len, int index_of_ray, float current_angle);
 
 // render utils

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculations_utlis.c                               :+:      :+:    :+:   */
+/*   calculations_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:04:04 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 11:08:41 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 13:26:44 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,12 @@ int get_vertical_direction(float current_angle,float* x_coordinate,float* len_x)
 }
 
 
-float	calculate_len(t_game* game,float x_coordinate,float y_coordinate)
+float	calculate_len(t_game* game, float x_coordinate, float y_coordinate)
 {
 	float len_x;
 	float len_y;
 
+	printf("%.2f	%.2f %.2f %.2f\n", game->player->x, game->player->y, x_coordinate, y_coordinate);
 	len_x = x_coordinate - game->player->x;
 	len_y = y_coordinate - game->player->y;
 	return(sqrt(pow(len_x, 2) + pow(len_y, 2)));
