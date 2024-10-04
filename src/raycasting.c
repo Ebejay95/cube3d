@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:34 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 19:38:49 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 11:33:23 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	render_game(t_game *game)
 		// current_angle = angle_check(start_angle + ray_index * RAY_ANGLE_STEP);
 		// current_angle = angle_check(start_angle + ray_index * ((float)FOV / (float)NUM_RAYS));
 		current_angle = game->player->angle + atan(start_angle / NUM_RAYS * tan(FOV / 1.1));
-		normalize_angle(&current_angle);
+		current_angle = angle_check(current_angle);
 		cast_ray(game, &hitx, &hity, current_angle);
 		// angle_begin += (90.0f / (float)NUM_RAYS);
 		render_wall_slice(game, hitx, hity, current_angle, ray_index);

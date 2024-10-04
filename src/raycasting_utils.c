@@ -6,14 +6,15 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 09:10:09 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 11:34:55 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-
-
+/********************************************************/
+/*	Function to check if angle is within radian values	*/
+/********************************************************/
 float	angle_check(float angle)
 {
 	if (angle >= 2 * PI)
@@ -24,21 +25,10 @@ float	angle_check(float angle)
 		return (angle);
 }
 
-void	normalize_angle(float* angle)
-{
-	if (*angle >= 2 * PI)
-		*angle = *angle - 2 * PI;
-	else if (*angle < 0)
-		*angle = *angle + 2 * PI;
-}
-
-
 float to_radian(float angle)
 {
 	return ((angle / 180)  * PI);
 }
-
-
 
 int	ft_surface(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 09:10:51 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 11:33:32 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,27 @@ void	initialize_ray_data(t_game *game, t_ray_data *ray, float current_angle);
 void	calculate_step_and_sidedist(t_ray_data *ray);
 void	perform_dda(t_game *game, t_ray_data *ray);
 
-void	normalize_angle(float* angle);
+// calculations
+float	get_len_to_horizontal_wall(t_game* game, float current_angle);
+float	get_len_to_vertical_wall(t_game* game, float current_angle);
+int		ray_calculation(t_game* game);
 
+// calculations utils
+int		is_player_looking_up(float angle);
+int		is_player_looking_down(float angle);
+int		is_position_in_map(t_game* game,int pos_x,int pos_y);
+int		is_wall(t_game* game,float x_coordinate,float y_coordinate);
+int		get_horizontal_direction(float current_angle,float* y_coordinate,float* len_y);
+int		get_vertical_direction(float current_angle,float* x_coordinate,float* len_x);
+float	calculate_len(t_game* game,float x_coordinate,float y_coordinate);
 
-int		render(t_game *game);
+// render
+void	calculate_wall_slice_height(float distance, float *start_height, float *end_height);
+// void	draw_wall(mlx_image_t *surface, int x, float start_height, float end_height);
+void	rendering_wall(t_game* game, float ray_len, int index_of_ray, float current_angle);
+
+// render utils
+float	fish_eye_correction(t_game* game, float ray_len, float current_angle);
 
 
 #endif

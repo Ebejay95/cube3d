@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 16:54:59 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 11:32:08 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	update_game_state(void *param)
 		calc_delta(game, '+');
 	ft_surface(game);
 	// render_game(game);
-	render(game);
+	ray_calculation(game);
 	render_minimap(game);
 }
 
