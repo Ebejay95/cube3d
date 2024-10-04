@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 11:34:55 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 15:06:38 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,6 @@ int	ft_surface(t_game *game)
 	return (0);
 }
 
-
-float	calculate_steps(float dx, float dy)
-{
-	if (fabsf(dx) > fabsf(dy))
-		return (fabsf(dx));
-	else
-		return (fabsf(dy));
-}
 
 void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color)
 {

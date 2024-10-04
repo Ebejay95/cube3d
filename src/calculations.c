@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 13:26:51 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 15:24:42 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,23 +98,31 @@ int	ray_calculation(t_game* game)
 	current_angle = game->player->angle - (FOV / 2);
 	while (index_of_ray < NUM_RAYS)
 	{
+
 		current_angle = angle_check(current_angle);
 		horizontal_line = get_len_to_horizontal_wall(game, current_angle);
 		vertical_line = get_len_to_vertical_wall(game, current_angle);
 
+		printf("%.2f %.2f\n",horizontal_line, vertical_line);
+		// printf("%.2f %.2f %.2f %i %.2f %.2f\n", game->player->x, game->player->y, current_angle, index_of_ray,horizontal_line, vertical_line);
 /******************************************************************************/
-		// printf("H:%.2f V:%.2f A:%.2f\n",horizontal_line, vertical_line, current_angle);
 
 		if(vertical_line <= horizontal_line)
-			ray_len = vertical_line;
-		else
 			ray_len = horizontal_line;
+		else
+			ray_len = vertical_line;
 /******************************************************************************/
-		// render_wall(game, ray_len, index_of_ray);
-		rendering_wall(game, ray_len, index_of_ray, current_angle);
+		// rendering_wall(game, ray_len, index_of_ray, current_angle);
+/******************************************************************************/
+
+
+
+
+
 /******************************************************************************/
 		index_of_ray++;
 		current_angle += (FOV / WINDOW_WIDTH);
 	}
+	printf("\n");
 	return 0;
 }

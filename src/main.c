@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 11:12:25 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 15:32:27 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 14:03:31 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	atexit(check_leaks);
+	// atexit(check_leaks);
 	ft_initialize(&game, argc, argv);
 	if (!game.map)
 	{
