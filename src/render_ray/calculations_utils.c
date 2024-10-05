@@ -6,39 +6,11 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:04:04 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 13:15:33 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 20:21:55 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
-
-int is_looking_right(float angle)
-{
-	if(angle >= 0 && angle < M_PI_2)
-		return 1;
-	return 0;
-}
-
-int is_looking_down(float angle)
-{
-	if(angle >= M_PI_2 && angle < M_PI)
-		return 1;
-	return 0;
-}
-
-int is_looking_left(float angle)
-{
-	if(angle >= M_PI && angle < 3 * M_PI_2)
-		return 1;
-	return 0;
-}
-
-int is_looking_up(float angle)
-{
-	if(angle >= 3 * M_PI_2 && angle < 2 * M_PI)
-		return 1;
-	return 0;
-}
+#include "../../include/cub3d.h"
 
 
 int	is_position_in_map(t_game* game,int pos_y,int pos_x)
@@ -55,8 +27,6 @@ int	is_wall(t_game* game,float x_coordinate,float y_coordinate)
 
 	y = floor(y_coordinate / CELL);
 	x = floor(x_coordinate / CELL);
-	// printf("Y:[%i] X:[%i] \n", y, x);
-
 	if(y >= game->map->height || y < 0)
 		return(1);
 	if(x >= game->map->width || x < 0)
@@ -96,7 +66,6 @@ float	calculate_len(t_game* game, float x_coordinate, float y_coordinate)
 	float len_x;
 	float len_y;
 
-	// printf("%.2f	%.2f %.2f %.2f\n", game->player->x, game->player->y, x_coordinate, y_coordinate);
 	len_x = x_coordinate - game->player->x;
 	len_y = y_coordinate - game->player->y;
 	return(sqrt(pow(len_x, 2) + pow(len_y, 2)));

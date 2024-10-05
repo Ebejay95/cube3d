@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 19:55:15 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 20:16:14 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,46 +136,43 @@ void mdraw_player(t_game *game);
 void render_minimap(t_game *game);
 
 // raycasting
-int	render_game(t_game *game);
 
 
 // raycasting_utils
 
 float	angle_check(float angle);
 float to_radian(float angle);
-int	ft_surface(t_game *game);
-float	calculate_steps(float dx, float dy);
+int		ft_surface(t_game *game);
 void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color);
 
 // dda
-void	cast_ray(t_game *game, int *hitx, int *hity, float current_angle);
-void	initialize_ray_data(t_game *game, t_ray_data *ray, float current_angle);
-void	calculate_step_and_sidedist(t_ray_data *ray);
-void	perform_dda(t_game *game, t_ray_data *ray);
+
 
 // calculations
 float	get_len_to_horizontal_wall(t_game* game, float current_angle);
 float	get_len_to_vertical_wall(t_game* game, float current_angle);
 int		ray_calculation(t_game* game);
 
-// calculations utils
-int		is_player_looking_up(float angle);
-int		is_player_looking_down(float angle);
-int		is_player_looking_left(float angle);
-int		is_player_looking_right(float angle);
-
-
+// calculations directions
 int is_looking_right(float angle);
 int is_looking_down(float angle);
 int is_looking_left(float angle);
 int is_looking_up(float angle);
 
+// calculations directions2
+int is_looking_south(float angle);
+int is_looking_west(float angle);
 
+// calculations_utils
 int		is_position_in_map(t_game* game,int pos_x,int pos_y);
 int		is_wall(t_game* game,float x_coordinate,float y_coordinate);
 int		get_horizontal_direction(float current_angle,float* y_coordinate,float* len_y);
 int		get_vertical_direction(float current_angle,float* x_coordinate,float* len_x);
 float	calculate_len(t_game* game,float x_coordinate,float y_coordinate);
+
+// calculations_utils2
+float	get_min(float a, float b);
+
 
 // render
 void	calculate_wall_slice_height(float distance, float *start_height, float *end_height);

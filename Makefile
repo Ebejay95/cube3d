@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/05 19:48:26 by ajehle           ###   ########.fr        #
+#    Updated: 2024/10/05 20:21:13 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,13 +100,15 @@ SRCS=	src/utils/ft_exit.c \
 		src/move.c \
 		src/textures.c \
 		src/utils.c \
-		src/dda.c \
-		src/render.c \
-		src/render_utils.c \
-		src/calculations.c \
-		src/calculations_utils.c \
-		src/raycasting.c \
-		src/raycasting_utils.c \
+		src/render_ray/render.c \
+		src/render_ray/render_utils.c \
+		src/render_ray/calculations.c \
+		src/render_ray/calculations_directions.c \
+		src/render_ray/calculations_directions2.c \
+		src/render_ray/calculations_utils.c \
+		src/render_ray/calculations_utils2.c \
+		src/render_ray/raycasting.c \
+		src/render_ray/raycasting_utils.c \
 		src/parser/map_content_check_spot.c \
 		src/parser/map_content_flood.c \
 		src/parser/map_content_spawn.c \
