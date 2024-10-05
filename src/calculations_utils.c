@@ -6,12 +6,25 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:04:04 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 14:09:17 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 16:55:52 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+int is_player_looking_left(float angle)
+{
+	if (angle > M_PI && angle < 2 * M_PI)
+		return 1;
+	return 0;
+}
+
+int is_player_looking_right(float angle)
+{
+	if (angle > 0 && angle < M_PI)
+		return 1;
+	return 0;
+}
 
 int	is_player_looking_up(float angle)
 {
@@ -28,9 +41,9 @@ int	is_player_looking_down(float angle)
 }
 
 
-int	is_position_in_map(t_game* game,int pos_x,int pos_y)
+int	is_position_in_map(t_game* game,int pos_y,int pos_x)
 {
-	if(game->map->content[pos_y] && pos_x <= (int)ft_strlen(game->map->content[pos_y]))
+	if(game->map->content[pos_y] && (pos_x <= (int)ft_strlen(game->map->content[pos_y])))
 			return(1);
 	return(0);
 }
@@ -54,7 +67,6 @@ int	is_wall(t_game* game,float x_coordinate,float y_coordinate)
 	return(0);
 
 }
-
 
 // if the player is looking downwards the next tile size is added???
 // if the player ???

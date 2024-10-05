@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:21:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 15:23:44 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 11:26:55 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ void	rendering_wall(t_game* game, float ray_len, int index_of_ray, float current
 	float top;
 	float wall_height;
 
-	// ray_len = fish_eye_correction(game, ray_len, current_angle);
+	ray_len = fish_eye_correction(game, ray_len, current_angle);
 	wall_height = (CELL / ray_len) * ((WINDOW_HEIGHT/2) / tan(FOV / 2));
 	calculate_wall_slice_height(wall_height, &top, &bottom);
-	printf("%.2f %.2f\n", top, bottom);
 	draw_wall(game->surface, index_of_ray, top, bottom);
 }
 

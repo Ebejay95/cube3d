@@ -6,11 +6,27 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 15:24:42 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 11:26:17 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+
+int	unit_circle(float angle, char c)
+{
+	if (c == 'x')
+	{
+		if (angle > 0 && angle < M_PI)
+			return (1);
+	}
+	else if (c == 'y')
+	{
+		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
+			return (1);
+	}
+	return (0);
+}
 
 /*****************************************/
 /*	Calculation to get the len of the ray
@@ -28,14 +44,25 @@ float get_len_to_horizontal_wall(t_game* game, float current_angle)
 
 	len_y = CELL;
 	len_x = CELL / tan(current_angle);
-	y_coordinate = fabsf(game->player->y / CELL) * CELL;
+	y_coordinate = floor(game->player->y / CELL) * CELL;
 
-	direction = get_horizontal_direction(current_angle, &y_coordinate, &len_y);
+	// direction = get_horizontal_direction(current_angle, &y_coordinate, &len_y);
+		direction = 1;
+		if (current_angle >= 0 && current_angle <= M_PI)
+	{
+		direction = -1;
+		y_coordinate += CELL;
+	}
+	else
+		len_y *= -1;
 
 	x_coordinate = game->player->x + (y_coordinate - game->player->y) / tan(current_angle);
 
-	if ((is_player_looking_up(current_angle) && len_x > 0) || (is_player_looking_down(current_angle) && len_x < 0))
-		len_x *= (-1);
+	// if ((is_player_looking_up(current_angle) && len_x > 0) || (is_player_looking_down(current_angle) && len_x < 0))
+	// 	len_x *= (-1);
+	if ((unit_circle(current_angle, 'y') && len_x > 0)
+		|| (!unit_circle(current_angle, 'y') && len_x < 0))
+		len_x *= -1;
 
 	while (!is_wall(game, x_coordinate, y_coordinate - direction))
 	{
@@ -45,7 +72,6 @@ float get_len_to_horizontal_wall(t_game* game, float current_angle)
 	len_horizontal = calculate_len(game, x_coordinate, y_coordinate);
 	return len_horizontal;
 }
-
 
 /*****************************************/
 /*	Calculation to get the len of the ray
@@ -62,16 +88,26 @@ float get_len_to_vertical_wall(t_game* game, float current_angle)
 
 
 	len_x = CELL;
-	len_y = CELL / tan(current_angle);
-	x_coordinate = fabsf(game->player->x / CELL) * CELL;
+	len_y = CELL * tan(current_angle);
+	x_coordinate = floor(game->player->x / CELL) * CELL;
 
-	direction = get_vertical_direction(current_angle, &x_coordinate, &len_x);
+	// direction = get_vertical_direction(current_angle, &x_coordinate, &len_x);
+	direction = 1;
+	if (!(current_angle >= M_PI_2 && current_angle <= 3 * M_PI_2))
+	{
+		direction = -1;
+		x_coordinate += CELL;
+	}
+	else
+		len_x *= -1;
 
-	y_coordinate = game->player->y + (x_coordinate - game->player->x) / tan(current_angle);
+	y_coordinate = game->player->y + (x_coordinate - game->player->x) * tan(current_angle);
 
-	if ((is_player_looking_down(current_angle) && len_y < 0) || (is_player_looking_up(current_angle) && len_y > 0))
-		len_x *= (-1);
-
+	// if ((is_player_looking_right(current_angle) && len_y < 0) || (is_player_looking_left(current_angle) && len_y > 0))
+	// 	len_y *= (-1);
+	if ((unit_circle(current_angle, 'x') && len_y < 0)
+		|| (!unit_circle(current_angle, 'x') && len_y > 0))
+		len_y *= -1;
 	while (!is_wall(game, x_coordinate - direction, y_coordinate))
 	{
 		x_coordinate += len_x;
@@ -95,24 +131,30 @@ int	ray_calculation(t_game* game)
 
 
 	index_of_ray = 0;
-	current_angle = game->player->angle - (FOV / 2);
+	// current_angle = game->player->angle - (FOV / 2);
+	// current_angle = game->player->angle - (((FOV * M_PI) / 180) / 2);
+	current_angle = game->player->angle - 0.52;
+	// printf("%.2f\n",(((FOV * M_PI) / 180) / 2));
+	// exit(0);
 	while (index_of_ray < NUM_RAYS)
 	{
+	// printf("%.2f\n", game->player->angle);
 
 		current_angle = angle_check(current_angle);
 		horizontal_line = get_len_to_horizontal_wall(game, current_angle);
 		vertical_line = get_len_to_vertical_wall(game, current_angle);
 
-		printf("%.2f %.2f\n",horizontal_line, vertical_line);
+		printf("%.2f %.2f %.2f %.2f %.2f \n", current_angle ,horizontal_line, vertical_line, game->player->x, game->player->y);
+		// exit(0);
+		// printf("%.2f %.2f\n",horizontal_line, vertical_line);
 		// printf("%.2f %.2f %.2f %i %.2f %.2f\n", game->player->x, game->player->y, current_angle, index_of_ray,horizontal_line, vertical_line);
 /******************************************************************************/
-
 		if(vertical_line <= horizontal_line)
-			ray_len = horizontal_line;
-		else
 			ray_len = vertical_line;
+		else
+			ray_len = horizontal_line;
 /******************************************************************************/
-		// rendering_wall(game, ray_len, index_of_ray, current_angle);
+		rendering_wall(game, ray_len, index_of_ray, current_angle);
 /******************************************************************************/
 
 
@@ -121,8 +163,9 @@ int	ray_calculation(t_game* game)
 
 /******************************************************************************/
 		index_of_ray++;
-		current_angle += (FOV / WINDOW_WIDTH);
+		current_angle += (1.05 / WINDOW_WIDTH);
+		// current_angle += ((FOV ) / WINDOW_WIDTH);
 	}
-	printf("\n");
+	// exit(0);
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:24:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 15:06:38 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/04 17:17:37 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 /********************************************************/
 float	angle_check(float angle)
 {
-	if (angle >= 2 * PI)
-		return(angle - 2 * PI);
+	if (angle >= 2 * M_PI)
+		return(angle - 2 * M_PI);
 	else if (angle < 0)
-		return(angle + 2 * PI);
+		return(angle + 2 * M_PI);
 	else
 		return (angle);
 }
