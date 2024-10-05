@@ -6,39 +6,67 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:04:04 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 16:55:52 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 12:05:12 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int is_player_looking_left(float angle)
+int is_looking_right(float angle)
 {
-	if (angle > M_PI && angle < 2 * M_PI)
+	if(angle >= 0 && angle < M_PI_2)
 		return 1;
 	return 0;
 }
 
-int is_player_looking_right(float angle)
+int is_looking_down(float angle)
 {
-	if (angle > 0 && angle < M_PI)
+	if(angle >= M_PI_2 && angle < M_PI)
 		return 1;
 	return 0;
 }
 
-int	is_player_looking_up(float angle)
+int is_looking_left(float angle)
 {
-	if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
-		return (1);
-	return(0);
+	if(angle >= M_PI && angle < 3 * M_PI_2)
+		return 1;
+	return 0;
 }
 
-int	is_player_looking_down(float angle)
+int is_looking_up(float angle)
 {
-	if (angle > 0 && angle < M_PI)
-		return (1);
-	return(0);
+	if(angle >= 3 * M_PI_2 && angle < 2 * M_PI)
+		return 1;
+	return 0;
 }
+
+// int is_player_looking_left(float angle)
+// {
+// 	if (angle > M_PI && angle < 2 * M_PI)
+// 		return 1;
+// 	return 0;
+// }
+
+// int is_player_looking_right(float angle)
+// {
+// 	if (angle >= 0 && angle <= M_PI)
+// 		return 1;
+// 	return 0;
+// }
+
+// int	is_player_looking_up(float angle)
+// {
+// 	if (angle >= (M_PI / 2) && angle <= (3 * M_PI) / 2)
+// 		return (1);
+// 	return(0);
+// }
+
+// int	is_player_looking_down(float angle)
+// {
+// 	if (angle >= 0 && angle <= M_PI)
+// 		return (1);
+// 	return(0);
+// }
 
 
 int	is_position_in_map(t_game* game,int pos_y,int pos_x)
@@ -68,11 +96,9 @@ int	is_wall(t_game* game,float x_coordinate,float y_coordinate)
 
 }
 
-// if the player is looking downwards the next tile size is added???
-// if the player ???
 int get_horizontal_direction(float current_angle,float* y_coordinate,float* len_y)
 {
-	if(is_player_looking_down(current_angle))
+	if(is_looking_right(current_angle) || is_looking_down(current_angle))
 	{
 		*y_coordinate = *y_coordinate + CELL;
 		return(-1);
@@ -83,7 +109,7 @@ int get_horizontal_direction(float current_angle,float* y_coordinate,float* len_
 
 int get_vertical_direction(float current_angle,float* x_coordinate,float* len_x)
 {
-	if(is_player_looking_up(current_angle))
+	if(is_looking_right(current_angle) || is_looking_up(current_angle))
 	{
 		*x_coordinate = *x_coordinate + CELL;
 		return(-1);

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 11:26:17 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 11:56:29 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ float get_len_to_horizontal_wall(t_game* game, float current_angle)
 	len_x = CELL / tan(current_angle);
 	y_coordinate = floor(game->player->y / CELL) * CELL;
 
-	// direction = get_horizontal_direction(current_angle, &y_coordinate, &len_y);
-		direction = 1;
-		if (current_angle >= 0 && current_angle <= M_PI)
-	{
-		direction = -1;
-		y_coordinate += CELL;
-	}
-	else
-		len_y *= -1;
+	direction = get_horizontal_direction(current_angle, &y_coordinate, &len_y);
+	// 	direction = 1;
+	// 	if (current_angle >= 0 && current_angle <= M_PI)
+	// {
+	// 	direction = -1;
+	// 	y_coordinate += CELL;
+	// }
+	// else
+	// 	len_y *= -1;
 
 	x_coordinate = game->player->x + (y_coordinate - game->player->y) / tan(current_angle);
 
@@ -91,15 +91,15 @@ float get_len_to_vertical_wall(t_game* game, float current_angle)
 	len_y = CELL * tan(current_angle);
 	x_coordinate = floor(game->player->x / CELL) * CELL;
 
-	// direction = get_vertical_direction(current_angle, &x_coordinate, &len_x);
-	direction = 1;
-	if (!(current_angle >= M_PI_2 && current_angle <= 3 * M_PI_2))
-	{
-		direction = -1;
-		x_coordinate += CELL;
-	}
-	else
-		len_x *= -1;
+	direction = get_vertical_direction(current_angle, &x_coordinate, &len_x);
+	// direction = 1;
+	// if (!(current_angle >= M_PI_2 && current_angle <= 3 * M_PI_2))
+	// {
+	// 	direction = -1;
+	// 	x_coordinate += CELL;
+	// }
+	// else
+	// 	len_x *= -1;
 
 	y_coordinate = game->player->y + (x_coordinate - game->player->x) * tan(current_angle);
 
@@ -122,7 +122,6 @@ float get_len_to_vertical_wall(t_game* game, float current_angle)
 
 int	ray_calculation(t_game* game)
 {
-	// printf("Y:%.2f X:%.2f A:%.2f\n",game->player->y,game->player->x,game->player->angle);
 	int	index_of_ray;
 	float current_angle;
 	float horizontal_line = 0;
@@ -131,23 +130,18 @@ int	ray_calculation(t_game* game)
 
 
 	index_of_ray = 0;
-	// current_angle = game->player->angle - (FOV / 2);
+	// doesnt work with the calculation?!?!?!?!
 	// current_angle = game->player->angle - (((FOV * M_PI) / 180) / 2);
 	current_angle = game->player->angle - 0.52;
-	// printf("%.2f\n",(((FOV * M_PI) / 180) / 2));
-	// exit(0);
+
 	while (index_of_ray < NUM_RAYS)
 	{
-	// printf("%.2f\n", game->player->angle);
 
 		current_angle = angle_check(current_angle);
 		horizontal_line = get_len_to_horizontal_wall(game, current_angle);
 		vertical_line = get_len_to_vertical_wall(game, current_angle);
 
-		printf("%.2f %.2f %.2f %.2f %.2f \n", current_angle ,horizontal_line, vertical_line, game->player->x, game->player->y);
-		// exit(0);
-		// printf("%.2f %.2f\n",horizontal_line, vertical_line);
-		// printf("%.2f %.2f %.2f %i %.2f %.2f\n", game->player->x, game->player->y, current_angle, index_of_ray,horizontal_line, vertical_line);
+		// printf("%.2f %.2f %.2f %.2f %.2f \n", current_angle ,horizontal_line, vertical_line, game->player->x, game->player->y);
 /******************************************************************************/
 		if(vertical_line <= horizontal_line)
 			ray_len = vertical_line;
@@ -157,15 +151,11 @@ int	ray_calculation(t_game* game)
 		rendering_wall(game, ray_len, index_of_ray, current_angle);
 /******************************************************************************/
 
-
-
-
-
 /******************************************************************************/
 		index_of_ray++;
+	// doesnt work with the calculation?!?!?!?!
+		// current_angle += ((FOV) / WINDOW_WIDTH);
 		current_angle += (1.05 / WINDOW_WIDTH);
-		// current_angle += ((FOV ) / WINDOW_WIDTH);
 	}
-	// exit(0);
 	return 0;
 }
