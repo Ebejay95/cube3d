@@ -6,22 +6,28 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:21:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 20:28:20 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 20:46:19 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/cub3d.h"
 
-void calculate_wall_slice_height(float height, float *top, float *bottom)
+void draw_ceiling(mlx_image_t *surface,int index_of_ray ,int top)
 {
-	*bottom = (WINDOW_HEIGHT / 2) + (height / 2);
-	*top = (WINDOW_HEIGHT / 2) - (height / 2);
-	if(*bottom > WINDOW_HEIGHT)
-		*bottom = WINDOW_HEIGHT;
-	if(*top < 0)
-		*top = 0;
+	while (top)
+	{
+		draw_pixel(surface, index_of_ray, top, WALL_COLOR3);
+		top--;
+	}
+}
 
+void draw_floor(mlx_image_t *surface,int index_of_ray ,int bottom)
+{
+	while (bottom < WINDOW_HEIGHT)
+	{
+		draw_pixel(surface, index_of_ray, bottom, WALL_COLOR4);
+		bottom++;
+	}
 }
 
 void draw_wall(mlx_image_t *surface,int index_of_ray ,int top, int bottom)
@@ -42,5 +48,7 @@ void	rendering_wall(t_game* game, float ray_len, int index_of_ray, float current
 	ray_len = fish_eye_correction(game, ray_len, current_angle);
 	wall_height = (CELL / ray_len) * ((WINDOW_HEIGHT/2) / tan(FOV / 2));
 	calculate_wall_slice_height(wall_height, &top, &bottom);
+	draw_ceiling(game->surface, index_of_ray, top);
+	draw_floor(game->surface, index_of_ray, bottom);
 	draw_wall(game->surface, index_of_ray, top, bottom);
 }

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 20:16:14 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 20:51:02 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,19 +135,6 @@ void mdraw_rays(t_game *game, float cos_angle, float sin_angle);
 void mdraw_player(t_game *game);
 void render_minimap(t_game *game);
 
-// raycasting
-
-
-// raycasting_utils
-
-float	angle_check(float angle);
-float to_radian(float angle);
-int		ft_surface(t_game *game);
-void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color);
-
-// dda
-
-
 // calculations
 float	get_len_to_horizontal_wall(t_game* game, float current_angle);
 float	get_len_to_vertical_wall(t_game* game, float current_angle);
@@ -172,15 +159,20 @@ float	calculate_len(t_game* game,float x_coordinate,float y_coordinate);
 
 // calculations_utils2
 float	get_min(float a, float b);
+float	angle_check(float angle);
 
 
 // render
-void	calculate_wall_slice_height(float distance, float *start_height, float *end_height);
-void draw_wall(mlx_image_t *surface,int index_of_ray ,int top, int bottom);
+void	draw_ceiling(mlx_image_t *surface,int index_of_ray ,int top);
+void	draw_floor(mlx_image_t *surface,int index_of_ray ,int bottom);
+void	draw_wall(mlx_image_t *surface,int index_of_ray ,int top, int bottom);
 void	rendering_wall(t_game* game, float ray_len, int index_of_ray, float current_angle);
 
 // render utils
 float	fish_eye_correction(t_game* game, float ray_len, float current_angle);
+void calculate_wall_slice_height(float height, float *top, float *bottom);
+void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color);
+int		ft_surface(t_game *game);
 
 
 #endif

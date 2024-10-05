@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting_utils.c                                 :+:      :+:    :+:   */
+/*   calculations_utils2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 11:24:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 20:22:02 by ajehle           ###   ########.fr       */
+/*   Created: 2024/10/04 11:04:04 by ajehle            #+#    #+#             */
+/*   Updated: 2024/10/05 20:49:25 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,10 @@ float	angle_check(float angle)
 		return (angle);
 }
 
-float to_radian(float angle)
+float get_min(float a, float b)
 {
-	return ((angle / 180)  * PI);
-}
-
-int	ft_surface(t_game *game)
-{
-	if (game->surface)
-		mlx_delete_image(game->mlx, game->surface);
-	game->surface = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!game->surface)
-		return (1);
-	if (mlx_image_to_window(game->mlx, game->surface, 0, 0) == -1)
-		return (1);
-	// ft_set_color_minimap_char(game->surface, 0x000001); //not needed???
-	return (0);
-}
-
-
-void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color)
-{
-	if (x >= 0 && x < image->width && y >= 0 && y < image->height)
-	{
-		mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, color);
-	}
+	if(a <= b)
+		return a;
+	else
+		return b;
 }
