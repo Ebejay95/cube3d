@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/04 16:18:07 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 12:08:16 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,13 @@ int		is_player_looking_up(float angle);
 int		is_player_looking_down(float angle);
 int		is_player_looking_left(float angle);
 int		is_player_looking_right(float angle);
+
+
+int is_looking_right(float angle);
+int is_looking_down(float angle);
+int is_looking_left(float angle);
+int is_looking_up(float angle);
+
 
 int		is_position_in_map(t_game* game,int pos_x,int pos_y);
 int		is_wall(t_game* game,float x_coordinate,float y_coordinate);

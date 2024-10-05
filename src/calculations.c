@@ -6,12 +6,11 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 11:56:29 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/05 13:50:01 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
 
 int	unit_circle(float angle, char c)
 {
@@ -25,6 +24,20 @@ int	unit_circle(float angle, char c)
 		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
 			return (1);
 	}
+	return (0);
+}
+
+int is_looking_south(float angle)
+{
+	if (angle > 0 && angle < M_PI)
+			return (1);
+	return (0);
+}
+
+int is_looking_west(float angle)
+{
+	if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
+			return (1);
 	return (0);
 }
 
@@ -47,21 +60,13 @@ float get_len_to_horizontal_wall(t_game* game, float current_angle)
 	y_coordinate = floor(game->player->y / CELL) * CELL;
 
 	direction = get_horizontal_direction(current_angle, &y_coordinate, &len_y);
-	// 	direction = 1;
-	// 	if (current_angle >= 0 && current_angle <= M_PI)
-	// {
-	// 	direction = -1;
-	// 	y_coordinate += CELL;
-	// }
-	// else
-	// 	len_y *= -1;
 
 	x_coordinate = game->player->x + (y_coordinate - game->player->y) / tan(current_angle);
 
-	// if ((is_player_looking_up(current_angle) && len_x > 0) || (is_player_looking_down(current_angle) && len_x < 0))
-	// 	len_x *= (-1);
-	if ((unit_circle(current_angle, 'y') && len_x > 0)
-		|| (!unit_circle(current_angle, 'y') && len_x < 0))
+
+	// if ((unit_circle(current_angle, 'y') && len_x > 0) || (!unit_circle(current_angle, 'y') && len_x < 0))
+	// 	len_x *= -1;
+	if ((is_looking_west(current_angle) && len_x > 0) || (!is_looking_west(current_angle) && len_x < 0))
 		len_x *= -1;
 
 	while (!is_wall(game, x_coordinate, y_coordinate - direction))
@@ -92,22 +97,17 @@ float get_len_to_vertical_wall(t_game* game, float current_angle)
 	x_coordinate = floor(game->player->x / CELL) * CELL;
 
 	direction = get_vertical_direction(current_angle, &x_coordinate, &len_x);
-	// direction = 1;
-	// if (!(current_angle >= M_PI_2 && current_angle <= 3 * M_PI_2))
-	// {
-	// 	direction = -1;
-	// 	x_coordinate += CELL;
-	// }
-	// else
-	// 	len_x *= -1;
 
 	y_coordinate = game->player->y + (x_coordinate - game->player->x) * tan(current_angle);
 
-	// if ((is_player_looking_right(current_angle) && len_y < 0) || (is_player_looking_left(current_angle) && len_y > 0))
-	// 	len_y *= (-1);
-	if ((unit_circle(current_angle, 'x') && len_y < 0)
-		|| (!unit_circle(current_angle, 'x') && len_y > 0))
+	// if ((unit_circle(current_angle, 'x') && len_y < 0) || (!unit_circle(current_angle, 'x') && len_y > 0))
+	// 	len_y *= -1;
+
+	if ((is_looking_south(current_angle) && len_y < 0) || (!is_looking_south(current_angle) && len_y > 0))
 		len_y *= -1;
+
+
+
 	while (!is_wall(game, x_coordinate - direction, y_coordinate))
 	{
 		x_coordinate += len_x;
