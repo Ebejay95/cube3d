@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:21:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 16:56:52 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 17:15:17 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,8 @@ void	draw_floor(mlx_image_t *surface,int index_of_ray ,int bottom)
 }
 
 // Function to retrieve the pixel color from the texture at given coordinates
-int	get_pixel_color(mlx_image_t *texture, int x, int y)
+int	get_pixel_color(mlx_texture_t *texture, int i)
 {
-	unsigned int	i;
-
-	i = (y * texture->width + x) * 4;
-	i = 0;
 	return get_rgba_colors_hex(
 		texture->pixels[i],
 		texture->pixels[i + 1],
@@ -101,29 +97,52 @@ int get_y_pos(float top,float bottom,double step)
 // mlx_image_t *surface
 void	draw_wall(t_game* game, t_ray ray ,int top, int bottom)
 {
-	double	step;
-	int		tex_pos_x;
-	int		tex_pos_y;
+	// double	step;
+	// int		tex_pos_x;
+	// int		tex_pos_y;
+	// uint32_t color;
+	// int	pos;
+
+	// mlx_image_t* image;
+
+	// image = get_image(game, ray.current_angle);
+	// // image = game->map->img_north;
+	// step = get_step_size(game, image, bottom - top);
+	// tex_pos_x = get_x_pos(ray, game->map->tex_north->width);
+	// tex_pos_y = get_y_pos(top, bottom, step);
+	// pos = 0;
+	// top=0;
+	// printf("%i %i\n", tex_pos_x, tex_pos_y);
+	// while (top < bottom && top < WINDOW_HEIGHT)
+	// {
+
+	// 	// color = get_pixel_color(image, tex_pos_x, tex_pos_y);
+	// 	color = get_pixel_color(game->map->img_east, top, 0);
+	// 	mlx_put_pixel(game->surface, tex_pos_x, top, color);
+	// 	top++;
+	// }
+		unsigned int	i;
 	uint32_t color;
-	int	pos;
 
-	mlx_image_t* image;
+	i = 0;
+	if(ray.index % 4 == 0)
+		i = 0;
+	else if(ray.index % 4 == 1)
+		i = game->map->tex_north->height + 1;
+	else if(ray.index % 4 == 2)
+		i = game->map->tex_north->height * 2 + 1;
+	else if(ray.index % 4 == 3)
+		i = game->map->tex_north->height * 3 + 1;
 
-	image = get_image(game, ray.current_angle);
-	// image = game->map->img_north;
-	step = get_step_size(game, image, bottom - top);
-	tex_pos_x = get_x_pos(ray, game->map->tex_north->width);
-	tex_pos_y = get_y_pos(top, bottom, step);
-	pos = 0;
-	top=0;
-	printf("%i %i\n", tex_pos_x, tex_pos_y);
-	while (top < bottom && top < WINDOW_HEIGHT)
+	while (top < bottom)
 	{
-
-		// color = get_pixel_color(image, tex_pos_x, tex_pos_y);
-		color = get_pixel_color(game->map->img_east, top, 0);
-		mlx_put_pixel(game->surface, tex_pos_x, top, color);
+		color = get_pixel_color(game->map->tex_north, i);
+		// color = get_rgba_colors_hex(game->map->tex_north->pixels[i],game->map->tex_north->pixels[i + 1],game->map->tex_north->pixels[i + 2],game->map->tex_north->pixels[i+3]);
+		draw_pixel(game->surface, ray.index, top, color);
 		top++;
+		i += 4;
+		if(i > (game->map->tex_north->height * game->map->tex_north->bytes_per_pixel)) // >= ?
+			i = 0;
 	}
 }
 

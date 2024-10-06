@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 15:56:13 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 17:10:57 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,6 @@ float	angle_check(float angle);
 // render
 void	draw_ceiling(mlx_image_t *surface,int index_of_ray ,int top);
 void	draw_floor(mlx_image_t *surface,int index_of_ray ,int bottom);
-void	draw_wall(t_game* game, t_ray ray ,int top, int bottom);
 void	rendering_wall(t_game* game, t_ray ray);
 
 // render utils
