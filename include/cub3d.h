@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 15:31:34 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 15:56:13 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,19 +161,18 @@ float	calculate_len(t_game* game,float x_coordinate,float y_coordinate);
 float	get_min(float a, float b);
 float	angle_check(float angle);
 
-
 // render
 void	draw_ceiling(mlx_image_t *surface,int index_of_ray ,int top);
 void	draw_floor(mlx_image_t *surface,int index_of_ray ,int bottom);
-void	draw_wall(t_game* game, int index_of_ray ,int top, int bottom, float current_angle);
-void	rendering_wall(t_game* game, float vertical_line, float horizontal_line, int index_of_ray, float current_angle):
+void	draw_wall(t_game* game, t_ray ray ,int top, int bottom);
+void	rendering_wall(t_game* game, t_ray ray);
 
 // render utils
 float	fish_eye_correction(t_game* game, float ray_len, float current_angle);
-void calculate_wall_slice_height(float height, float *top, float *bottom);
+void	calculate_wall_slice_height(float height, float *top, float *bottom);
 void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color);
 int		ft_surface(t_game *game);
-int	get_rgba_colors_hex(int red, int green, int blue, int alpha);
+int		get_rgba_colors_hex(int red, int green, int blue, int alpha);
 
 
 #endif

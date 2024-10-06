@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 15:31:54 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 15:53:47 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,28 +74,28 @@ float get_len_to_vertical_wall(t_game* game, float current_angle)
 
 int	ray_calculation(t_game* game)
 {
-	int	index_of_ray;
-	float current_angle;
-	float horizontal_line;
-	float vertical_line;
+	t_ray ray;
 
-	index_of_ray = 0;
+	ray.index = 0;
 
 	// doesnt work with the calculation?!?!?!?!
 	// current_angle = game->player->angle - (((FOV * M_PI) / 180) / 2);
-	current_angle = game->player->angle - 0.52;
+	ray.current_angle = game->player->angle - 0.52;
+	// current_angle = game->player->angle - 0.52;
 
-	while (index_of_ray < NUM_RAYS)
+	while (ray.index < NUM_RAYS)
 	{
-		current_angle = angle_check(current_angle);
-		horizontal_line = get_len_to_horizontal_wall(game, current_angle);
-		vertical_line = get_len_to_vertical_wall(game, current_angle);
-		rendering_wall(game, vertical_line, horizontal_line, index_of_ray, current_angle);
-		index_of_ray++;
+		ray.current_angle = angle_check(ray.current_angle);
+		ray.horizontal_len = get_len_to_horizontal_wall(game, ray.current_angle);
+		ray.vertical_len = get_len_to_vertical_wall(game, ray.current_angle);
+		ray.len = get_min(ray.vertical_len, ray.horizontal_len);
+		rendering_wall(game, ray);
+		ray.index++;
 
 	// doesnt work with the calculation?!?!?!?!
 		// current_angle += ((FOV) / WINDOW_WIDTH);
-		current_angle += (1.05 / WINDOW_WIDTH);
+		// current_angle += (1.05 / WINDOW_WIDTH);
+		ray.current_angle += (1.05 / WINDOW_WIDTH);
 	}
 	return 0;
 }

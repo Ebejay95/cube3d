@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:08:29 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 13:25:08 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 16:15:14 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ int	load_textures(t_game *game)
 	// calc_delta(game, ' ');
 	// i += ft_load_textures_minimap(game);
 
-	i += init_walls(game);
-	printf("END\n");
+	// i += init_walls(game);
 
 
 	if (i)

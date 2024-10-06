@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 15:37:08 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 15:45:39 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,7 @@ typedef struct s_map_bounds
 	int	right;
 }	t_map_bounds;
 
-typedef struct s_ray {
-	float	start_x;
-	float	start_y;
-	float	end_x;
-	float	end_y;
-	float	dx;
-	float	dy;
-	float	steps;
-	float	x_inc;
-	float	y_inc;
-}	t_ray;
+
 
 typedef struct s_ray_data {
 	double	posx;
@@ -114,7 +104,12 @@ typedef struct s_game
 
 }					t_game;
 
-// typedef struct s_ra
-
+typedef struct s_ray {
+	int		index;
+	float	current_angle;
+	float	horizontal_len;
+	float	vertical_len;
+	float	len;
+}	t_ray;
 
 #endif
