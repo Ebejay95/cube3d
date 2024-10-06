@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:08:29 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 12:45:26 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 13:25:08 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ int	init_walls(t_game *game)
 		return(1);
 	if (mlx_image_to_window(game->mlx, game->map->img_north, 0,	0) == -1)
 		return(1);
-	int	i = 0;
-	while(game->map->tex_north->pixels[i])
-	{
-		uint32_t color = get_rgba_colors_hex(game->map->tex_north->pixels[i],game->map->tex_north->pixels[i + 1],game->map->tex_north->pixels[i + 2],game->map->tex_north->pixels[i+3]);
-		printf("%i %u\n ",i, color);
-		i += 4;
-	}
-	printf("\n");
+	// int	i = 0;
+	// while(game->map->tex_north->pixels[i])
+	// {
+	// 	uint32_t color = get_rgba_colors_hex(game->map->tex_north->pixels[i],game->map->tex_north->pixels[i + 1],game->map->tex_north->pixels[i + 2],game->map->tex_north->pixels[i+3]);
+	// 	printf("%i	%u\n ",i, color);
+	// 	i += 4;
+	// }
+	// printf("%i %i \n", game->map->tex_north->height,game->map->tex_north->width);
+	// printf("\n");
 
 	return(0);
 }

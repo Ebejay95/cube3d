@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 21:05:58 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 15:16:10 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define DEFS_H
 
 # include "cub3d.h"
+
+# define NORTH 0
+# define SOUTH 1
+# define EAST 2
+# define WEST 3
 
 # define RAY_COLOR 0xDDDDBBFF
 # define WALL_COLOR 0x999999FF

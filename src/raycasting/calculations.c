@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 20:25:09 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 15:31:54 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	ray_calculation(t_game* game)
 	float current_angle;
 	float horizontal_line;
 	float vertical_line;
-	float ray_len;
 
 	index_of_ray = 0;
 
@@ -91,8 +90,7 @@ int	ray_calculation(t_game* game)
 		current_angle = angle_check(current_angle);
 		horizontal_line = get_len_to_horizontal_wall(game, current_angle);
 		vertical_line = get_len_to_vertical_wall(game, current_angle);
-		ray_len = get_min(vertical_line, horizontal_line);
-		rendering_wall(game, ray_len, index_of_ray, current_angle);
+		rendering_wall(game, vertical_line, horizontal_line, index_of_ray, current_angle);
 		index_of_ray++;
 
 	// doesnt work with the calculation?!?!?!?!

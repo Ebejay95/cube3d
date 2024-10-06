@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 12:39:04 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 15:31:34 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,8 +165,8 @@ float	angle_check(float angle);
 // render
 void	draw_ceiling(mlx_image_t *surface,int index_of_ray ,int top);
 void	draw_floor(mlx_image_t *surface,int index_of_ray ,int bottom);
-void	draw_wall(mlx_image_t *surface,int index_of_ray ,int top, int bottom);
-void	rendering_wall(t_game* game, float ray_len, int index_of_ray, float current_angle);
+void	draw_wall(t_game* game, int index_of_ray ,int top, int bottom, float current_angle);
+void	rendering_wall(t_game* game, float vertical_line, float horizontal_line, int index_of_ray, float current_angle):
 
 // render utils
 float	fish_eye_correction(t_game* game, float ray_len, float current_angle);
