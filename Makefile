@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/05 20:50:32 by ajehle           ###   ########.fr        #
+#    Updated: 2024/10/06 10:54:59 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,11 +94,12 @@ SYSLIBFLAGS =
 
 SRCS=	src/utils/ft_exit.c \
 		src/utils/ft_init.c \
-		src/load_textures_mini.c \
+		src/textures/load_textures_mini.c \
+		src/textures/textures_wall.c \
+		src/textures/textures.c \
 		src/loop.c \
 		src/main.c \
 		src/move.c \
-		src/textures.c \
 		src/utils.c \
 		src/rendering/render.c \
 		src/rendering/render_utils.c \

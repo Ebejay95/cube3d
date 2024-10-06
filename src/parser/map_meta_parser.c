@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:03:02 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/26 11:14:36 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 11:11:09 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,9 @@ void	set_textr_meta(int *err, char *line, t_game *g, char ornttn)
 		g->map->tex_east = mlx_load_png(path);
 	if (ornttn == 's')
 		g->map->tex_south = mlx_load_png(path);
+		// return value mlx_load if path doenst exist?!?!? see load_textures from andi
+		// maybe we make this function in load textures because there would
+		// be mlx_load and mlx_delete in one funciton? readability, consistency?
 	if (*err)
 	{
 		ft_fprintf(2, RED"Error loading texture in map meta definition: "D);

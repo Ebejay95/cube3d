@@ -6,11 +6,11 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 15:25:47 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 10:54:35 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	ft_set_color_minimap_char(mlx_image_t *image, uint32_t color)
 {

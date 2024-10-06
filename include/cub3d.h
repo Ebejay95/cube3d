@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 20:51:02 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 12:39:04 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ float	fish_eye_correction(t_game* game, float ray_len, float current_angle);
 void calculate_wall_slice_height(float height, float *top, float *bottom);
 void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color);
 int		ft_surface(t_game *game);
+int	get_rgba_colors_hex(int red, int green, int blue, int alpha);
 
 
 #endif

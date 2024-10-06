@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:34:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 20:52:49 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 12:38:53 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,8 @@ int	ft_surface(t_game *game)
 	return (0);
 }
 
+
+int	get_rgba_colors_hex(int red, int green, int blue, int alpha)
+{
+	return (red << 24 | green << 16 | blue << 8 | alpha);
+}

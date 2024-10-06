@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:21:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/05 20:46:19 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/06 12:39:19 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@ void draw_floor(mlx_image_t *surface,int index_of_ray ,int bottom)
 {
 	while (bottom < WINDOW_HEIGHT)
 	{
-		draw_pixel(surface, index_of_ray, bottom, WALL_COLOR4);
+		draw_pixel(surface, index_of_ray, bottom, WALL_COLOR3);
 		bottom++;
 	}
 }
 
 void draw_wall(mlx_image_t *surface,int index_of_ray ,int top, int bottom)
 {
+
 	while (top < bottom)
 	{
-		draw_pixel(surface, index_of_ray, top, WALL_COLOR2);
+			draw_pixel(surface, index_of_ray, top, WALL_COLOR2);
 		top++;
 	}
 }
