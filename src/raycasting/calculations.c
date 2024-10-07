@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:35:04 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:47:11 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int	ray_calculation(t_game *game)
 		ray.current_angle = angle_check(ray.current_angle);
 		ray.horizontal_len = get_len_to_horizontal_wall(game, &ray);
 		ray.vertical_len = get_len_to_vertical_wall(game, &ray);
-		ray.horizontal_len *= 1;
-		ray.vertical_len *= 1;
+		ray.horizontal_len *= 0.7;
+		ray.vertical_len *= 0.7;
 		ray.len = get_min(ray.vertical_len, ray.horizontal_len);
 		rendering_wall(game, ray);
 		ray.index++;

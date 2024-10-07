@@ -1,7 +1,7 @@
-EA ./textures/east.png
-NO ./textures/north.png
-WE ./textures/west.png
-SO ./textures/south.png
+EA assets/_the_scream.png
+NO assets/girl_with_a_pearl_earring.png
+WE assets/Mona_Lisa.png
+SO assets/the_starry_night.png
 
 C 135, 206, 250
 F 210, 105, 30
