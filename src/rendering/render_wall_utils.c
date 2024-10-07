@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:52:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 14:20:16 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 14:27:12 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,13 @@ int	get_x_pos(t_ray ray, int texture_width)
 	double	relative_pos;
 	int		texture_x;
 
-	// if (is_looking_left(ray.current_angle) || is_looking_right(ray.current_angle))
 	if (ray.vertical_len <= ray.horizontal_len)
-		relative_pos = fmod(ray.horizontal_len, CELL);
+		relative_pos = fmod(ray.wall_hit_y, CELL);
 	else
-		relative_pos = fmod(ray.vertical_len, CELL);
+		relative_pos = fmod(ray.wall_hit_x, CELL);
 	texture_x = (int)(relative_pos / CELL * texture_width);
-	if (is_looking_left(ray.current_angle) || is_looking_down(ray.current_angle))
-		texture_x = texture_width - texture_x - 1;
+	// if (is_looking_left(ray.current_angle) || is_looking_down(ray.current_angle))
+	// 	texture_x = texture_width - texture_x - 1;
 	return (texture_x);
 }
 
@@ -68,7 +67,6 @@ int get_y_pos(float top,float bottom,double step)
 		return(WINDOW_HEIGHT);
 }
 
-// Function to retrieve the pixel color from the texture at given coordinates
 int	get_pixel_color(mlx_texture_t *texture, int i)
 {
 	return get_rgba_colors_hex(
