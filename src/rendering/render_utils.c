@@ -6,25 +6,24 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:34:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 12:38:53 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:31:33 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-
-float	fish_eye_correction(t_game* game, float ray_len, float current_angle)
+float	fish_eye_correction(t_game *game, float ray_len, float current_angle)
 {
-	return(ray_len * cos((current_angle - game->player->angle)));
+	return (ray_len * cos((current_angle - game->player->angle)));
 }
 
-void calculate_wall_slice_height(float height, float *top, float *bottom)
+void	calculate_wall_slice_height(float height, float *top, float *bottom)
 {
 	*top = (WINDOW_HEIGHT / 2) - (height / 2);
 	*bottom = (WINDOW_HEIGHT / 2) + (height / 2);
-	if(*bottom > WINDOW_HEIGHT)
+	if (*bottom > WINDOW_HEIGHT)
 		*bottom = WINDOW_HEIGHT;
-	if(*top < 0)
+	if (*top < 0)
 		*top = 0;
 }
 
@@ -45,11 +44,8 @@ int	ft_surface(t_game *game)
 		return (1);
 	if (mlx_image_to_window(game->mlx, game->surface, 0, 0) == -1)
 		return (1);
-	// ft_set_color_minimap_char(game->surface, 0x000001); //not needed???
-	// resizing??????
 	return (0);
 }
-
 
 int	get_rgba_colors_hex(int red, int green, int blue, int alpha)
 {

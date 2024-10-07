@@ -10,7 +10,8 @@
 		"libft.h": "c",
 		"array": "c",
 		"string_view": "c",
-		"vector": "c"
+		"vector": "c",
+		"algorithm": "c"
 	},
 	"cmake.sourceDirectory": "/Users/ajehle/Desktop/cub3d_collab/mlx42"
 }

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 14:25:43 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:09:36 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,8 @@ float	get_min(float a, float b);
 float	angle_check(float angle);
 
 // render
-void	draw_ceiling(mlx_image_t *surface,int index_of_ray ,int top);
-void	draw_floor(mlx_image_t *surface,int index_of_ray ,int bottom);
+void	draw_ceiling(t_game* game, int index_of_ray ,int top);
+void	draw_floor(t_game* game, int index_of_ray ,int bottom);
 void	rendering_wall(t_game* game, t_ray ray);
 
 // render utils
@@ -184,6 +184,9 @@ mlx_texture_t* get_texture(t_game* game, t_ray ray);
 double	get_step_size(t_game* game, mlx_texture_t* texture, int height);
 int	get_x_pos(t_ray ray, int texture_width);
 int get_y_pos(float top,float bottom,double step);
+
+// bonus/animation
+void animation(void *param);
 
 
 #endif

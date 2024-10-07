@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:01:51 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:04:44 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ typedef struct s_game
 	t_player		*player;
 	t_key_states	key_states;
 	int				mouse_locked;
+
+	int				frame_bonus;
 
 	float			deltax;
 	float			deltay;

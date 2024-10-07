@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calculations_utils2.c                              :+:      :+:    :+:   */
+/*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 11:04:04 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:34:59 by ajehle           ###   ########.fr       */
+/*   Created: 2024/10/07 15:04:11 by ajehle            #+#    #+#             */
+/*   Updated: 2024/10/07 15:26:33 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-/********************************************************/
-/*	Function to check if angle is within radian values	*/
-/********************************************************/
-float	angle_check(float angle)
+void animation(void *param)
 {
-	if (angle >= 2 * M_PI)
-		return (angle - 2 * M_PI);
-	else if (angle < 0)
-		return (angle + 2 * M_PI);
-	else
-		return (angle);
-}
+	t_game	*game;
+ 	// uint32_t alpha;
 
-float	get_min(float a, float b)
-{
-	if (a <= b)
-		return (a);
-	else
-		return (b);
+	game = (t_game *)param;
+	// alpha = game->map->ceiling & 0xFF;
+	// printf("%u %i\n", alpha, game->map->ceiling);
+	game->frame_bonus += 1;
+	if(game->frame_bonus == FRAME * 1)
+	{
+		game->frame_bonus = 0;
+	}
 }

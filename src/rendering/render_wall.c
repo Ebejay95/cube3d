@@ -6,12 +6,11 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:52:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 14:47:49 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:38:39 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
 
 static int	get_pixel_color2(mlx_texture_t *texture, int x, int y)
 {
@@ -22,14 +21,14 @@ static int	get_pixel_color2(mlx_texture_t *texture, int x, int y)
 			texture->pixels[i + 2], texture->pixels[i + 3]));
 }
 
-void	draw_wall(t_game* game, t_ray ray ,int top, int bottom)
+void	draw_wall(t_game *game, t_ray ray, int top, int bottom)
 {
-	double	step;
-	int		tex_pos_x;
-	int		tex_pos_y;
-	uint32_t color;
-	mlx_texture_t* texture;
-	double	tex_index;
+	double			step;
+	int				tex_pos_x;
+	int				tex_pos_y;
+	uint32_t		color;
+	mlx_texture_t	*texture;
+	double			tex_index;
 
 	texture = get_texture(game, ray);
 	step = get_step_size(game, texture, bottom - top);

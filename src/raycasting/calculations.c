@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:01:35 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:35:04 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 /*****************************************/
 /*	Calculation to get the len of the ray
- 	hitting the horizontal grid			 */
+	hitting the horizontal grid				*/
 /*****************************************/
-float get_len_to_horizontal_wall(t_game* game, t_ray* ray)
+float	get_len_to_horizontal_wall(t_game *game, t_ray *ray)
 {
 	float	y_coordinate;
 	float	x_coordinate;
@@ -27,8 +27,10 @@ float get_len_to_horizontal_wall(t_game* game, t_ray* ray)
 	len_y = CELL;
 	len_x = CELL / tan(ray->current_angle);
 	y_coordinate = floor(game->player->y / CELL) * CELL;
-	direction = get_horizontal_direction(ray->current_angle, &y_coordinate, &len_y);
-	x_coordinate = game->player->x + (y_coordinate - game->player->y) / tan(ray->current_angle);
+	direction = get_horizontal_direction(ray->current_angle, &y_coordinate,
+			&len_y);
+	x_coordinate = game->player->x + (y_coordinate - game->player->y)
+		/ tan(ray->current_angle);
 	if (is_looking_west(ray->current_angle) && len_x > 0)
 		len_x *= -1;
 	if (!is_looking_west(ray->current_angle) && len_x < 0)
@@ -39,15 +41,14 @@ float get_len_to_horizontal_wall(t_game* game, t_ray* ray)
 		y_coordinate += len_y;
 	}
 	ray->wall_hit_x = x_coordinate;
-	return calculate_len(game, x_coordinate, y_coordinate);
+	return (calculate_len(game, x_coordinate, y_coordinate));
 }
-
 
 /*****************************************/
 /*	Calculation to get the len of the ray
- 	hitting the vertical grid				 */
+	hitting the vertical grid					*/
 /*****************************************/
-float get_len_to_vertical_wall(t_game* game, t_ray* ray)
+float	get_len_to_vertical_wall(t_game *game, t_ray *ray)
 {
 	float	y_coordinate;
 	float	x_coordinate;
@@ -58,11 +59,13 @@ float get_len_to_vertical_wall(t_game* game, t_ray* ray)
 	len_x = CELL;
 	len_y = CELL * tan(ray->current_angle);
 	x_coordinate = floor(game->player->x / CELL) * CELL;
-	direction = get_vertical_direction(ray->current_angle, &x_coordinate, &len_x);
-	y_coordinate = game->player->y + (x_coordinate - game->player->x) * tan(ray->current_angle);
+	direction = get_vertical_direction(ray->current_angle, &x_coordinate,
+			&len_x);
+	y_coordinate = game->player->y + (x_coordinate - game->player->x)
+		* tan(ray->current_angle);
 	if (is_looking_south(ray->current_angle) && len_y < 0)
 		len_y *= -1;
-	if(!is_looking_south(ray->current_angle) && len_y > 0)
+	if (!is_looking_south(ray->current_angle) && len_y > 0)
 		len_y *= -1;
 	while (!is_wall(game, x_coordinate - direction, y_coordinate))
 	{
@@ -70,13 +73,12 @@ float get_len_to_vertical_wall(t_game* game, t_ray* ray)
 		y_coordinate += len_y;
 	}
 	ray->wall_hit_y = y_coordinate;
-	return calculate_len(game, x_coordinate, y_coordinate);
+	return (calculate_len(game, x_coordinate, y_coordinate));
 }
 
-
-int	ray_calculation(t_game* game)
+int	ray_calculation(t_game *game)
 {
-	t_ray ray;
+	t_ray	ray;
 
 	ray.index = 0;
 	ray.current_angle = game->player->angle - (FOV_RAD / 2);
@@ -92,5 +94,5 @@ int	ray_calculation(t_game* game)
 		ray.index++;
 		ray.current_angle += (FOV_RAD / WINDOW_WIDTH);
 	}
-	return 0;
+	return (0);
 }
