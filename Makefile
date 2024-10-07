@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/06 10:54:59 by ajehle           ###   ########.fr        #
+#    Updated: 2024/10/07 09:53:01 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,8 @@ SRCS=	src/utils/ft_exit.c \
 		src/move.c \
 		src/utils.c \
 		src/rendering/render.c \
+		src/rendering/render_wall.c \
+		src/rendering/render_wall_utils.c \
 		src/rendering/render_utils.c \
 		src/raycasting/calculations.c \
 		src/raycasting/calculations_directions.c \

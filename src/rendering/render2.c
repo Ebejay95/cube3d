@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:21:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 17:09:09 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 09:40:35 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,3 +69,28 @@ void	rendering_wall(t_game* game, float ray_len, int index_of_ray, float current
 	draw_floor(game->surface, index_of_ray, bottom);
 	draw_wall(game, game->surface, index_of_ray, top, bottom);
 }
+
+
+	unsigned int	i;
+	uint32_t color;
+
+	i = 0;
+	if(ray.index % 4 == 0)
+		i = 0;
+	else if(ray.index % 4 == 1)
+		i = game->map->tex_north->height + 1;
+	else if(ray.index % 4 == 2)
+		i = game->map->tex_north->height * 2 + 1;
+	else if(ray.index % 4 == 3)
+		i = game->map->tex_north->height * 3 + 1;
+
+	while (top < bottom)
+	{
+		color = get_pixel_color(game->map->tex_north, i);
+		// color = get_rgba_colors_hex(game->map->tex_north->pixels[i],game->map->tex_north->pixels[i + 1],game->map->tex_north->pixels[i + 2],game->map->tex_north->pixels[i+3]);
+		draw_pixel(game->surface, ray.index, top, color);
+		top++;
+		i += 4;
+		if(i > (game->map->tex_north->height * game->map->tex_north->bytes_per_pixel)) // >= ?
+			i = 0;
+	}

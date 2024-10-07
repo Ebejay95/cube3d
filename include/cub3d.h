@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 17:10:57 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 09:54:21 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,16 @@ void	calculate_wall_slice_height(float height, float *top, float *bottom);
 void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color);
 int		ft_surface(t_game *game);
 int		get_rgba_colors_hex(int red, int green, int blue, int alpha);
+
+// render_wall
+void	draw_wall(t_game* game, t_ray ray ,int top, int bottom);
+
+// render_wall_utils
+int	get_pixel_color(mlx_texture_t *texture, int i);
+mlx_texture_t* get_texture(t_game* game, float current_angle);
+double	get_step_size(t_game* game, mlx_texture_t* texture, int height);
+int	get_x_pos(t_ray ray, int texture_width);
+int get_y_pos(float top,float bottom,double step);
 
 
 #endif
