@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:03:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 15:53:47 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 13:01:23 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,7 @@ int	ray_calculation(t_game* game)
 	t_ray ray;
 
 	ray.index = 0;
-
-	// doesnt work with the calculation?!?!?!?!
-	// current_angle = game->player->angle - (((FOV * M_PI) / 180) / 2);
-	ray.current_angle = game->player->angle - 0.52;
-	// current_angle = game->player->angle - 0.52;
-
+	ray.current_angle = game->player->angle - (FOV_RAD / 2);
 	while (ray.index < NUM_RAYS)
 	{
 		ray.current_angle = angle_check(ray.current_angle);
@@ -91,11 +86,7 @@ int	ray_calculation(t_game* game)
 		ray.len = get_min(ray.vertical_len, ray.horizontal_len);
 		rendering_wall(game, ray);
 		ray.index++;
-
-	// doesnt work with the calculation?!?!?!?!
-		// current_angle += ((FOV) / WINDOW_WIDTH);
-		// current_angle += (1.05 / WINDOW_WIDTH);
-		ray.current_angle += (1.05 / WINDOW_WIDTH);
+		ray.current_angle += (FOV_RAD / WINDOW_WIDTH);
 	}
 	return 0;
 }

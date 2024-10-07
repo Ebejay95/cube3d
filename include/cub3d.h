@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 09:54:21 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 13:13:26 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ int is_looking_left(float angle);
 int is_looking_up(float angle);
 
 // calculations directions2
+int is_looking_north(float angle);
+int is_looking_east(float angle);
 int is_looking_south(float angle);
 int is_looking_west(float angle);
 
@@ -178,7 +180,7 @@ void	draw_wall(t_game* game, t_ray ray ,int top, int bottom);
 
 // render_wall_utils
 int	get_pixel_color(mlx_texture_t *texture, int i);
-mlx_texture_t* get_texture(t_game* game, float current_angle);
+mlx_texture_t* get_texture(t_game* game, t_ray ray);
 double	get_step_size(t_game* game, mlx_texture_t* texture, int height);
 int	get_x_pos(t_ray ray, int texture_width);
 int get_y_pos(float top,float bottom,double step);

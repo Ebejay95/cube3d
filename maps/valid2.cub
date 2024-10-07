@@ -1,8 +1,8 @@
 
-EA assets/textr/East2.png
-NO assets/textr/East2.png
-WE assets/textr/East2.png
-SO assets/textr/East2.png
+EA assets/_the_scream.png
+NO assets/girl_with_a_pearl_earring.png
+WE assets/Mona_Lisa.png
+SO assets/the_starry_night.png
 F 220,100,0
 C 225,30,0
 
@@ -10,6 +10,6 @@ C 225,30,0
 
     11111
     10001
-    10N01
+    10S01
     10001
     11111

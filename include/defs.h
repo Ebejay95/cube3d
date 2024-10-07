@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 15:16:10 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 13:00:21 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define PLAYER_SIZE 6
 # define PI 3.14159265359
 # define NUM_RAYS 1024
-# define FOV (PI / 2)
-# define FOV_RAD (FOX * PI) / 180
+# define FOV 60
+# define FOV_RAD (FOV * PI) / 180
 # define RAY_ANGLE_STEP (FOV / (float)NUM_RAYS)
 
 # define WINDOW_WIDTH 1024

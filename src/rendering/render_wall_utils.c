@@ -6,26 +6,28 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:52:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 09:59:32 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 13:17:18 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-// Function to determine which texture to load based on the view/ray angle
-mlx_texture_t* get_texture(t_game* game, float current_angle)
+mlx_texture_t* get_texture(t_game* game, t_ray ray)
 {
-	float angle;
-
-	angle = angle_check(current_angle);
-	if (is_looking_left(angle))
-		return game->map->tex_west;
-	else if (is_looking_down(angle))
-		return game->map->tex_south;
-	else if (is_looking_up(angle))
-		return game->map->tex_north;
+	if(ray.vertical_len <= ray.horizontal_len)
+	{
+		if (is_looking_west(ray.current_angle))
+			return game->map->tex_west;
+		else
+			return game->map->tex_east;
+	}
 	else
-		return game->map->tex_east;
+	{
+		if (is_looking_south(ray.current_angle))
+			return game->map->tex_south;
+		else
+			return game->map->tex_north;
+	}
 }
 
 double	get_step_size(t_game* game, mlx_texture_t* texture, int height)
@@ -55,6 +57,7 @@ int	get_x_pos(t_ray ray, int texture_width)
 		texture_x = texture_width - texture_x - 1;
 	return texture_x;
 }
+
 
 int get_y_pos(float top,float bottom,double step)
 {
