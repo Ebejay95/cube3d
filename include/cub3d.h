@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 13:13:26 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 13:28:44 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,10 @@ void mdraw_player(t_game *game);
 void render_minimap(t_game *game);
 
 // calculations
-float	get_len_to_horizontal_wall(t_game* game, float current_angle);
-float	get_len_to_vertical_wall(t_game* game, float current_angle);
+// float	get_len_to_horizontal_wall(t_game* game, t_ray *ray);
+// float	get_len_to_vertical_wall(t_game* game, t_ray *ray);
+float	get_len_to_horizontal_wall(t_game* game, t_ray ray);
+float	get_len_to_vertical_wall(t_game* game, t_ray ray);
 int		ray_calculation(t_game* game);
 
 // calculations directions

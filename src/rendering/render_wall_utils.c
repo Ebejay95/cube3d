@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:52:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 13:17:18 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 14:20:16 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,15 @@ int	get_x_pos(t_ray ray, int texture_width)
 	double	relative_pos;
 	int		texture_x;
 
-	if (is_looking_left(ray.current_angle) || is_looking_right(ray.current_angle))
+	// if (is_looking_left(ray.current_angle) || is_looking_right(ray.current_angle))
+	if (ray.vertical_len <= ray.horizontal_len)
 		relative_pos = fmod(ray.horizontal_len, CELL);
 	else
 		relative_pos = fmod(ray.vertical_len, CELL);
 	texture_x = (int)(relative_pos / CELL * texture_width);
 	if (is_looking_left(ray.current_angle) || is_looking_down(ray.current_angle))
 		texture_x = texture_width - texture_x - 1;
-	return texture_x;
+	return (texture_x);
 }
 
 

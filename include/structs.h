@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 15:45:39 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 13:22:26 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ typedef struct s_ray {
 	float	horizontal_len;
 	float	vertical_len;
 	float	len;
+	float	wall_hit_y;
+	float	wall_hit_x;
 }	t_ray;
 
 #endif
