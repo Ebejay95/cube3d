@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 13:22:26 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 15:01:51 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_key_states {
 	bool	d_pressed;
 	bool	left_pressed;
 	bool	right_pressed;
+	bool	up_pressed;
 }	t_key_states;
 
 typedef struct s_map
@@ -101,7 +102,6 @@ typedef struct s_game
 	float			deltax;
 	float			deltay;
 	float			angle;
-
 }					t_game;
 
 typedef struct s_ray {

@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:52:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 14:08:34 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/07 14:47:49 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	draw_wall(t_game* game, t_ray ray ,int top, int bottom)
 	double	step;
 	int		tex_pos_x;
 	int		tex_pos_y;
-	int		pos_pixel;
 	uint32_t color;
 	mlx_texture_t* texture;
 	double	tex_index;
@@ -35,7 +34,6 @@ void	draw_wall(t_game* game, t_ray ray ,int top, int bottom)
 	texture = get_texture(game, ray);
 	step = get_step_size(game, texture, bottom - top);
 	tex_pos_x = get_x_pos(ray, texture->width);
-
 	tex_index = 0;
 	while (top < bottom && top < WINDOW_HEIGHT)
 	{
@@ -45,5 +43,4 @@ void	draw_wall(t_game* game, t_ray ray ,int top, int bottom)
 		mlx_put_pixel(game->surface, ray.index, top, color);
 		top++;
 	}
-	printf("%i %.2f \n", ray.index, ray.current_angle);
 }
