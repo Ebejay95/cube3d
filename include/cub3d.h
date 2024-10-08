@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:09:36 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 12:41:26 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,14 +179,13 @@ int		get_rgba_colors_hex(int red, int green, int blue, int alpha);
 void	draw_wall(t_game* game, t_ray ray ,int top, int bottom);
 
 // render_wall_utils
-int	get_pixel_color(mlx_texture_t *texture, int i);
-mlx_texture_t* get_texture(t_game* game, t_ray ray);
-double	get_step_size(t_game* game, mlx_texture_t* texture, int height);
-int	get_x_pos(t_ray ray, int texture_width);
-int get_y_pos(float top,float bottom,double step);
+int				get_pixel_color(mlx_texture_t *texture, int x, int y);
+mlx_texture_t*	get_texture(t_game* game, t_ray ray);
+double			get_step_size(t_game* game, mlx_texture_t* texture, int height);
+int				get_x_pos(t_game *game, t_ray ray, mlx_texture_t* texture);
 
 // bonus/animation
-void animation(void *param);
+void	animation(void *param);
 
 
 #endif

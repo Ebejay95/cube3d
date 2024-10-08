@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:04:44 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 12:33:01 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,8 @@ typedef struct s_game
 	float			angle;
 }					t_game;
 
-typedef struct s_ray {
+typedef struct s_ray
+{
 	int		index;
 	float	current_angle;
 	float	horizontal_len;

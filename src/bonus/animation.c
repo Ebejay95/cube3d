@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:04:11 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:26:33 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 12:20:39 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void animation(void *param)
 	// printf("%u %i\n", alpha, game->map->ceiling);
 	game->frame_bonus += 1;
 	if(game->frame_bonus == FRAME * 1)
+	{
+
+	}
+	if(game->frame_bonus == FRAME * 2)
 	{
 		game->frame_bonus = 0;
 	}

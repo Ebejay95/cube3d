@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:34:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:31:33 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 12:16:17 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ void	calculate_wall_slice_height(float height, float *top, float *bottom)
 {
 	*top = (WINDOW_HEIGHT / 2) - (height / 2);
 	*bottom = (WINDOW_HEIGHT / 2) + (height / 2);
+	if(*bottom - *top > WINDOW_HEIGHT)
+	{
+
+	}
 	if (*bottom > WINDOW_HEIGHT)
+		// *bottom = *bottom - WINDOW_HEIGHT;
 		*bottom = WINDOW_HEIGHT;
 	if (*top < 0)
+		// *top = WINDOW_HEIGHT - *top;
 		*top = 0;
 }
 

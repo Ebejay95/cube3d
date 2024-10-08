@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/07 15:03:27 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 12:20:47 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	start_game(t_game *game)
 		mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 		mlx_key_hook(game->mlx, &key_hook, game);
 		mlx_loop_hook(game->mlx, &update_game_state, game);
-		mlx_loop_hook(game->mlx, &animation, game);
+		// mlx_loop_hook(game->mlx, &animation, game);
 		mlx_loop(game->mlx);
 		mlx_terminate(game->mlx);
 	}
