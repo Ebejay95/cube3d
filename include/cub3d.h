@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/09 22:49:23 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 00:17:23 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,6 @@ int				check_move_up(t_game *game);
 int				check_move_down(t_game *game);
 int				check_move_left(t_game *game);
 int				check_move_right(t_game *game);
-
-// minimap
-void			mclear_and_draw_frame(t_game *game);
-void			mrender_rotmap(t_game *game, float cosa, float sina);
-void			mdraw_rays(t_game *game, float cosa, float sina);
-void			mdraw_player(t_game *game);
-void			render_minimap(t_game *game);
 
 // calculations
 float			get_len_to_horizontal_wall(t_game *game, t_ray *ray);

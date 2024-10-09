@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/08 17:47:20 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 00:17:35 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	update_game_state(void *param)
 		calc_delta(game, '+');
 	ft_surface(game);
 	ray_calculation(game);
-	render_minimap(game);
 }
 
 void	start_game(t_game *game)

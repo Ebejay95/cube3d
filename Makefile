@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/10 00:14:47 by jeberle          ###   ########.fr        #
+#    Updated: 2024/10/10 00:16:59 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,7 +125,6 @@ SRCS=	src/utils/ft_exit.c \
 		src/parser/map_parser_trimmer.c \
 		src/parser/map_parser.c \
 		src/parser/map_printers.c \
-		src/bonus/minimap.c \
 
 
 BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
