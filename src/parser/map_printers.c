@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_printers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:33:25 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/26 11:14:48 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 13:53:10 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,9 @@ void	ft_printmetas(t_map *map)
 	ft_printf("East: %p\n", (void *)map->tex_east);
 	ft_printf("North: %p\n", (void *)map->tex_north);
 	ft_printf("South: %p\n", (void *)map->tex_south);
-	ft_printf("\nImage Pointers:\n");
-	ft_printf("West: %p\n", (void *)map->img_west);
-	ft_printf("East: %p\n", (void *)map->img_east);
-	ft_printf("North: %p\n", (void *)map->img_north);
-	ft_printf("South: %p\n", (void *)map->img_south);
 	ft_printf("\nColors:\n");
-	ft_printf("Ceiling: 0x%08X\n", map->ceiling);
-	ft_printf("Floor: 0x%08X\n", map->floor);
+	printf("Floor: 0x%08X\n", map->floor);
+	printf("Ceiling: 0x%08X\n", map->ceiling);
 	ft_printf("\nFlags:\n");
 	ft_printf("Ceiling set: %d\n", map->ceiling_set);
 	ft_printf("Floor set: %d\n", map->floor_set);

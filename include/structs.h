@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/08 12:33:01 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/09 18:19:14 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_split_context
 	size_t	i;
 	size_t	j;
 	char	*start;
-}	t_split_context;
+}	t_splt_ctx;
 
 typedef struct s_map_bounds
 {
@@ -31,8 +31,6 @@ typedef struct s_map_bounds
 	int	left;
 	int	right;
 }	t_map_bounds;
-
-
 
 typedef struct s_ray_data {
 	double	posx;
@@ -71,13 +69,9 @@ typedef struct s_map
 {
 	char			**content;
 	mlx_texture_t	*tex_west;
-	mlx_image_t		*img_west;
 	mlx_texture_t	*tex_east;
-	mlx_image_t		*img_east;
 	mlx_texture_t	*tex_north;
-	mlx_image_t		*img_north;
 	mlx_texture_t	*tex_south;
-	mlx_image_t		*img_south;
 	uint32_t		ceiling;
 	uint32_t		floor;
 	int				ceiling_set;
@@ -89,18 +83,15 @@ typedef struct s_map
 	char			spawn;
 }					t_map;
 
-
 typedef struct s_game
 {
-	t_map*			map;
-	mlx_t*			mlx;
-	mlx_image_t*	surface;
+	t_map			*map;
+	mlx_t			*mlx;
+	mlx_image_t		*surface;
 	t_player		*player;
 	t_key_states	key_states;
 	int				mouse_locked;
-
 	int				frame_bonus;
-
 	float			deltax;
 	float			deltay;
 	float			angle;

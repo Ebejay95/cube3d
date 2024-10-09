@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_meta_validations.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:02:27 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/26 11:14:38 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:04:25 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,10 @@ int	check_all_meta(t_game *game)
 	return (1);
 }
 
-int	check_line_format(char *s1, size_t n)
-{
-	size_t	i;
-
-	i = (n + 1);
-	while (s1[i])
-	{
-		if (ft_isspace(s1[i]) && s1[i] != '\n')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 int	got_meta_line(t_game *game, char *s1, char *s2, size_t n)
 {
 	if (!ft_strncmp(s1, s2, n))
 	{
-		if (!check_line_format(s1, n))
-			return (0);
 		if (!ft_strcmp(s2, "NO ") && !game->map->tex_north)
 			return (1);
 		if (!ft_strcmp(s2, "SO ") && !game->map->tex_south)

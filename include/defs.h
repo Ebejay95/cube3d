@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/08 11:29:39 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:59:47 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@
 # define PI 3.14159265359
 # define NUM_RAYS 1024
 # define FOV 60
-# define FOV_RAD (FOV * PI) / 180
-# define RAY_ANGLE_STEP (FOV / (float)NUM_RAYS)
 
 # define WINDOW_WIDTH 1024
 # define WINDOW_HEIGHT 650

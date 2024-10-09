@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_textures_mini.c                               :+:      :+:    :+:   */
+/*   map_parser_helper3.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 22:43:28 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/08 16:47:17 by jeberle          ###   ########.fr       */
+/*   Created: 2024/10/08 17:44:38 by jeberle           #+#    #+#             */
+/*   Updated: 2024/10/08 17:44:58 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	ft_set_color_minimap_char(mlx_image_t *image, uint32_t color)
+char	*create_new_line(char *old_line, t_map_bounds *bounds)
 {
-	uint32_t	x;
-	uint32_t	y;
+	char	*new_line;
+	int		j;
+	int		new_width;
 
-	x = 0;
-	y = 0;
-	while (x < image->width)
+	new_width = bounds->right - bounds->left + 1;
+	new_line = ft_calloc(new_width + 1, sizeof(char));
+	if (!new_line)
+		return (NULL);
+	j = 0;
+	while (j < new_width)
 	{
-		while (y < image->height)
-		{
-			mlx_put_pixel(image, x, y, color);
-			y++;
-		}
-		y = 0;
-		x++;
+		if (bounds->left + j < (int)ft_strlen(old_line))
+			new_line[j] = old_line[bounds->left + j];
+		else
+			new_line[j] = ' ';
+		j++;
 	}
-}
-
-int	ft_load_textures_minimap(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	game->mouse_locked = true;
-	return (i);
+	new_line[new_width] = '\0';
+	return (new_line);
 }

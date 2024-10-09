@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   textures_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 10:53:39 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/06 10:59:32 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:47:11 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../include/cub3d.h"
-
 
 // int	ft_load_textures_item(t_game *game)
 // {

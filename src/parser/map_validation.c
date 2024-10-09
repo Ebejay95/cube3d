@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:10:24 by jeberle           #+#    #+#             */
-/*   Updated: 2024/09/26 11:14:50 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 14:05:05 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,9 @@ void	get_map(t_game *game, int argc, char **argv)
 		return ;
 	game->map->content = NULL;
 	game->map->tex_west = NULL;
-	game->map->img_west = NULL;
 	game->map->tex_east = NULL;
-	game->map->img_east = NULL;
 	game->map->tex_north = NULL;
-	game->map->img_north = NULL;
 	game->map->tex_south = NULL;
-	game->map->img_south = NULL;
 	game->map->ceiling = 0;
 	game->map->floor = 0;
 	game->map->ceiling_set = 0;
@@ -73,7 +69,10 @@ void	get_map(t_game *game, int argc, char **argv)
 	game->map->spawn_y = -1;
 	game->map->spawn = '-';
 	if (validate_input(argc, argv) > 0)
+	{
 		call_exit(game);
+		return ;
+	}
 	if (validate_map(game, argv[1]) > 0)
 		call_exit(game);
 }

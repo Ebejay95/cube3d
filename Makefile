@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
+#    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/07 15:08:56 by ajehle           ###   ########.fr        #
+#    Updated: 2024/10/09 17:49:55 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ NAME_BONUS=cub3d_bonus
 #------------------------------------------------------------------------------#
 
 CC=cc
-CFLAGS=-Wall -Wextra #-Werror
+CFLAGS=-Wall -Wextra -Werror
 LDFLAGS=
 
 ifeq ($(DEBUG), 1)
@@ -82,7 +82,7 @@ MLXFT_DIR = ./mlx42
 MLXFT = libmlx42.a
 MLXFT_BUILD_DIR = ./mlx_build
 MLXFT_LIB = $(MLXFT_BUILD_DIR)/$(MLXFT)
-MLXFTFLAGS = -L$(MLXFT_BUILD_DIR) -lmlx42 -lglfw
+MLXFTFLAGS = -L$(MLXFT_BUILD_DIR) -lmlx42 -Iinclude -lglfw -framework Cocoa -framework OpenGL -framework IOKit
 MLXFT_REPO = https://github.com/codam-coding-college/MLX42.git
 
 
@@ -96,12 +96,10 @@ SRCS=	src/utils/ft_exit.c \
 		src/utils/ft_init.c \
 		src/textures/load_textures_mini.c \
 		src/textures/textures_wall.c \
-		src/textures/textures.c \
 		src/loop.c \
 		src/main.c \
 		src/move.c \
 		src/utils.c \
-		src/bonus/animation.c \
 		src/rendering/render.c \
 		src/rendering/render_wall.c \
 		src/rendering/render_wall_utils.c \
@@ -115,14 +113,19 @@ SRCS=	src/utils/ft_exit.c \
 		src/parser/map_content_flood.c \
 		src/parser/map_content_spawn.c \
 		src/parser/map_content_validations.c \
+		src/parser/map_meta_helper.c \
 		src/parser/map_meta_parser.c \
 		src/parser/map_meta_validations.c \
 		src/parser/map_validation.c \
+		src/parser/map_parser_helper.c \
+		src/parser/map_parser_helper2.c \
+		src/parser/map_parser_helper3.c \
 		src/parser/map_parser_rect.c \
 		src/parser/map_parser_trimmer.c \
 		src/parser/map_parser.c \
 		src/parser/map_printers.c \
 		src/bonus/minimap.c \
+
 
 BONUS_SRCS= \
 # bonus/cube3d_bonus.c \
@@ -174,7 +177,6 @@ remove-mlx:
 		git submodule deinit -q -f $(MLXFT_DIR) > /dev/null 2>&1; \
 		git rm -q -f $(MLXFT_DIR) > /dev/null 2>&1; \
 		rm -rf .git/modules/$(MLXFT_DIR) > /dev/null 2>&1; \
-		rm -rf ./mlx_build > /dev/null 2>&1; \
 		rm -rf ./mlx42 > /dev/null 2>&1; \
 	fi
 
@@ -202,7 +204,7 @@ $(MLXFT_LIB): init-mlx
 	fi
 
 $(NAME): $(LIBFT_LIB) $(MLXFT_LIB) $(OBJECTS)
-	@$(CC) -o $@ $(OBJECTS) $(LIBFTFLAGS) $(MLXFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
+	@$(CC) -o $@ $(OBJECTS) $(LIBFTFLAGS) -L$(MLXFT_BUILD_DIR) -lmlx42 $(MLXFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
 	@echo "$(SUCCESS)"
 
 $(NAME_BONUS): $(LIBFT_LIB) $(MLXFT_LIB) $(BONUS_OBJECTS)

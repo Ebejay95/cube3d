@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:21:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/08 12:20:47 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 17:47:20 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	calc_delta(t_game *game, char operator)
 {
-	float	angle_increment;
+	float	angle_incr;
 
-	angle_increment = 0.06;
+	angle_incr = 0.06;
 	if (operator == '+')
-		game->player->angle = angle_check(game->player->angle + angle_increment);
+		game->player->angle = angle_check(game->player->angle + angle_incr);
 	else if (operator == '-')
-		game->player->angle = angle_check(game->player->angle - angle_increment);
+		game->player->angle = angle_check(game->player->angle - angle_incr);
 	game->deltax = cos(game->player->angle);
 	game->deltay = sin(game->player->angle);
 	game->angle = game->player->angle;
@@ -48,8 +48,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	else if (keydata.key == MLX_KEY_RIGHT)
 		game->key_states.right_pressed = is_pressed;
 }
-
-
 
 void	update_game_state(void *param)
 {
@@ -80,7 +78,6 @@ void	start_game(t_game *game)
 		mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 		mlx_key_hook(game->mlx, &key_hook, game);
 		mlx_loop_hook(game->mlx, &update_game_state, game);
-		// mlx_loop_hook(game->mlx, &animation, game);
 		mlx_loop(game->mlx);
 		mlx_terminate(game->mlx);
 	}

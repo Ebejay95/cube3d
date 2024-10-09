@@ -3,42 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:34:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/08 12:16:17 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/09 18:22:31 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-float	fish_eye_correction(t_game *game, float ray_len, float current_angle)
+float	fish_eye_crct(t_game *game, float ray_len, float current_angle)
 {
 	return (ray_len * cos((current_angle - game->player->angle)));
 }
 
-void	calculate_wall_slice_height(float height, float *top, float *bottom)
+void	calc_wallslice_height(float height, float *top, float *bottom)
 {
 	*top = (WINDOW_HEIGHT / 2) - (height / 2);
 	*bottom = (WINDOW_HEIGHT / 2) + (height / 2);
-	if(*bottom - *top > WINDOW_HEIGHT)
-	{
-
-	}
 	if (*bottom > WINDOW_HEIGHT)
-		// *bottom = *bottom - WINDOW_HEIGHT;
 		*bottom = WINDOW_HEIGHT;
 	if (*top < 0)
-		// *top = WINDOW_HEIGHT - *top;
 		*top = 0;
 }
 
-void	draw_pixel(mlx_image_t *image, float x, float y, uint32_t color)
+void	drawpixel(mlx_image_t *image, float x, float y, uint32_t color)
 {
 	if (x >= 0 && x < image->width && y >= 0 && y < image->height)
-	{
 		mlx_put_pixel(image, (uint32_t)x, (uint32_t)y, color);
-	}
 }
 
 int	ft_surface(t_game *game)

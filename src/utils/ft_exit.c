@@ -3,50 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 12:11:27 by ajehle            #+#    #+#             */
-/*   Updated: 2024/09/26 15:53:39 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:46:55 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-
-void	call_exit_map_textrs(t_game *game, t_map *map)
+void	call_exit_map_textrs(t_game *game)
 {
-	if (map->tex_west)
-		mlx_delete_texture(map->tex_west);
-	if (map->tex_east)
-		mlx_delete_texture(map->tex_east);
-	if (map->tex_north)
-		mlx_delete_texture(map->tex_north);
-	if (map->tex_south)
-		mlx_delete_texture(map->tex_south);
-	if (map->img_west)
-		mlx_delete_image(game->mlx, map->img_west);
-	if (map->img_east)
-		mlx_delete_image(game->mlx, map->img_east);
-	if (map->img_north)
-		mlx_delete_image(game->mlx, map->img_north);
-	if (map->img_south)
-		mlx_delete_image(game->mlx, map->img_south);
-	map->tex_west = NULL;
-	map->tex_east = NULL;
-	map->tex_north = NULL;
-	map->tex_south = NULL;
-	map->img_west = NULL;
-	map->img_east = NULL;
-	map->img_north = NULL;
-	map->img_south = NULL;
+	if (game->map->tex_west)
+		mlx_delete_texture(game->map->tex_west);
+	if (game->map->tex_east)
+		mlx_delete_texture(game->map->tex_east);
+	if (game->map->tex_north)
+		mlx_delete_texture(game->map->tex_north);
+	if (game->map->tex_south)
+		mlx_delete_texture(game->map->tex_south);
+	game->map->tex_west = NULL;
+	game->map->tex_east = NULL;
+	game->map->tex_north = NULL;
+	game->map->tex_south = NULL;
 }
 
 void	call_exit_player(t_player *player)
 {
-	if(player)
+	if (player)
 		free(player);
 }
-
 
 void	call_exit_map(t_game *game)
 {
@@ -68,7 +54,7 @@ void	call_exit_map(t_game *game)
 				free(game->map->content);
 				game->map->content = NULL;
 			}
-			call_exit_map_textrs(game, game->map);
+			call_exit_map_textrs(game);
 			free(game->map);
 			game->map = NULL;
 		}

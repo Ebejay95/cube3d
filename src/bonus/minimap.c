@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:17:54 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/03 12:17:51 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/09 18:24:18 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void mclear_and_draw_frame(t_game *game)
+void	mclear_and_draw_frame(t_game *game)
 {
-	int x, y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < MAP_FRAME)
@@ -22,8 +23,8 @@ void mclear_and_draw_frame(t_game *game)
 		x = 0;
 		while (x < MAP_FRAME)
 		{
-			if (x < FRAME_THICKNESS || x >= MAP_FRAME - FRAME_THICKNESS ||
-				y < FRAME_THICKNESS || y >= MAP_FRAME - FRAME_THICKNESS)
+			if (x < FRAME_THICKNESS || x >= MAP_FRAME - FRAME_THICKNESS
+				|| y < FRAME_THICKNESS || y >= MAP_FRAME - FRAME_THICKNESS)
 			{
 				mlx_put_pixel(game->surface, x, y, FRAME_COLOR);
 			}
@@ -37,12 +38,14 @@ void mclear_and_draw_frame(t_game *game)
 	}
 }
 
-
-void mrender_rotated_map(t_game *game, float cos_angle, float sin_angle)
+void	mrender_rotmap(t_game *game, float cos_angle, float sin_angle)
 {
-	int x, y, map_x, map_y;
-	float rot_x;
-	float rot_y;
+	int		x;
+	int		y;
+	int		map_x;
+	int		map_y;
+	float	rot_x;
+	float	rot_y;
 
 	y = FRAME_THICKNESS;
 	while (y < MAP_FRAME - FRAME_THICKNESS)
@@ -109,8 +112,7 @@ void mdraw_rays(t_game *game, float cos_angle, float sin_angle)
 	}
 }
 
-
-void mdraw_player(t_game *game)
+void	mdraw_player(t_game *game)
 {
 	int	x;
 	int	y;
@@ -125,8 +127,8 @@ void mdraw_player(t_game *game)
 		{
 			px = (MAP_FRAME / 2) + x;
 			py = (MAP_FRAME / 2) + y;
-			if (px >= FRAME_THICKNESS && px < MAP_FRAME - FRAME_THICKNESS &&
-				py >= FRAME_THICKNESS && py < MAP_FRAME - FRAME_THICKNESS)
+			if (px >= FRAME_THICKNESS && px < MAP_FRAME - FRAME_THICKNESS
+				&& py >= FRAME_THICKNESS && py < MAP_FRAME - FRAME_THICKNESS)
 			{
 				mlx_put_pixel(game->surface, px, py, PLAYER_COLOR);
 			}
@@ -136,16 +138,16 @@ void mdraw_player(t_game *game)
 	}
 }
 
-void render_minimap(t_game *game)
+void	render_minimap(t_game *game)
 {
-	float cos_angle;
-	float sin_angle;
+	float	cos_angle;
+	float	sin_angle;
+
 	cos_angle = cos(-game->player->angle);
 	sin_angle = sin(-game->player->angle);
-
 	mclear_and_draw_frame(game);
-	mrender_rotated_map(game, cos_angle, sin_angle);
-	mrender_rotated_map(game, cos_angle, sin_angle);
+	mrender_rotmap(game, cos_angle, sin_angle);
+	mrender_rotmap(game, cos_angle, sin_angle);
 	mdraw_rays(game, cos_angle, sin_angle);
 	mdraw_player(game);
 }
