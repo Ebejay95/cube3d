@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 09:52:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/08 17:42:11 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 23:10:52 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ double	get_step_size(t_game *game, mlx_texture_t *texture, int height)
 }
 
 // Calculate the texture x-coordinate based on the wall hit position
-int	get_x_pos(t_game *game, t_ray ray, mlx_texture_t *texture)
+int	get_xpos(t_game *game, t_ray ray, mlx_texture_t *texture)
 {
 	double	relative_pos;
 	int		texture_x;
@@ -58,7 +58,7 @@ int	get_x_pos(t_game *game, t_ray ray, mlx_texture_t *texture)
 	return (texture_x);
 }
 
-int	get_pixel_color(mlx_texture_t *texture, int x, int y)
+int	get_pxl_clr(mlx_texture_t *texture, int x, int y)
 {
 	unsigned int	i;
 

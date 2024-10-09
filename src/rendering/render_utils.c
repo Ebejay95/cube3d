@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 17:34:52 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/09 18:22:31 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 22:36:31 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ float	fish_eye_crct(t_game *game, float ray_len, float current_angle)
 	return (ray_len * cos((current_angle - game->player->angle)));
 }
 
-void	calc_wallslice_height(float height, float *top, float *bottom)
+void	calc_wallslice_height(float *top, float *bottom)
 {
-	*top = (WINDOW_HEIGHT / 2) - (height / 2);
-	*bottom = (WINDOW_HEIGHT / 2) + (height / 2);
 	if (*bottom > WINDOW_HEIGHT)
 		*bottom = WINDOW_HEIGHT;
 	if (*top < 0)

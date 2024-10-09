@@ -3,8 +3,8 @@ EA              assets/scream.png
 NO assets/girl.png
 WE assets/monalisa.png
 SO assets/night.png
-F   255,0,0
-C  0     , 255   ,0
+F   40,20,0
+C  200     , 200   ,200
 
 
     1111111111111111111111111 11111111

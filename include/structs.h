@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/09 18:19:14 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 23:08:04 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 # define STRUCTS_H
 
 # include "cub3d.h"
+
+typedef struct s_render_data
+{
+	int		x;
+	int		y;
+	int		map_x;
+	int		map_y;
+	float	rot_x;
+	float	rot_y;
+	float	cosa;
+	float	sina;
+}	t_render_data;
 
 typedef struct s_split_context
 {

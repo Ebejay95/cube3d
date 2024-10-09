@@ -6,109 +6,53 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 11:17:54 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/09 18:24:18 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:06:21 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	mclear_and_draw_frame(t_game *game)
+void	calculate_map_coordinates(t_game *game, t_render_data *d)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < MAP_FRAME)
-	{
-		x = 0;
-		while (x < MAP_FRAME)
-		{
-			if (x < FRAME_THICKNESS || x >= MAP_FRAME - FRAME_THICKNESS
-				|| y < FRAME_THICKNESS || y >= MAP_FRAME - FRAME_THICKNESS)
-			{
-				mlx_put_pixel(game->surface, x, y, FRAME_COLOR);
-			}
-			else
-			{
-				mlx_put_pixel(game->surface, x, y, WALL_COLOR);
-			}
-			x++;
-		}
-		y++;
-	}
+	d->rot_x = -(d->y - (MF / 2)) * d->cosa + (d->x - (MF / 2)) * d->sina;
+	d->rot_y = (d->y - (MF / 2)) * d->sina + (d->x - (MF / 2)) * d->cosa;
+	d->map_x = (int)((game->player->x / CELL) + (d->rot_x / (float)MCELL));
+	d->map_y = (int)((game->player->y / CELL) + (d->rot_y / (float)MCELL));
 }
 
-void	mrender_rotmap(t_game *game, float cos_angle, float sin_angle)
+int	is_valid_map_position(t_game *game, t_render_data *d)
 {
-	int		x;
-	int		y;
-	int		map_x;
-	int		map_y;
-	float	rot_x;
-	float	rot_y;
-
-	y = FRAME_THICKNESS;
-	while (y < MAP_FRAME - FRAME_THICKNESS)
-	{
-		x = FRAME_THICKNESS;
-		while (x < MAP_FRAME - FRAME_THICKNESS)
-		{
-			rot_x = -(y - (MAP_FRAME / 2)) * cos_angle + (x - (MAP_FRAME / 2)) * sin_angle;
-			rot_y = (y - (MAP_FRAME / 2)) * sin_angle + (x - (MAP_FRAME / 2)) * cos_angle;
-			map_x = (int)((game->player->x / CELL) + (rot_x / (float)MCELL));
-			map_y = (int)((game->player->y / CELL) + (rot_y / (float)MCELL));
-			if (map_x >= 0 && map_x < game->map->width && map_y >= 0 && map_y < game->map->height)
-			{
-				if (game->map->content[map_y][map_x] == '1')
-					mlx_put_pixel(game->surface, x, y, WALL_COLOR);
-				else if (ft_strchr("NEWS0", game->map->content[map_y][map_x]))
-					mlx_put_pixel(game->surface, x, y, ROOM_COLOR);
-			}
-			x++;
-		}
-		y++;
-	}
+	if (d->map_x >= 0 && d->map_x < game->map->width && d->map_y >= 0
+		&& d->map_y < game->map->height)
+		return (1);
+	return (0);
 }
 
-void mdraw_rays(t_game *game, float cos_angle, float sin_angle)
+void	mrender_rotmap(t_game *game, float cosa, float sina)
 {
-	float ray_angle = game->player->angle - (PI / 4);
-	int i = 0;
+	t_render_data	data;
+	char			map_content;
 
-	while (i < NUM_RAYS)
+	data.cosa = cosa;
+	data.sina = sina;
+	data.y = FRAME_THICKNESS;
+	while (data.y < MF - FRAME_THICKNESS)
 	{
-		float sin_a = sin(ray_angle);
-		float cos_a = cos(ray_angle);
-		float ray_x = game->player->x;
-		float ray_y = game->player->y;
-		while (1)
+		data.x = FRAME_THICKNESS;
+		while (data.x < MF - FRAME_THICKNESS)
 		{
-			ray_x += cos_a;
-			ray_y += sin_a;
-
-			int map_ray_x = (int)(ray_x / CELL);
-			int map_ray_y = (int)(ray_y / CELL);
-
-			if (map_ray_x < 0 || map_ray_x >= game->map->width || map_ray_y < 0 || map_ray_y >= game->map->height || game->map->content[map_ray_y][map_ray_x] == '1')
+			calculate_map_coordinates(game, &data);
+			if (is_valid_map_position(game, &data))
 			{
-				break;
+				map_content = game->map->content[data.map_y][data.map_x];
+				if (map_content == '1')
+					mlx_put_pixel(game->surface, data.x, data.y, WALL_COLOR);
+				else if (ft_strchr("NEWS0", map_content))
+					mlx_put_pixel(game->surface, data.x, data.y, ROOM_COLOR);
 			}
-			float rel_x = ray_x - game->player->x;
-			float rel_y = ray_y - game->player->y;
-			float rot_ray_x = rel_x * cos_angle - rel_y * sin_angle;
-			float rot_ray_y = rel_x * sin_angle + rel_y * cos_angle;
-			float display_x = rot_ray_y;
-			float display_y = -rot_ray_x;
-			int minimap_x = MAP_FRAME / 2 + (int)(display_x * MCELL / CELL);
-			int minimap_y = MAP_FRAME / 2 + (int)(display_y * MCELL / CELL);
-			if (minimap_x >= FRAME_THICKNESS && minimap_x < MAP_FRAME - FRAME_THICKNESS &&
-				minimap_y >= FRAME_THICKNESS && minimap_y < MAP_FRAME - FRAME_THICKNESS)
-			{
-				mlx_put_pixel(game->surface, minimap_x, minimap_y, RAY_COLOR);
-			}
+			data.x++;
 		}
-		ray_angle += (PI / 2) / NUM_RAYS;
-		i++;
+		data.y++;
 	}
 }
 
@@ -125,10 +69,10 @@ void	mdraw_player(t_game *game)
 		x = -2;
 		while (x <= 2)
 		{
-			px = (MAP_FRAME / 2) + x;
-			py = (MAP_FRAME / 2) + y;
-			if (px >= FRAME_THICKNESS && px < MAP_FRAME - FRAME_THICKNESS
-				&& py >= FRAME_THICKNESS && py < MAP_FRAME - FRAME_THICKNESS)
+			px = (MF / 2) + x;
+			py = (MF / 2) + y;
+			if (px >= FRAME_THICKNESS && px < MF - FRAME_THICKNESS
+				&& py >= FRAME_THICKNESS && py < MF - FRAME_THICKNESS)
 			{
 				mlx_put_pixel(game->surface, px, py, PLAYER_COLOR);
 			}
@@ -140,14 +84,29 @@ void	mdraw_player(t_game *game)
 
 void	render_minimap(t_game *game)
 {
-	float	cos_angle;
-	float	sin_angle;
+	float	cosa;
+	float	sina;
+	int		x;
+	int		y;
 
-	cos_angle = cos(-game->player->angle);
-	sin_angle = sin(-game->player->angle);
-	mclear_and_draw_frame(game);
-	mrender_rotmap(game, cos_angle, sin_angle);
-	mrender_rotmap(game, cos_angle, sin_angle);
-	mdraw_rays(game, cos_angle, sin_angle);
+	cosa = cos(-game->player->angle);
+	sina = sin(-game->player->angle);
+	y = 0;
+	while (y < MF)
+	{
+		x = 0;
+		while (x < MF)
+		{
+			if (x < FRAME_THICKNESS || x >= MF - FRAME_THICKNESS
+				|| y < FRAME_THICKNESS || y >= MF - FRAME_THICKNESS)
+				mlx_put_pixel(game->surface, x, y, FRAME_COLOR);
+			else
+				mlx_put_pixel(game->surface, x, y, WALL_COLOR);
+			x++;
+		}
+		y++;
+	}
+	mrender_rotmap(game, cosa, sina);
+	mrender_rotmap(game, cosa, sina);
 	mdraw_player(game);
 }

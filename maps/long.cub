@@ -1,10 +1,10 @@
 
-EA assets/_the_scream.png
-NO assets/girl_with_a_pearl_earring.png
-WE assets/Mona_Lisa.png
-SO assets/the_starry_night.png
-F 255,255,0
-C  0,255,0
+EA              assets/scream.png
+NO assets/girl.png
+WE assets/monalisa.png
+SO assets/night.png
+F   40,20,0
+C  200     , 200   ,200
 
 
 111

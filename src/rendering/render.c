@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:21:03 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/09 18:22:31 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 22:36:21 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,20 @@ void	draw_floor(t_game *game, int index_of_ray, int bottom)
 
 void	rendering_wall(t_game *game, t_ray ray)
 {
+	float	fcbottom;
+	float	fctop;
 	float	bottom;
 	float	top;
 	float	wall_height;
 
 	ray.len = fish_eye_crct(game, ray.len, ray.current_angle);
 	wall_height = (CELL / ray.len) * ((WINDOW_HEIGHT / 2) / tan(M_PI_2 / 2));
-	calc_wallslice_height(wall_height, &top, &bottom);
-	draw_ceiling(game, ray.index, top);
-	draw_floor(game, ray.index, bottom);
+	top = (WINDOW_HEIGHT / 2) - (wall_height / 2);
+	bottom = (WINDOW_HEIGHT / 2) + (wall_height / 2);
+	fctop = top;
+	fcbottom = bottom;
+	calc_wallslice_height(&fctop, &fcbottom);
+	draw_ceiling(game, ray.index, fctop);
+	draw_floor(game, ray.index, fcbottom);
 	draw_wall(game, ray, top, bottom);
 }

@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:14:01 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/09 18:24:18 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 22:49:23 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ int				check_move_right(t_game *game);
 
 // minimap
 void			mclear_and_draw_frame(t_game *game);
-void			mrender_rotmap(t_game *game, float cos_angle, float sin_angle);
-void			mdraw_rays(t_game *game, float cos_angle, float sin_angle);
+void			mrender_rotmap(t_game *game, float cosa, float sina);
+void			mdraw_rays(t_game *game, float cosa, float sina);
 void			mdraw_player(t_game *game);
 void			render_minimap(t_game *game);
 
@@ -178,7 +178,7 @@ void			rendering_wall(t_game *game, t_ray ray);
 
 // render utils
 float			fish_eye_crct(t_game *game, float ray_len, float current_angle);
-void			calc_wallslice_height(float height, float *top, float *bottom);
+void			calc_wallslice_height(float *top, float *bottom);
 void			drawpixel(mlx_image_t *image, float x, float y, uint32_t color);
 int				ft_surface(t_game *game);
 int				get_rgba_colors_hex(int red, int green, int blue, int alpha);
@@ -187,9 +187,9 @@ int				get_rgba_colors_hex(int red, int green, int blue, int alpha);
 void			draw_wall(t_game *game, t_ray ray, int top, int bottom);
 
 // render_wall_utils
-int				get_pixel_color(mlx_texture_t *texture, int x, int y);
+int				get_pxl_clr(mlx_texture_t *texture, int x, int y);
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);
 double			get_step_size(t_game *game, mlx_texture_t *texture, int height);
-int				get_x_pos(t_game *game, t_ray ray, mlx_texture_t *texture);
+int				get_xpos(t_game *game, t_ray ray, mlx_texture_t *texture);
 
 #endif

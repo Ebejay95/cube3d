@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:10:55 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/08 16:59:47 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 20:59:47 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 # define DEBUG 0
 # define DEBUG_COLLISION 1
-# define PLYR_STEP 2
+# define PLYR_STEP 6
 # define CELL 64
 # define MINI_FKT 50
 # define MCELL 32
@@ -57,6 +57,6 @@
 # define PATH_ENEMY "./assets/32x32/ghost.png"
 
 # define MAP_CNT_CHARS "01 NEWS\n"
-# define MAP_FRAME 250
+# define MF 250
 
 #endif

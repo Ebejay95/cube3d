@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 11:04:04 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/09 18:23:59 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 20:48:44 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	is_position_in_map(t_game *game, int pos_y, int pos_x)
 	return (0);
 }
 
-int	is_wall(t_game *game, float x, float y)
+int	is_wall(t_game *game, float xv, float yv)
 {
 	int	y;
 	int	x;
 
-	y = floor(y / CELL);
-	x = floor(x / CELL);
+	y = floor(yv / CELL);
+	x = floor(xv / CELL);
 	if (y >= game->map->height || y < 0)
 		return (1);
 	if (x >= game->map->width || x < 0)
