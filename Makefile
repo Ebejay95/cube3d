@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/09 20:49:45 by jeberle          ###   ########.fr        #
+#    Updated: 2024/10/10 00:14:47 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,8 +128,39 @@ SRCS=	src/utils/ft_exit.c \
 		src/bonus/minimap.c \
 
 
-BONUS_SRCS= \
-# bonus/cube3d_bonus.c \
+BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
+		src_bonus/utils/ft_init_bonus.c \
+		src_bonus/textures/load_textures_mini_bonus.c \
+		src_bonus/textures/textures_wall_bonus.c \
+		src_bonus/loop_bonus.c \
+		src_bonus/main_bonus.c \
+		src_bonus/move_bonus.c \
+		src_bonus/utils_bonus.c \
+		src_bonus/rendering/render_bonus.c \
+		src_bonus/rendering/render_wall_bonus.c \
+		src_bonus/rendering/render_wall_utils_bonus.c \
+		src_bonus/rendering/render_utils_bonus.c \
+		src_bonus/raycasting/calculations_bonus.c \
+		src_bonus/raycasting/calculations_directions_bonus.c \
+		src_bonus/raycasting/calculations_directions2_bonus.c \
+		src_bonus/raycasting/calculations_utils_bonus.c \
+		src_bonus/raycasting/calculations_utils2_bonus.c \
+		src_bonus/parser/map_content_check_spot_bonus.c \
+		src_bonus/parser/map_content_flood_bonus.c \
+		src_bonus/parser/map_content_spawn_bonus.c \
+		src_bonus/parser/map_content_validations_bonus.c \
+		src_bonus/parser/map_meta_helper_bonus.c \
+		src_bonus/parser/map_meta_parser_bonus.c \
+		src_bonus/parser/map_meta_validations_bonus.c \
+		src_bonus/parser/map_validation_bonus.c \
+		src_bonus/parser/map_parser_helper_bonus.c \
+		src_bonus/parser/map_parser_helper2_bonus.c \
+		src_bonus/parser/map_parser_helper3_bonus.c \
+		src_bonus/parser/map_parser_rect_bonus.c \
+		src_bonus/parser/map_parser_trimmer_bonus.c \
+		src_bonus/parser/map_parser_bonus.c \
+		src_bonus/parser/map_printers_bonus.c \
+		src_bonus/minimap/minimap_bonus.c \
 
 #------------------------------------------------------------------------------#
 #--------------                      OBJECTS                      -------------#
