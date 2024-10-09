@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 15:09:56 by ajehle            #+#    #+#             */
-/*   Updated: 2024/10/09 23:08:04 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/09 23:32:25 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,12 @@ typedef struct s_game
 	float			deltay;
 	float			angle;
 }					t_game;
+
+typedef struct s_optimization
+{
+	int		ray_step;
+	float	max_distance;
+}	t_optimization;
 
 typedef struct s_ray
 {
