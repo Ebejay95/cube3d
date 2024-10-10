@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:06:23 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 00:06:33 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 13:55:57 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	check_all_meta(t_game *game)
 	if (!game->map->tex_north)
 		return (0);
 	if (!game->map->tex_south)
+		return (0);
+	if (!game->map->tex_door)
 		return (0);
 	if (!game->map->floor_set)
 		return (0);
@@ -40,6 +42,8 @@ int	got_meta_line(t_game *game, char *s1, char *s2, size_t n)
 		if (!ft_strcmp(s2, "WE ") && !game->map->tex_west)
 			return (1);
 		if (!ft_strcmp(s2, "EA ") && !game->map->tex_east)
+			return (1);
+		if (!ft_strcmp(s2, "DR ") && !game->map->tex_door)
 			return (1);
 		if (!ft_strcmp(s2, "F ") && !game->map->floor_set)
 			return (1);
@@ -61,6 +65,8 @@ void	retreive_meta(char *line, int *err, t_game *game)
 		set_textr_meta(err, line, game, 'w');
 	else if (got_meta_line(game, line, "EA ", 3))
 		set_textr_meta(err, line, game, 'e');
+	else if (got_meta_line(game, line, "DR ", 3))
+		set_textr_meta(err, line, game, 'd');
 	else if (got_meta_line(game, line, "F ", 2))
 		set_color_meta(err, line, game, 'f');
 	else if (got_meta_line(game, line, "C ", 2))

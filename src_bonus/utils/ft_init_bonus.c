@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:46 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/09 23:58:06 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:28:32 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_initialize_game(t_game	*game)
 	game->key_states.d_pressed = false;
 	game->key_states.left_pressed = false;
 	game->key_states.right_pressed = false;
+	game->run_music = true;
 }
 
 void	ft_initialize(t_game *game, int argc, char **argv)

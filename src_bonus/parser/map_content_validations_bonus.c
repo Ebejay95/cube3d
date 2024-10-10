@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:07:09 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 00:07:14 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 17:25:58 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	map_validation(t_map *map, int *err)
 
 	check_chars(map, err);
 	check_spawn(map, err);
+	check_doors(map, err);
 	while (has_defined_insides(map) && !(*err))
 	{
 		init_flood(map);
@@ -75,21 +76,32 @@ void	map_validation(t_map *map, int *err)
 	}
 }
 
-void	clear_validation(t_map *map)
+void	clear_validation(t_map *m)
 {
 	int	y;
 	int	x;
+	int	dx;
 
 	y = 0;
-	while (y < map->height)
+	while (y < m->height)
 	{
 		x = 0;
-		while (x < map->width)
+		while (x < m->width)
 		{
-			if (y == map->spawn_y && x == map->spawn_x)
-				map->content[y][x] = map->spawn;
-			if (map->content[y][x] == 'X')
-				map->content[y][x] = '0';
+			if (y == m->spawn_y && x == m->spawn_x)
+				m->content[y][x] = m->spawn;
+			if (m->content[y][x] == 'X')
+				m->content[y][x] = '0';
+			dx = 0;
+			while (dx < m->door_count)
+			{
+				if (y == m->doors[dx]->y && x == m->doors[dx]->x)
+				{
+					if (m->doors[dx]->direction != '-')
+						m->content[y][x] = ft_toupper(m->doors[dx]->direction);
+				}
+				dx++;
+			}
 			x++;
 		}
 		y++;

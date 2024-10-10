@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/09 23:57:34 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 17:23:53 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		game->run_music = false;
 		mlx_close_window(game->mlx);
+		return ;
+	}
 	is_pressed = (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT);
 	if (keydata.key == MLX_KEY_W)
 		game->key_states.w_pressed = is_pressed;

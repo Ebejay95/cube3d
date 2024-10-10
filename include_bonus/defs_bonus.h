@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:44 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 00:12:56 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 17:15:58 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DEFS_BONUS_H
 
 # include "cub3d_bonus.h"
+# include <pthread.h>
 
 # define NORTH 0
 # define SOUTH 1
@@ -48,6 +49,7 @@
 # define FRAME 20
 
 # define NAME_WINDOW "CUB3D"
-# define MAP_CNT_CHARS "01 NEWS\n"
+# define MAP_CNT_CHARS "01 NEWSD\n"
 # define MF 250
+# define MAX_DOORS 200
 #endif

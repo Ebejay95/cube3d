@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:03:01 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 00:03:05 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 17:17:55 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	get_map(t_game *game, int argc, char **argv)
 	game->map->tex_east = NULL;
 	game->map->tex_north = NULL;
 	game->map->tex_south = NULL;
+	game->map->tex_door = NULL;
 	game->map->ceiling = 0;
 	game->map->floor = 0;
 	game->map->ceiling_set = 0;
@@ -68,6 +69,7 @@ void	get_map(t_game *game, int argc, char **argv)
 	game->map->spawn_x = -1;
 	game->map->spawn_y = -1;
 	game->map->spawn = '-';
+	game->map->door_count = 0;
 	if (validate_input(argc, argv) > 0)
 	{
 		call_exit(game);

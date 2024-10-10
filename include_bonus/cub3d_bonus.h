@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:13:28 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 00:13:48 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 15:38:19 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # include <time.h>
 # include <unistd.h>
 # include <math.h>
+# include <pthread.h>
+# include <signal.h>
+
+// audio
+void			*bg_music(void *arg);
 
 // ft_exit
 void			call_exit_map(t_game *game);
@@ -61,6 +66,9 @@ void			init_flood(t_map *map);
 void			flood_one(char *ref, int *check, char *work);
 int				check_xy_nexts(t_map *map, int ydex, int xdex);
 void			flood(t_map *map);
+
+// map_content_doors.c
+void			check_doors(t_map *map, int *err);
 
 // map_content_spawn.c
 void			set_spawn_point(t_map *map, int x, int y);

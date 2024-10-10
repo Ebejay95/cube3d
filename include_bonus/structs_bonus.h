@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:20 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 00:12:31 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 17:16:48 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define STRUCTS_BONUS_H
 
 # include "cub3d_bonus.h"
+# include <pthread.h>
+
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	int		open;
+	char	direction;
+}	t_door;
 
 typedef struct s_render_data
 {
@@ -84,6 +93,7 @@ typedef struct s_map
 	mlx_texture_t	*tex_east;
 	mlx_texture_t	*tex_north;
 	mlx_texture_t	*tex_south;
+	mlx_texture_t	*tex_door;
 	uint32_t		ceiling;
 	uint32_t		floor;
 	int				ceiling_set;
@@ -93,6 +103,8 @@ typedef struct s_map
 	int				spawn_x;
 	int				spawn_y;
 	char			spawn;
+	t_door			*doors[MAX_DOORS];
+	int				door_count;
 }					t_map;
 
 typedef struct s_game
@@ -107,6 +119,10 @@ typedef struct s_game
 	float			deltax;
 	float			deltay;
 	float			angle;
+	pthread_t		music_thread;
+	int				run_music;
+	int				bg_sec;
+	pid_t			music_pid;
 }					t_game;
 
 typedef struct s_optimization

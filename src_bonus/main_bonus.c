@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:56:58 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/09 23:57:04 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:31:13 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 	}
 	if (!ft_init_window(&game))
 		return (ft_printf(RED"Error init window\n"D), call_exit(&game), 0);
+	pthread_create(&game.music_thread, NULL, bg_music, &game);
 	start_game(&game);
 	call_exit(&game);
 	return (0);

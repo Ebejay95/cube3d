@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/10 00:16:59 by jeberle          ###   ########.fr        #
+#    Updated: 2024/10/10 15:38:35 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,6 +128,7 @@ SRCS=	src/utils/ft_exit.c \
 
 
 BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
+		src_bonus/audio/audio_bonus.c \
 		src_bonus/utils/ft_init_bonus.c \
 		src_bonus/textures/load_textures_mini_bonus.c \
 		src_bonus/textures/textures_wall_bonus.c \
@@ -146,6 +147,7 @@ BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
 		src_bonus/raycasting/calculations_utils2_bonus.c \
 		src_bonus/parser/map_content_check_spot_bonus.c \
 		src_bonus/parser/map_content_flood_bonus.c \
+		src_bonus/parser/map_content_doors_bonus.c \
 		src_bonus/parser/map_content_spawn_bonus.c \
 		src_bonus/parser/map_content_validations_bonus.c \
 		src_bonus/parser/map_meta_helper_bonus.c \
