@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:13:28 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 15:25:44 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 16:08:33 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 
 // audio
 void			play_sound(pthread_t thread, void *(*play)(void *));
-void			*door_sound(void *arg);
+void			*door_open(void *arg);
+void			*door_close(void *arg);
 void			*bg_music(void *arg);
 
 // ft_exit

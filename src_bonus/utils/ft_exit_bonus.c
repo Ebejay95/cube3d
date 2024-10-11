@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:58:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 11:12:32 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 16:12:59 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ void	free_doors(t_map *map)
 		free(map->doors[i]);
 		i++;
 	}
+}
+
+void	call_exit_player(t_player *player)
+{
+	if (player)
+		free(player);
 }
 
 void	call_exit_map(t_game *game)
@@ -82,6 +88,7 @@ void	call_exit(t_game *game)
 			pthread_join(game->music_thread, NULL);
 			game->music_thread = NULL;
 		}
+		call_exit_player(game->player);
 		call_exit_map(game);
 	}
 }

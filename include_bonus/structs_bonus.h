@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:20 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 16:01:25 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 16:09:03 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ typedef struct s_game
 	float			deltay;
 	float			angle;
 	pthread_t		music_thread;
-	pthread_t		door_sound_thread;
+	pthread_t		door_open_thread;
+	pthread_t		door_close_thread;
 	int				run_music;
 	int				bg_sec;
 	pid_t			music_pid;

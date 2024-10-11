@@ -6,13 +6,31 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:35 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 14:17:44 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 16:07:24 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include_bonus/cub3d_bonus.h"
 
-void	*door_sound(void *arg)
+void	*door_close(void *arg)
+{
+	(void)arg;
+	if (access("assets/audio/close.mp3", F_OK) != -1)
+	{
+		if (fork() == 0)
+		{
+			execlp("afplay", "afplay", "assets/audio/close.mp3", (char *) NULL);
+			_exit(1);
+		}
+	}
+	else
+	{
+		ft_printf("The file 'assets/audio/close.mp3' does not exist.\n");
+	}
+	return (NULL);
+}
+
+void	*door_open(void *arg)
 {
 	(void)arg;
 	if (access("assets/audio/open.mp3", F_OK) != -1)
