@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:35 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 14:45:14 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 14:17:44 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	*door_sound(void *arg)
 {
 	(void)arg;
-	if (access("assets/audio/door.mp3", F_OK) != -1)
+	if (access("assets/audio/open.mp3", F_OK) != -1)
 	{
 		if (fork() == 0)
 		{
-			execlp("afplay", "afplay", "assets/audio/door.mp3", (char *) NULL);
+			execlp("afplay", "afplay", "assets/audio/open.mp3", (char *) NULL);
 			_exit(1);
 		}
 	}
 	else
 	{
-		ft_printf("The file 'assets/audio/door.mp3' does not exist.\n");
+		ft_printf("The file 'assets/audio/open.mp3' does not exist.\n");
 	}
 	return (NULL);
 }
@@ -60,16 +60,13 @@ void	*bg_music_loop(t_game *g, char *cmd)
 
 void	*bg_music(void *arg)
 {
-	char	*cmd;
 	t_game	*g;
 
-	cmd = ft_strdup("afplay");
 	g = (t_game *)arg;
 	if (access("assets/audio/cub3d.mp3", F_OK) != -1)
-		bg_music_loop(g, cmd);
+		bg_music_loop(g, "afplay");
 	else
 		ft_printf("The file 'assets/audio/cub3d.mp3' does not exist.\n");
-	free(cmd);
 	return (NULL);
 }
 

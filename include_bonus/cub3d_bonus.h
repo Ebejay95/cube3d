@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:13:28 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 15:38:19 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 15:25:44 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <signal.h>
 
 // audio
+void			play_sound(pthread_t thread, void *(*play)(void *));
+void			*door_sound(void *arg);
 void			*bg_music(void *arg);
 
 // ft_exit
@@ -51,6 +53,10 @@ void			start_game(t_game *game);
 int				draw_direction(t_game *game);
 void			calc_delta(t_game *game, char operator);
 
+// door_action
+float			find_nearest_door(t_game *game, float *door_x, float *door_y);
+void			toggle_door(t_game *game, int map_x, int map_y);
+
 // load_textures_cub
 int				ft_load_textures_minimap(t_game *game);
 
@@ -69,6 +75,7 @@ void			flood(t_map *map);
 
 // map_content_doors.c
 void			check_doors(t_map *map, int *err);
+t_door			*get_door(t_map *map, int x, int y);
 
 // map_content_spawn.c
 void			set_spawn_point(t_map *map, int x, int y);
@@ -174,7 +181,7 @@ int				is_wall(t_game *game, float x, float y);
 int				get_h_drctn(float current_angle, float *y, float *len_y);
 int				get_v_drctn(float current_angle, float *x, float *len_x);
 float			calculate_len(t_game *game, float x, float y);
-
+int				is_blocked(t_game *game, int x, int y);
 // calculations_utils2
 float			get_min(float a, float b);
 float			angle_check(float angle);

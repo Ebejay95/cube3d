@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/10 15:38:35 by jeberle          ###   ########.fr        #
+#    Updated: 2024/10/11 15:34:00 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,6 +132,7 @@ BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
 		src_bonus/utils/ft_init_bonus.c \
 		src_bonus/textures/load_textures_mini_bonus.c \
 		src_bonus/textures/textures_wall_bonus.c \
+		src_bonus/doors_actions_bonus.c \
 		src_bonus/loop_bonus.c \
 		src_bonus/main_bonus.c \
 		src_bonus/move_bonus.c \

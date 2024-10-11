@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:08:08 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 00:08:13 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 15:33:37 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,43 @@ int	is_valid_map_position(t_game *game, t_render_data *d)
 
 void	mrender_rotmap(t_game *game, float cosa, float sina)
 {
-	t_render_data	data;
+	t_render_data	d;
 	char			map_content;
+	t_door			*door;
 
-	data.cosa = cosa;
-	data.sina = sina;
-	data.y = FRAME_THICKNESS;
-	while (data.y < MF - FRAME_THICKNESS)
+	d.cosa = cosa;
+	d.sina = sina;
+	d.y = FRAME_THICKNESS;
+	while (d.y < MF - FRAME_THICKNESS)
 	{
-		data.x = FRAME_THICKNESS;
-		while (data.x < MF - FRAME_THICKNESS)
+		d.x = FRAME_THICKNESS;
+		while (d.x < MF - FRAME_THICKNESS)
 		{
-			calculate_map_coordinates(game, &data);
-			if (is_valid_map_position(game, &data))
+			calculate_map_coordinates(game, &d);
+			if (is_valid_map_position(game, &d))
 			{
-				map_content = game->map->content[data.map_y][data.map_x];
+				map_content = game->map->content[d.map_y][d.map_x];
 				if (map_content == '1')
-					mlx_put_pixel(game->surface, data.x, data.y, WALL_COLOR);
+					mlx_put_pixel(game->surface, d.x, d.y, WALL_COLOR);
+				else if (map_content == 'V' || map_content == 'H')
+				{
+					door = get_door(game->map, d.map_x, d.map_y);
+					if (door)
+					{
+						if (door->open)
+							mlx_put_pixel(game->surface, d.x, d.y, DOOR_COLOR);
+						else
+							mlx_put_pixel(game->surface, d.x, d.y, DOOR_C_CLR);
+					}
+					else
+						mlx_put_pixel(game->surface, d.x, d.y, ROOM_COLOR);
+				}
 				else if (ft_strchr("NEWS0", map_content))
-					mlx_put_pixel(game->surface, data.x, data.y, ROOM_COLOR);
+					mlx_put_pixel(game->surface, d.x, d.y, ROOM_COLOR);
 			}
-			data.x++;
+			d.x++;
 		}
-		data.y++;
+		d.y++;
 	}
 }
 

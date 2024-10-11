@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:07:37 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 00:07:44 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 11:09:38 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,16 @@ void	flood_one(char *ref, int *check, char *work)
 int	check_xy_nexts(t_map *map, int ydex, int xdex)
 {
 	int		check;
-	char	*ref;
 
 	check = 0;
-	ref = ft_strdup("0 ");
 	if (ydex != 0)
-		flood_one(ref, &check, &map->content[ydex - 1][xdex]);
+		flood_one("0 ", &check, &map->content[ydex - 1][xdex]);
 	if (xdex != 0)
-		flood_one(ref, &check, &map->content[ydex][xdex - 1]);
+		flood_one("0 ", &check, &map->content[ydex][xdex - 1]);
 	if (ydex != (map->height - 1))
-		flood_one(ref, &check, &map->content[ydex + 1][xdex]);
+		flood_one("0 ", &check, &map->content[ydex + 1][xdex]);
 	if (xdex != (map->width - 1))
-		flood_one(ref, &check, &map->content[ydex][xdex + 1]);
-	free(ref);
+		flood_one("0 ", &check, &map->content[ydex][xdex + 1]);
 	return (check);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:20 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 17:16:48 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 16:01:25 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,27 @@
 
 # include "cub3d_bonus.h"
 # include <pthread.h>
+
+typedef struct s_door_finder
+{
+	float	min_distance;
+	float	door_x;
+	float	door_y;
+	int		found;
+}	t_door_finder;
+
+typedef struct s_dctx
+{
+	float	x;
+	float	y;
+	float	angle;
+	float	distance;
+	float	sin_a;
+	float	cos_a;
+	int		map_x;
+	int		map_y;
+	char	cell;
+}	t_dctx;
 
 typedef struct s_door
 {
@@ -84,6 +105,7 @@ typedef struct s_key_states {
 	bool	left_pressed;
 	bool	right_pressed;
 	bool	up_pressed;
+	bool	space_pressed;
 }	t_key_states;
 
 typedef struct s_map
@@ -120,6 +142,7 @@ typedef struct s_game
 	float			deltay;
 	float			angle;
 	pthread_t		music_thread;
+	pthread_t		door_sound_thread;
 	int				run_music;
 	int				bg_sec;
 	pid_t			music_pid;

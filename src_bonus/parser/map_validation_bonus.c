@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:03:01 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 17:17:55 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 11:13:11 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	validate_map(t_game *game, char *filename)
 	get_map_content(fd, &problem, game);
 	close(fd);
 	if (problem)
+	{
 		call_exit(game);
+		return (1);
+	}
 	return (0);
 }
 

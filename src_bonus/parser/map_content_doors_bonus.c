@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 15:36:40 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 17:24:27 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 15:19:21 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,16 @@ void	check_doors(t_map *map, int *err)
 	}
 }
 
-void	free_doors(t_map *map)
+t_door	*get_door(t_map *map, int x, int y)
 {
 	int	i;
 
 	i = 0;
-	while (map->doors[i])
+	while (i < map->door_count)
 	{
-		free(map->doors[i]);
+		if (x == map->doors[i]->x && y == map->doors[i]->y)
+			return (map->doors[i]);
 		i++;
 	}
-	free(map->doors);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:44 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 17:15:58 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/11 15:33:15 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define WALL_COLOR4 0x999999FF
 # define WALL_COLOR5 0x559999FF
 # define ROOM_COLOR 0x000000FF
+# define DOOR_COLOR 0x009900FF
+# define DOOR_C_CLR 0x990000FF
 # define PLAYER_COLOR 0xFF0000FF
 # define FRAME_COLOR 0xFFFFFFFF
 
@@ -52,4 +54,5 @@
 # define MAP_CNT_CHARS "01 NEWSD\n"
 # define MF 250
 # define MAX_DOORS 200
+# define MAX_DOOR_DISTANCE 120.0
 #endif
