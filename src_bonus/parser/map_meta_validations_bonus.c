@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:06:23 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 13:55:57 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 21:24:34 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ void	retreive_meta(char *line, int *err, t_game *game)
 	{
 		if (ft_strlen(line) == ft_strspn(line, MAP_CNT_CHARS))
 		{
-			ft_fprintf(2, RED"Received Meta Data in wrong format ");
-			ft_fprintf(2, "or a mandatory Meta is missing because");
+			ft_fprintf(2, RED"Received Meta Data in wrong format, ");
 			ft_fprintf(2, " this seems to be map content: \n %s\n"D, line);
 		}
 		else

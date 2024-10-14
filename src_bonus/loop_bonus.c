@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 15:27:47 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:05:33 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,52 @@ void	calc_delta(t_game *game, char operator)
 	game->angle = game->player->angle;
 }
 
-void	key_hook(mlx_key_data_t keydata, void *param)
+void	key_listener(t_game *game, mlx_key_data_t kd, float distance)
 {
-	t_game	*game;
-	bool	is_pressed;
 	float	door_x;
 	float	door_y;
-	float	distance;
 
-	game = (t_game *)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		game->run_music = false;
-		mlx_close_window(game->mlx);
-		return ;
-	}
-	is_pressed = (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT);
-	if (keydata.key == MLX_KEY_W)
-		game->key_states.w_pressed = is_pressed;
-	else if (keydata.key == MLX_KEY_S)
-		game->key_states.s_pressed = is_pressed;
-	else if (keydata.key == MLX_KEY_A)
-		game->key_states.a_pressed = is_pressed;
-	else if (keydata.key == MLX_KEY_D)
-		game->key_states.d_pressed = is_pressed;
-	else if (keydata.key == MLX_KEY_LEFT)
-		game->key_states.left_pressed = is_pressed;
-	else if (keydata.key == MLX_KEY_RIGHT)
-		game->key_states.right_pressed = is_pressed;
-	else if (keydata.key == MLX_KEY_SPACE && keydata.action == MLX_PRESS)
+	if (kd.key == MLX_KEY_W)
+		game->key_states.w_pressed = game->is_pressed;
+	else if (kd.key == MLX_KEY_S)
+		game->key_states.s_pressed = game->is_pressed;
+	else if (kd.key == MLX_KEY_A)
+		game->key_states.a_pressed = game->is_pressed;
+	else if (kd.key == MLX_KEY_D)
+		game->key_states.d_pressed = game->is_pressed;
+	else if (kd.key == MLX_KEY_LEFT)
+		game->key_states.left_pressed = game->is_pressed;
+	else if (kd.key == MLX_KEY_RIGHT)
+		game->key_states.right_pressed = game->is_pressed;
+	else if (kd.key == MLX_KEY_SPACE && kd.action == MLX_PRESS)
 	{
 		distance = find_nearest_door(game, &door_x, &door_y);
 		if (distance >= 0 && distance <= MAX_DOOR_DISTANCE)
 		{
 			toggle_door(game, (int)(door_x / CELL), (int)(door_y / CELL));
 		}
+	}
+}
+
+void	key_hook(mlx_key_data_t kd, void *param)
+{
+	t_game	*game;
+	float	distance;
+
+	distance = 0;
+	game = (t_game *)param;
+	if (kd.key == MLX_KEY_ESCAPE && kd.action == MLX_PRESS)
+	{
+		game->run_music = false;
+		mlx_close_window(game->mlx);
+		return ;
+	}
+	game->is_pressed = (kd.action == MLX_PRESS || kd.action == MLX_REPEAT);
+	key_listener(game, kd, distance);
+	if (kd.key == MLX_KEY_ENTER && kd.action == MLX_PRESS)
+	{
+		game->animating_hand = true;
+		ft_printf("MLX_KEY_ENTER\n");
 	}
 }
 
@@ -84,6 +95,7 @@ void	update_game_state(void *param)
 	ft_surface(game);
 	ray_calculation(game);
 	render_minimap(game);
+	//render_hand(game);
 }
 
 void	start_game(t_game *game)

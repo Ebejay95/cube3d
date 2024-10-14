@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:59:37 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 17:24:48 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:23:39 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	get_shade(t_ray ray)
 {
-	if (ray.vertical_len <= ray.horizontal_len)
+	if (ray.verlen <= ray.horlen)
 	{
 		if (is_looking_west(ray.current_angle))
 			return ('w');
@@ -67,48 +67,88 @@ uint32_t	apply_shading(uint32_t color, char shade)
 
 int	is_door_open(t_game *game, int x, int y)
 {
-	t_door *door = get_door(game->map, x, y);
+	t_door	*door;
+
+	door = get_door(game->map, x, y);
 	return (door && door->open);
 }
-void	draw_wall(t_game *g, t_ray ray, int top, int bottom)
+
+int	check_open_door(t_game *g, t_ray ray)
 {
-	uint32_t		clr;
-	mlx_texture_t	*tex;
-	double			t_idx;
-	int				draw_start;
-	int				y;
-	float			wall_x;
-	int				tex_x;
+	int	door_x;
+	int	door_y;
 
 	if (ray.hit_door)
 	{
-		int door_x = (int)(ray.wall_hit_x / CELL);
-		int door_y = (int)(ray.wall_hit_y / CELL);
+		door_x = (int)(ray.wall_hit_x / CELL);
+		door_y = (int)(ray.wall_hit_y / CELL);
 		if (is_door_open(g, door_x, door_y))
-			return ;
+			return (1);
 	}
-	tex = get_texture(g, ray);
+	return (0);
+}
+
+int	get_draw_start(int top)
+{
 	if (top < 0)
-		draw_start = 0;
-	else
-		draw_start = top;
-	t_idx = (draw_start - top) * get_step_size(g, tex, bottom - top);
-	y = draw_start;
-	if (ray.vertical_len <= ray.horizontal_len)
-		wall_x = ray.wall_hit_y;
-	else
-		wall_x = ray.wall_hit_x;
+		return (0);
+	return (top);
+}
+
+float	calculate_wall_x(t_ray ray)
+{
+	if (ray.verlen <= ray.horlen)
+		return (ray.wall_hit_y);
+	return (ray.wall_hit_x);
+}
+
+int	calculate_tex_x(float wall_x, mlx_texture_t *tex, t_ray ray)
+{
+	int	tex_x;
+
 	wall_x = fmodf(wall_x, CELL);
 	tex_x = (int)(wall_x * tex->width / CELL);
-	if ((ray.vertical_len <= ray.horizontal_len && is_looking_west(ray.current_angle))
-		|| (ray.vertical_len > ray.horizontal_len && is_looking_north(ray.current_angle)))
+	if ((ray.verlen <= ray.horlen && is_looking_west(ray.current_angle))
+		|| (ray.verlen > ray.horlen && is_looking_north(ray.current_angle)))
 		tex_x = tex->width - tex_x - 1;
-	while (y < get_dr_end(bottom))
+	return (tex_x);
+}
+
+void	wallpxls(t_wall_data *d)
+{
+	double		t;
+	int			y;
+	uint32_t	clr;
+	int			s;
+
+	s = get_draw_start(d->top);
+	t = (s - d->top) * get_step_size(d->game, d->texture, d->bottom - d->top);
+	y = s;
+	while (y < get_dr_end(d->bottom))
 	{
-		t_idx += get_step_size(g, tex, bottom - top);
-		clr = get_pxl_clr(tex, tex_x, (int)t_idx % tex->height);
-		clr = apply_shading(clr, get_shade(ray));
-		mlx_put_pixel(g->surface, ray.index, y, clr);
+		t += get_step_size(d->game, d->texture, d->bottom - d->top);
+		clr = get_pxl_clr(d->texture, d->tex_x, (int)t % d->texture->height);
+		clr = apply_shading(clr, get_shade(d->ray));
+		mlx_put_pixel(d->game->surface, d->ray.index, y, clr);
 		y++;
 	}
+}
+
+void	draw_wall(t_game *g, t_ray ray, int top, int bottom)
+{
+	t_wall_data		wall_data;
+	mlx_texture_t	*tex;
+	float			wall_x;
+
+	if (check_open_door(g, ray))
+		return ;
+	tex = get_texture(g, ray);
+	wall_x = calculate_wall_x(ray);
+	wall_data.game = g;
+	wall_data.ray = ray;
+	wall_data.top = top;
+	wall_data.bottom = bottom;
+	wall_data.texture = tex;
+	wall_data.tex_x = calculate_tex_x(wall_x, tex, ray);
+	wallpxls(&wall_data);
 }

@@ -6,104 +6,51 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:07:09 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 17:25:58 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 21:56:13 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include_bonus/cub3d_bonus.h"
 
-void	check_chars(t_map *map, int *err)
+void	process_clear_doors(t_map *m, int x, int y)
 {
-	int	y;
+	int	dx;
 
-	y = 0;
-	while (y < map->height && !(*err))
+	dx = 0;
+	while (dx < m->door_count)
 	{
-		if (map->width != (int)ft_strspn(map->content[y], MAP_CNT_CHARS))
-		{
-			(*err)++;
-			ft_fprintf(2, RED"Invalid char in map:\n"D);
-			print_map_error(map, y, ft_strspn(map->content[y], MAP_CNT_CHARS));
-		}
-		y++;
+		handle_clear_door(m, x, y, dx);
+		dx++;
 	}
 }
 
-int	has_defined_insides(t_map *map)
+void	process_clear_cell(t_map *m, int x, int y)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < map->height)
-	{
-		x = 0;
-		while (x < map->width)
-		{
-			if (map->content[y][x] == '0')
-				return (1);
-			x++;
-		}
-		y++;
-	}
-	return (0);
+	handle_clear_spawn_point(m, x, y);
+	handle_clear_x_content(m, x, y);
+	process_clear_doors(m, x, y);
 }
 
-void	map_validation(t_map *map, int *err)
+void	process_clear_row(t_map *m, int y)
 {
-	int	y;
 	int	x;
 
-	check_chars(map, err);
-	check_spawn(map, err);
-	check_doors(map, err);
-	while (has_defined_insides(map) && !(*err))
+	x = 0;
+	while (x < m->width)
 	{
-		init_flood(map);
-		flood(map);
-	}
-	y = 0;
-	while (y < map->height && !(*err))
-	{
-		x = 0;
-		while (x < map->width && !(*err))
-		{
-			if (map->content[y][x] == 'X')
-				check_the_spot(map, y, x, err);
-			x++;
-		}
-		y++;
+		process_clear_cell(m, x, y);
+		x++;
 	}
 }
 
 void	clear_validation(t_map *m)
 {
 	int	y;
-	int	x;
-	int	dx;
 
 	y = 0;
 	while (y < m->height)
 	{
-		x = 0;
-		while (x < m->width)
-		{
-			if (y == m->spawn_y && x == m->spawn_x)
-				m->content[y][x] = m->spawn;
-			if (m->content[y][x] == 'X')
-				m->content[y][x] = '0';
-			dx = 0;
-			while (dx < m->door_count)
-			{
-				if (y == m->doors[dx]->y && x == m->doors[dx]->x)
-				{
-					if (m->doors[dx]->direction != '-')
-						m->content[y][x] = ft_toupper(m->doors[dx]->direction);
-				}
-				dx++;
-			}
-			x++;
-		}
+		process_clear_row(m, y);
 		y++;
 	}
 }

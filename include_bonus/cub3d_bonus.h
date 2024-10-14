@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:13:28 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 17:23:46 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:03:20 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void			play_sound(pthread_t thread, void *(*play)(void *));
 void			*door_open(void *arg);
 void			*door_close(void *arg);
 void			*bg_music(void *arg);
+void			*good(void *arg);
 
 // ft_exit
 void			call_exit_map(t_game *game);
 void			call_exit(t_game *game);
-int	is_door_open(t_game *game, int x, int y);
 
 // ft_init
 mlx_t			*ft_init_window(t_game *game);
@@ -54,8 +54,11 @@ void			my_keyhook(mlx_key_data_t keydata, void *param);
 void			start_game(t_game *game);
 int				draw_direction(t_game *game);
 void			calc_delta(t_game *game, char operator);
+void			render_hand(t_game *game);
 
 // door_action
+void			init_ray(t_game *game, t_dctx *ray);
+void			update_ray_position(t_dctx *ray);
 float			find_nearest_door(t_game *game, float *door_x, float *door_y);
 void			toggle_door(t_game *game, int map_x, int map_y);
 
@@ -87,6 +90,12 @@ void			handle_no_spawns(t_map *map, int *err);
 void			check_spawn(t_map *map, int *err);
 
 // map_content_validation
+void			check_chars(t_map *map, int *err);
+int				has_defined_insides(t_map *map);
+void			map_validation(t_map *map, int *err);
+void			handle_clear_spawn_point(t_map *m, int x, int y);
+void			handle_clear_x_content(t_map *m, int x, int y);
+void			handle_clear_door(t_map *m, int x, int y, int dx);
 void			get_map_content(int fd, int *err, t_game *game);
 
 // map_meta_helper
@@ -154,10 +163,15 @@ int				check_move_left(t_game *game);
 int				check_move_right(t_game *game);
 
 // minimap
-void			mclear_and_draw_frame(t_game *game);
+
+void			calculate_map_coordinates(t_game *game, t_render_data *d);
+int				is_valid_map_position(t_game *game, t_render_data *d);
+void			handle_wall(t_game *game, t_render_data *d);
+void			handle_door(t_game *game, t_render_data *d);
+void			handle_room(t_game *game, t_render_data *d);
+void			process_map_content(t_game *game, t_render_data *d);
+void			process_column(t_game *game, t_render_data *d);
 void			mrender_rotmap(t_game *game, float cosa, float sina);
-void			mdraw_rays(t_game *game, float cosa, float sina);
-void			mdraw_player(t_game *game);
 void			render_minimap(t_game *game);
 
 // calculations
@@ -202,6 +216,7 @@ int				get_rgba_colors_hex(int red, int green, int blue, int alpha);
 
 // render_wall
 void			draw_wall(t_game *game, t_ray ray, int top, int bottom);
+int				is_door_open(t_game *game, int x, int y);
 
 // render_wall_utils
 int				get_pxl_clr(mlx_texture_t *texture, int x, int y);

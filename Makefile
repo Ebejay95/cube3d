@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/11 15:34:00 by jeberle          ###   ########.fr        #
+#    Updated: 2024/10/14 22:10:09 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,11 +129,14 @@ SRCS=	src/utils/ft_exit.c \
 
 BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
 		src_bonus/audio/audio_bonus.c \
+		src_bonus/audio/audio_bonus2.c \
 		src_bonus/utils/ft_init_bonus.c \
 		src_bonus/textures/load_textures_mini_bonus.c \
 		src_bonus/textures/textures_wall_bonus.c \
 		src_bonus/doors_actions_bonus.c \
+		src_bonus/doors_actions_bonus2.c \
 		src_bonus/loop_bonus.c \
+		src_bonus/loop_bonus2.c \
 		src_bonus/main_bonus.c \
 		src_bonus/move_bonus.c \
 		src_bonus/utils_bonus.c \
@@ -151,6 +154,8 @@ BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
 		src_bonus/parser/map_content_doors_bonus.c \
 		src_bonus/parser/map_content_spawn_bonus.c \
 		src_bonus/parser/map_content_validations_bonus.c \
+		src_bonus/parser/map_content_validation_bonus2.c \
+		src_bonus/parser/map_content_validation_bonus3.c \
 		src_bonus/parser/map_meta_helper_bonus.c \
 		src_bonus/parser/map_meta_parser_bonus.c \
 		src_bonus/parser/map_meta_validations_bonus.c \
@@ -163,6 +168,8 @@ BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
 		src_bonus/parser/map_parser_bonus.c \
 		src_bonus/parser/map_printers_bonus.c \
 		src_bonus/minimap/minimap_bonus.c \
+		src_bonus/minimap/minimap_bonus2.c \
+		src_bonus/minimap/minimap_bonus3.c \
 
 #------------------------------------------------------------------------------#
 #--------------                      OBJECTS                      -------------#

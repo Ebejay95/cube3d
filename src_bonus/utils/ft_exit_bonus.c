@@ -6,14 +6,17 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:58:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 16:12:59 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 21:11:51 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include_bonus/cub3d_bonus.h"
 
+//initalisiere hand images mit NULL durch um double free zu vermeiden.
 void	call_exit_map_textrs(t_game *game)
 {
+	int	i;
+
 	if (game->map->tex_west)
 		mlx_delete_texture(game->map->tex_west);
 	if (game->map->tex_east)
@@ -29,6 +32,12 @@ void	call_exit_map_textrs(t_game *game)
 	game->map->tex_north = NULL;
 	game->map->tex_south = NULL;
 	game->map->tex_door = NULL;
+	i = 0;
+	while (i < 6)
+	{
+		mlx_delete_image(game->mlx, (mlx_image_t *)&(game->hand_images[i]));
+		i++;
+	}
 }
 
 void	free_doors(t_map *map)

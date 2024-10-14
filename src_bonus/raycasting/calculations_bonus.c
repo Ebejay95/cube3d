@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:01:36 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 17:21:50 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:32:56 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ static float	get_len_to_wall(t_game *game, t_ray *ray)
 		ray->hit_door = h_hit.is_door;
 		ray->wall_hit_x = h_hit.x;
 		ray->wall_hit_y = h_hit.y;
-		ray->horizontal_len = h_hit.distance;
-		ray->vertical_len = v_hit.distance;
+		ray->horlen = h_hit.distance;
+		ray->verlen = v_hit.distance;
 		return (h_hit.distance);
 	}
 	else
@@ -119,8 +119,8 @@ static float	get_len_to_wall(t_game *game, t_ray *ray)
 		ray->hit_door = v_hit.is_door;
 		ray->wall_hit_x = v_hit.x;
 		ray->wall_hit_y = v_hit.y;
-		ray->horizontal_len = h_hit.distance;
-		ray->vertical_len = v_hit.distance;
+		ray->horlen = h_hit.distance;
+		ray->verlen = v_hit.distance;
 		return (v_hit.distance);
 	}
 }

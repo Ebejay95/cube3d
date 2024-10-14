@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:03:01 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 11:13:11 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 21:57:11 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,22 @@ int	validate_map(t_game *game, char *filename)
 	return (0);
 }
 
+int	validate_sprite(void)
+{
+	if (access("assets/hand_1.png", R_OK) != 0
+		&& access("assets/hand_2.png", R_OK) != 0
+		&& access("assets/hand_3.png", R_OK) != 0
+		&& access("assets/hand_4.png", R_OK) != 0
+		&& access("assets/hand_5.png", R_OK) != 0
+		&& access("assets/hand_6.png", R_OK) != 0
+	)
+	{
+		ft_putstr_fd(2, RED"cannot read from hand sprite files\n"D);
+		return (1);
+	}
+	return (0);
+}
+
 int	validate_input(int argc, char **argv)
 {
 	if (argc != 2)
@@ -52,11 +68,8 @@ int	validate_input(int argc, char **argv)
 	return (0);
 }
 
-void	get_map(t_game *game, int argc, char **argv)
+void	setup_game_stuff(t_game *game)
 {
-	game->map = malloc(sizeof(t_map));
-	if (!game->map)
-		return ;
 	game->map->content = NULL;
 	game->map->tex_west = NULL;
 	game->map->tex_east = NULL;
@@ -73,11 +86,30 @@ void	get_map(t_game *game, int argc, char **argv)
 	game->map->spawn_y = -1;
 	game->map->spawn = '-';
 	game->map->door_count = 0;
+}
+
+void	get_map(t_game *game, int argc, char **argv)
+{
+	game->map = malloc(sizeof(t_map));
+	if (!game->map)
+		return ;
+	setup_game_stuff(game);
+	if (validate_sprite() > 0)
+	{
+		call_exit(game);
+		return ;
+	}
 	if (validate_input(argc, argv) > 0)
 	{
 		call_exit(game);
 		return ;
 	}
+	//game->map->hand_one = mlx_load_png("assets/hand_1.png");
+	//game->map->hand_two = mlx_load_png("assets/hand_2.png");
+	//game->map->hand_three = mlx_load_png("assets/hand_3.png");
+	//game->map->hand_four = mlx_load_png("assets/hand_4.png");
+	//game->map->hand_five = mlx_load_png("assets/hand_5.png");
+	//game->map->hand_six = mlx_load_png("assets/hand_6.png");
 	if (validate_map(game, argv[1]) > 0)
 		call_exit(game);
 }

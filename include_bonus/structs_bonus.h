@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:20 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 15:15:04 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:28:41 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,13 @@ typedef struct s_map_bounds
 }	t_map_bounds;
 
 typedef struct s_ray_data {
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	sidedistx;
-	double	sidedisty;
-	double	deltadistx;
-	double	deltadisty;
-	int		stepx;
-	int		stepy;
-	int		mapx;
-	int		mapy;
-	int		hit;
+	float	x;
+	float	y;
+	float	len_x;
+	float	len_y;
+	int		direction;
+	int		map_x;
+	int		map_y;
 }	t_ray_data;
 
 typedef struct s_player
@@ -123,6 +117,12 @@ typedef struct s_map
 	mlx_texture_t	*tex_north;
 	mlx_texture_t	*tex_south;
 	mlx_texture_t	*tex_door;
+	mlx_image_t		hand_one;
+	mlx_image_t		hand_two;
+	mlx_image_t		hand_three;
+	mlx_image_t		hand_four;
+	mlx_image_t		hand_five;
+	mlx_image_t		hand_six;
 	uint32_t		ceiling;
 	uint32_t		floor;
 	int				ceiling_set;
@@ -138,23 +138,27 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	t_map			*map;
-	mlx_t			*mlx;
-	mlx_image_t		*surface;
-	t_player		*player;
-	t_key_states	key_states;
-	int				mouse_locked;
-	int				frame_bonus;
-	float			deltax;
-	float			deltay;
-	float			angle;
-	pthread_t		music_thread;
-	pthread_t		door_open_thread;
-	pthread_t		door_close_thread;
-	int				run_music;
-	int				bg_sec;
-	pid_t			music_pid;
-}					t_game;
+	t_map				*map;
+	mlx_t				*mlx;
+	mlx_image_t			*surface;
+	t_player			*player;
+	t_key_states		key_states;
+	int					mouse_locked;
+	int					frame_bonus;
+	float				deltax;
+	float				deltay;
+	float				angle;
+	pthread_t			music_thread;
+	pthread_t			door_open_thread;
+	pthread_t			door_close_thread;
+	int					run_music;
+	int					bg_sec;
+	pid_t				music_pid;
+	const mlx_image_t	hand_images[6];
+	int					current_hand_frame;
+	bool				animating_hand;
+	bool				is_pressed;
+}						t_game;
 
 typedef struct s_optimization
 {
@@ -166,12 +170,21 @@ typedef struct s_ray
 {
 	int		index;
 	float	current_angle;
-	float	horizontal_len;
-	float	vertical_len;
+	float	horlen;
+	float	verlen;
 	float	len;
 	float	wall_hit_y;
 	float	wall_hit_x;
 	int		hit_door;
 }	t_ray;
+
+typedef struct s_wall_data {
+	t_game			*game;
+	t_ray			ray;
+	int				top;
+	int				bottom;
+	mlx_texture_t	*texture;
+	int				tex_x;
+}	t_wall_data;
 
 #endif

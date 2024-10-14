@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:06:42 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 13:57:08 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 21:24:00 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ void	set_textr_meta(int *err, char *line, t_game *g, char ornttn)
 	if (ornttn == 'd')
 		g->map->tex_door = mlx_load_png(path);
 	if (*err)
-	{
-		ft_fprintf(2, RED"Error loading texture in map meta definition: "D);
-		ft_fprintf(2, "%s\n", path);
-	}
+		ft_fprintf(2, RED"Error loading texture meta definition: %s\n"D, path);
 	ft_multifree(NULL, NULL, path, tmp_path);
 }

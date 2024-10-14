@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:46 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 14:28:32 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 21:46:01 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ void	ft_initialize_game(t_game	*game)
 
 void	ft_initialize(t_game *game, int argc, char **argv)
 {
+	//game->hand_images[0] = game->map->hand_one;
+	//game->hand_images[1] = game->map->hand_two;
+	//game->hand_images[2] = game->map->hand_three;
+	//game->hand_images[3] = game->map->hand_four;
+	//game->hand_images[4] = game->map->hand_five;
+	//game->hand_images[5] = game->map->hand_six;
 	ft_initialize_game(game);
 	get_map(game, argc, argv);
 	if (!game->map)
@@ -63,4 +69,9 @@ void	ft_initialize(t_game *game, int argc, char **argv)
 	}
 	print_map(game->map);
 	ft_initialize_player(game);
+	if (!ft_init_window(game))
+	{
+		call_exit(game);
+		return ;
+	}
 }

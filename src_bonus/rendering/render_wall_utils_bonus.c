@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:00:44 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 15:13:07 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:17:11 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ mlx_texture_t	*get_texture(t_game *game, t_ray ray)
 {
 	if (ray.hit_door)
 		return (game->map->tex_door);
-	if (ray.vertical_len <= ray.horizontal_len)
+	if (ray.verlen <= ray.horlen)
 	{
 		if (is_looking_west(ray.current_angle))
 			return (game->map->tex_west);
@@ -50,7 +50,7 @@ int	get_xpos(t_game *game, t_ray ray, mlx_texture_t *texture)
 	double	relative_pos;
 	int		texture_x;
 
-	if (ray.vertical_len <= ray.horizontal_len)
+	if (ray.verlen <= ray.horlen)
 		relative_pos = fmod(ray.wall_hit_y, CELL);
 	else
 		relative_pos = fmod(ray.wall_hit_x, CELL);
