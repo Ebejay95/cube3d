@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:01:36 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 15:28:53 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:31:22 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_hit	cast_horizontal_ray(t_game *game, float angle)
 	int		map_x;
 	char	cell;
 
-	hit = {INFINITY, 0, 0, 0};
+	hit = (t_hit){INFINITY, 0, 0, 0};
 	len_y = CELL;
 	len_x = CELL / tan(angle);
 	y = floor(game->player->y / CELL) * CELL;
@@ -67,7 +67,7 @@ static t_hit	cast_vertical_ray(t_game *game, float angle)
 	int		map_x;
 	char	cell;
 
-	hit = {INFINITY, 0, 0, 0};
+	hit = (t_hit){INFINITY, 0, 0, 0};
 	len_x = CELL;
 	len_y = CELL * tan(angle);
 	x = floor(game->player->x / CELL) * CELL;
