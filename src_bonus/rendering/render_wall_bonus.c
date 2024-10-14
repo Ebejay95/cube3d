@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:59:37 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 14:54:02 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:14:28 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	draw_wall(t_game *g, t_ray ray, int top, int bottom)
 	double			t_idx;
 	int				draw_start;
 	int				y;
+	float			wall_x;
+	int				tex_x;
 
 	tex = get_texture(g, ray);
 	if (top < 0)
@@ -80,10 +82,19 @@ void	draw_wall(t_game *g, t_ray ray, int top, int bottom)
 		draw_start = top;
 	t_idx = (draw_start - top) * get_step_size(g, tex, bottom - top);
 	y = draw_start;
+	if (ray.vertical_len <= ray.horizontal_len)
+		wall_x = ray.wall_hit_y;
+	else
+		wall_x = ray.wall_hit_x;
+	wall_x = fmodf(wall_x, CELL);
+	tex_x = (int)(wall_x * tex->width / CELL);
+	if ((ray.vertical_len <= ray.horizontal_len && is_looking_west(ray.current_angle))
+		|| (ray.vertical_len > ray.horizontal_len && is_looking_north(ray.current_angle)))
+		tex_x = tex->width - tex_x - 1;
 	while (y < get_dr_end(bottom))
 	{
 		t_idx += get_step_size(g, tex, bottom - top);
-		clr = get_pxl_clr(tex, get_xpos(g, ray, tex), (int)t_idx % tex->height);
+		clr = get_pxl_clr(tex, tex_x, (int)t_idx % tex->height);
 		clr = apply_shading(clr, get_shade(ray));
 		mlx_put_pixel(g->surface, ray.index, y, clr);
 		y++;

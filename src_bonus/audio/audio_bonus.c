@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 13:39:35 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 16:07:24 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 14:18:16 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*door_open(void *arg)
 
 void	play_music(char *cmd)
 {
-	execlp(cmd, cmd, "-v", "0.4", "assets/audio/cub3d.mp3", (char *) NULL);
+	execlp(cmd, cmd, "-v", "0.2", "assets/audio/cub3d.mp3", (char *) NULL);
 	perror("execlp failed");
 	_exit(1);
 }

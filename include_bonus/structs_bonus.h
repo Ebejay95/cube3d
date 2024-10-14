@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:20 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 16:09:03 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 15:15:04 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # include "cub3d_bonus.h"
 # include <pthread.h>
+
+typedef struct s_hit {
+	float	distance;
+	int		is_door;
+	float	x;
+	float	y;
+}	t_hit;
 
 typedef struct s_door_finder
 {
@@ -164,6 +171,7 @@ typedef struct s_ray
 	float	len;
 	float	wall_hit_y;
 	float	wall_hit_x;
+	int		hit_door;
 }	t_ray;
 
 #endif
