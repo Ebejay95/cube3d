@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:13:28 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/11 16:08:33 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 17:23:46 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void			*bg_music(void *arg);
 // ft_exit
 void			call_exit_map(t_game *game);
 void			call_exit(t_game *game);
+int	is_door_open(t_game *game, int x, int y);
 
 // ft_init
 mlx_t			*ft_init_window(t_game *game);

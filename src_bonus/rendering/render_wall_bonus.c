@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:59:37 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 15:14:28 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 17:24:48 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ uint32_t	apply_shading(uint32_t color, char shade)
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
+int	is_door_open(t_game *game, int x, int y)
+{
+	t_door *door = get_door(game->map, x, y);
+	return (door && door->open);
+}
 void	draw_wall(t_game *g, t_ray ray, int top, int bottom)
 {
 	uint32_t		clr;
@@ -75,6 +80,13 @@ void	draw_wall(t_game *g, t_ray ray, int top, int bottom)
 	float			wall_x;
 	int				tex_x;
 
+	if (ray.hit_door)
+	{
+		int door_x = (int)(ray.wall_hit_x / CELL);
+		int door_y = (int)(ray.wall_hit_y / CELL);
+		if (is_door_open(g, door_x, door_y))
+			return ;
+	}
 	tex = get_texture(g, ray);
 	if (top < 0)
 		draw_start = 0;

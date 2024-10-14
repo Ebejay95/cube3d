@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:01:36 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 15:31:22 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/14 17:21:50 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_hit	cast_horizontal_ray(t_game *game, float angle)
 		if (map_x < 0 || map_y < 0 || map_x >= game->map->width || map_y >= game->map->height)
 			break ;
 		cell = game->map->content[map_y][map_x];
-		if (cell == '1' || cell == 'V' || cell == 'H')
+		if (cell == '1' || ((cell == 'V' || cell == 'H') && !is_door_open(game, map_x, map_y)))
 		{
 			hit.distance = calculate_len(game, x, y);
 			hit.is_door = (cell == 'V' || cell == 'H');
@@ -84,7 +84,7 @@ static t_hit	cast_vertical_ray(t_game *game, float angle)
 		if (map_x < 0 || map_y < 0 || map_x >= game->map->width || map_y >= game->map->height)
 			break ;
 		cell = game->map->content[map_y][map_x];
-		if (cell == '1' || cell == 'V' || cell == 'H')
+		if (cell == '1' || ((cell == 'V' || cell == 'H') && !is_door_open(game, map_x, map_y)))
 		{
 			hit.distance = calculate_len(game, x, y);
 			hit.is_door = (cell == 'V' || cell == 'H');
@@ -124,6 +124,7 @@ static float	get_len_to_wall(t_game *game, t_ray *ray)
 		return (v_hit.distance);
 	}
 }
+
 
 int	ray_calculation(t_game *game)
 {
