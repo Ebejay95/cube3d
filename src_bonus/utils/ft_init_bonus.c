@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:46 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 12:36:38 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/17 12:37:55 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ mlx_t	*ft_init_window(t_game *game)
 void	ft_initialize_game(t_game	*game)
 {
 	game->map = NULL;
+	game->player = NULL;
 	game->mlx = NULL;
 	game->surface = NULL;
 	game->key_states.w_pressed = false;
