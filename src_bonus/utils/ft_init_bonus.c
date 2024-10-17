@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:46 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 21:46:01 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 12:36:38 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,4 @@ void	ft_initialize(t_game *game, int argc, char **argv)
 	}
 	print_map(game->map);
 	ft_initialize_player(game);
-	if (!ft_init_window(game))
-	{
-		call_exit(game);
-		return ;
-	}
 }
