@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:58:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 21:11:51 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 11:29:39 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //initalisiere hand images mit NULL durch um double free zu vermeiden.
 void	call_exit_map_textrs(t_game *game)
 {
-	int	i;
+	//int	i;
 
 	if (game->map->tex_west)
 		mlx_delete_texture(game->map->tex_west);
@@ -32,12 +32,12 @@ void	call_exit_map_textrs(t_game *game)
 	game->map->tex_north = NULL;
 	game->map->tex_south = NULL;
 	game->map->tex_door = NULL;
-	i = 0;
-	while (i < 6)
-	{
-		mlx_delete_image(game->mlx, (mlx_image_t *)&(game->hand_images[i]));
-		i++;
-	}
+	//i = 0;
+	//while (i < 6)
+	//{
+	//	mlx_delete_image(game->mlx, (mlx_image_t *)&(game->hand_images[i]));
+	//	i++;
+	//}
 }
 
 void	free_doors(t_map *map)
