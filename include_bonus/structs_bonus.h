@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:20 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 22:28:41 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:28:49 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 
 # include "cub3d_bonus.h"
 # include <pthread.h>
+
+typedef struct s_ray_info {
+	float	x;
+	float	y;
+	float	len_x;
+	float	len_y;
+	int		direction;
+	int		map_x;
+	int		map_y;
+	char	cell;
+}	t_ray_info;
 
 typedef struct s_hit {
 	float	distance;
@@ -81,16 +92,6 @@ typedef struct s_map_bounds
 	int	right;
 }	t_map_bounds;
 
-typedef struct s_ray_data {
-	float	x;
-	float	y;
-	float	len_x;
-	float	len_y;
-	int		direction;
-	int		map_x;
-	int		map_y;
-}	t_ray_data;
-
 typedef struct s_player
 {
 	float		x;
@@ -117,12 +118,12 @@ typedef struct s_map
 	mlx_texture_t	*tex_north;
 	mlx_texture_t	*tex_south;
 	mlx_texture_t	*tex_door;
-	mlx_image_t		hand_one;
-	mlx_image_t		hand_two;
-	mlx_image_t		hand_three;
-	mlx_image_t		hand_four;
-	mlx_image_t		hand_five;
-	mlx_image_t		hand_six;
+	mlx_texture_t	*hand_one;
+	mlx_texture_t	*hand_two;
+	mlx_texture_t	*hand_three;
+	mlx_texture_t	*hand_four;
+	mlx_texture_t	*hand_five;
+	mlx_texture_t	*hand_six;
 	uint32_t		ceiling;
 	uint32_t		floor;
 	int				ceiling_set;
@@ -148,23 +149,13 @@ typedef struct s_game
 	float				deltax;
 	float				deltay;
 	float				angle;
-	pthread_t			music_thread;
-	pthread_t			door_open_thread;
-	pthread_t			door_close_thread;
-	int					run_music;
-	int					bg_sec;
-	pid_t				music_pid;
-	const mlx_image_t	hand_images[6];
+	mlx_image_t			*hand_images[6];
 	int					current_hand_frame;
 	bool				animating_hand;
 	bool				is_pressed;
+	int32_t				mouse_x;
+	int32_t				mouse_y;
 }						t_game;
-
-typedef struct s_optimization
-{
-	int		ray_step;
-	float	max_distance;
-}	t_optimization;
 
 typedef struct s_ray
 {

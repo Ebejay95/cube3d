@@ -6,17 +6,14 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:58:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 12:31:37 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:21:26 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include_bonus/cub3d_bonus.h"
 
-//initalisiere hand images mit NULL durch um double free zu vermeiden.
 void	call_exit_map_textrs(t_game *game)
 {
-	//int	i;
-
 	if (game->map->tex_west)
 		mlx_delete_texture(game->map->tex_west);
 	if (game->map->tex_east)
@@ -27,17 +24,27 @@ void	call_exit_map_textrs(t_game *game)
 		mlx_delete_texture(game->map->tex_south);
 	if (game->map->tex_door)
 		mlx_delete_texture(game->map->tex_door);
+	if (game->map->hand_one)
+		mlx_delete_texture(game->map->hand_one);
+	if (game->map->hand_two)
+		mlx_delete_texture(game->map->hand_two);
+	if (game->map->hand_three)
+		mlx_delete_texture(game->map->hand_three);
+	if (game->map->hand_four)
+		mlx_delete_texture(game->map->hand_four);
+	if (game->map->hand_five)
+		mlx_delete_texture(game->map->hand_five);
+	if (game->map->hand_six)
+		mlx_delete_texture(game->map->hand_six);
+}
+
+void	call_exit_map_textrs_addon(t_game *game)
+{
 	game->map->tex_west = NULL;
 	game->map->tex_east = NULL;
 	game->map->tex_north = NULL;
 	game->map->tex_south = NULL;
 	game->map->tex_door = NULL;
-	//i = 0;
-	//while (i < 6)
-	//{
-	//	mlx_delete_image(game->mlx, (mlx_image_t *)&(game->hand_images[i]));
-	//	i++;
-	//}
 }
 
 void	free_doors(t_map *map)
@@ -50,12 +57,6 @@ void	free_doors(t_map *map)
 		free(map->doors[i]);
 		i++;
 	}
-}
-
-void	call_exit_player(t_player *player)
-{
-	if (player)
-		free(player);
 }
 
 void	call_exit_map(t_game *game)
@@ -79,6 +80,7 @@ void	call_exit_map(t_game *game)
 				game->map->content = NULL;
 			}
 			call_exit_map_textrs(game);
+			call_exit_map_textrs_addon(game);
 			free_doors(game->map);
 			free(game->map);
 			game->map = NULL;
@@ -90,14 +92,8 @@ void	call_exit(t_game *game)
 {
 	if (game)
 	{
-		if (game->music_thread != NULL)
-		{
-			if (game->music_pid > 0)
-				kill(game->music_pid, SIGKILL);
-			pthread_join(game->music_thread, NULL);
-			game->music_thread = NULL;
-		}
-		call_exit_player(game->player);
+		if (game->player)
+			free(game->player);
 		call_exit_map(game);
 	}
 }

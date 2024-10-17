@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:13:28 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 14:49:34 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:42:36 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			check_collision(t_game *game, float *new_x, float *new_y);
 void			my_keyhook(mlx_key_data_t keydata, void *param);
 void			start_game(t_game *game);
 int				draw_direction(t_game *game);
-void			calc_delta(t_game *game, char operator);
+void			calc_delta(t_game *game, char operator, int factor);
 void			render_hand(t_game *game);
 
 // door_action
@@ -168,6 +168,7 @@ void			mrender_rotmap(t_game *game, float cosa, float sina);
 void			render_minimap(t_game *game);
 
 // calculations
+void			update_map_coordinates(t_ray_info *info, int is_horizontal);
 float			get_len_to_horizontal_wall(t_game *game, t_ray *ray);
 float			get_len_to_vertical_wall(t_game *game, t_ray *ray);
 int				ray_calculation(t_game *game);
@@ -208,6 +209,11 @@ int				ft_surface(t_game *game);
 int				get_rgba_colors_hex(int red, int green, int blue, int alpha);
 
 // render_wall
+char			get_shade(t_ray ray);
+int				get_dr_end(float bottom);
+uint32_t		apply_shading(uint32_t color, char shade);
+int				is_door_open(t_game *game, int x, int y);
+int				check_open_door(t_game *g, t_ray ray);
 void			draw_wall(t_game *game, t_ray ray, int top, int bottom);
 int				is_door_open(t_game *game, int x, int y);
 

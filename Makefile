@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/17 14:49:20 by jeberle          ###   ########.fr        #
+#    Updated: 2024/10/17 17:40:21 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,9 +139,11 @@ BONUS_SRCS= src_bonus/utils/ft_exit_bonus.c \
 		src_bonus/utils_bonus.c \
 		src_bonus/rendering/render_bonus.c \
 		src_bonus/rendering/render_wall_bonus.c \
+		src_bonus/rendering/render_wall_bonus2.c \
 		src_bonus/rendering/render_wall_utils_bonus.c \
 		src_bonus/rendering/render_utils_bonus.c \
 		src_bonus/raycasting/calculations_bonus.c \
+		src_bonus/raycasting/calculations_bonus2.c \
 		src_bonus/raycasting/calculations_directions_bonus.c \
 		src_bonus/raycasting/calculations_directions2_bonus.c \
 		src_bonus/raycasting/calculations_utils_bonus.c \

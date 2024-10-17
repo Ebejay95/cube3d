@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:03:01 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 21:57:11 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 15:12:32 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,12 @@ void	get_map(t_game *game, int argc, char **argv)
 		call_exit(game);
 		return ;
 	}
-	//game->map->hand_one = mlx_load_png("assets/hand_1.png");
-	//game->map->hand_two = mlx_load_png("assets/hand_2.png");
-	//game->map->hand_three = mlx_load_png("assets/hand_3.png");
-	//game->map->hand_four = mlx_load_png("assets/hand_4.png");
-	//game->map->hand_five = mlx_load_png("assets/hand_5.png");
-	//game->map->hand_six = mlx_load_png("assets/hand_6.png");
+	game->map->hand_one = mlx_load_png("assets/hand_1.png");
+	game->map->hand_two = mlx_load_png("assets/hand_2.png");
+	game->map->hand_three = mlx_load_png("assets/hand_3.png");
+	game->map->hand_four = mlx_load_png("assets/hand_4.png");
+	game->map->hand_five = mlx_load_png("assets/hand_5.png");
+	game->map->hand_six = mlx_load_png("assets/hand_6.png");
 	if (validate_map(game, argv[1]) > 0)
 		call_exit(game);
 }

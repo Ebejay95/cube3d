@@ -6,25 +6,11 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 22:05:33 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 17:14:28 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include_bonus/cub3d_bonus.h"
-
-void	calc_delta(t_game *game, char operator)
-{
-	float	angle_incr;
-
-	angle_incr = 0.06;
-	if (operator == '+')
-		game->player->angle = angle_check(game->player->angle + angle_incr);
-	else if (operator == '-')
-		game->player->angle = angle_check(game->player->angle - angle_incr);
-	game->deltax = cos(game->player->angle);
-	game->deltay = sin(game->player->angle);
-	game->angle = game->player->angle;
-}
 
 void	key_listener(t_game *game, mlx_key_data_t kd, float distance)
 {
@@ -62,7 +48,6 @@ void	key_hook(mlx_key_data_t kd, void *param)
 	game = (t_game *)param;
 	if (kd.key == MLX_KEY_ESCAPE && kd.action == MLX_PRESS)
 	{
-		game->run_music = false;
 		mlx_close_window(game->mlx);
 		return ;
 	}
@@ -89,21 +74,42 @@ void	update_game_state(void *param)
 	if (game->key_states.d_pressed)
 		check_move_right(game);
 	if (game->key_states.left_pressed)
-		calc_delta(game, '-');
+		calc_delta(game, '-', 1);
 	if (game->key_states.right_pressed)
-		calc_delta(game, '+');
+		calc_delta(game, '+', 1);
 	ft_surface(game);
 	ray_calculation(game);
 	render_minimap(game);
-	//render_hand(game);
+	render_hand(game);
+}
+
+void	mouse_rotate(void *g)
+{
+	t_game		*game;
+	int			x;
+	int			y;
+	float		last_m_x;
+
+	game = (t_game *)g;
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+	x = game->mouse_x;
+	last_m_x = game->mouse_x;
+	mlx_get_mouse_pos(game->mlx, &game->mouse_x, &y);
+	if (game->mouse_x > x)
+		calc_delta(game, '+', 3);
+	else if (game->mouse_x < x)
+		calc_delta(game, '-', 3);
 }
 
 void	start_game(t_game *game)
 {
 	if (game)
 	{
+		game->mouse_x = 0;
+		game->mouse_y = 0;
 		mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 		mlx_key_hook(game->mlx, &key_hook, game);
+		mlx_loop_hook(game->mlx, &mouse_rotate, game);
 		mlx_loop_hook(game->mlx, &update_game_state, game);
 		mlx_loop(game->mlx);
 		mlx_terminate(game->mlx);

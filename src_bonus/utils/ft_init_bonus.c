@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:46 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 12:37:55 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 15:38:05 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,10 @@ void	ft_initialize_game(t_game	*game)
 	game->key_states.d_pressed = false;
 	game->key_states.left_pressed = false;
 	game->key_states.right_pressed = false;
-	game->run_music = true;
 }
 
 void	ft_initialize(t_game *game, int argc, char **argv)
 {
-	//game->hand_images[0] = game->map->hand_one;
-	//game->hand_images[1] = game->map->hand_two;
-	//game->hand_images[2] = game->map->hand_three;
-	//game->hand_images[3] = game->map->hand_four;
-	//game->hand_images[4] = game->map->hand_five;
-	//game->hand_images[5] = game->map->hand_six;
 	ft_initialize_game(game);
 	get_map(game, argc, argv);
 	if (!game->map)
