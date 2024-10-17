@@ -6,7 +6,7 @@
 #    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/14 22:10:09 by jeberle          ###   ########.fr        #
+#    Updated: 2024/10/17 12:10:19 by jeberle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,6 @@ MLXFT = libmlx42.a
 MLXFT_BUILD_DIR = ./mlx_build
 MLXFT_LIB = $(MLXFT_BUILD_DIR)/$(MLXFT)
 MLXFTFLAGS = -L$(MLXFT_BUILD_DIR) -lmlx42 -Iinclude -lglfw -framework Cocoa -framework OpenGL -framework IOKit
-MLXFTFLAGS += -L/Users/jeberle/.brew/lib -I/Users/jeberle/.brew/include
 MLXFT_REPO = https://github.com/codam-coding-college/MLX42.git
 
 
