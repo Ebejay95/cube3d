@@ -6,7 +6,7 @@
 #    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/17 12:06:04 by ajehle           ###   ########.fr        #
+#    Updated: 2024/10/17 12:09:59 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -203,7 +203,7 @@ init-libft:
 		git submodule update --init --recursive $(LIBFT_DIR) || (echo "$(RED)Failed to update libft submodule$(X)" && exit 1); \
 	fi
 
-remove-submodules: remove-libft #remove-mlx
+remove-submodules: remove-libft remove-mlx
 
 remove-libft:
 	@if [ -d "$(LIBFT_DIR)" ]; then \
@@ -235,6 +235,7 @@ init-mlx:
 	fi
 
 $(MLXFT_LIB): init-mlx
+	@cd $(MLXFT_DIR) && git checkout tags/v2.3.4
 	@if [ ! -f "$(MLXFT_LIB)" ]; then \
 		echo "$(YELLOW)Building MLX42...$(X)"; \
 		mkdir -p $(MLXFT_BUILD_DIR); \
@@ -242,6 +243,7 @@ $(MLXFT_LIB): init-mlx
 		cmake --build $(MLXFT_BUILD_DIR) --parallel || \
 		(echo "$(RED)Failed to build MLX42$(X)" && exit 1); \
 	fi
+
 
 $(NAME): $(LIBFT_LIB) $(MLXFT_LIB) $(OBJECTS)
 	@$(CC) -o $@ $(OBJECTS) $(LIBFTFLAGS) -L$(MLXFT_BUILD_DIR) -lmlx42 $(MLXFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
