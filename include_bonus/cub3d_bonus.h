@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:13:28 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 22:03:20 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 14:49:34 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@
 # include <math.h>
 # include <pthread.h>
 # include <signal.h>
-
-// audio
-void			play_sound(pthread_t thread, void *(*play)(void *));
-void			*door_open(void *arg);
-void			*door_close(void *arg);
-void			*bg_music(void *arg);
-void			*good(void *arg);
 
 // ft_exit
 void			call_exit_map(t_game *game);

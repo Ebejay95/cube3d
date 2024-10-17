@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 15:24:15 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/14 20:42:16 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/17 14:49:49 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,5 @@ void	toggle_door(t_game *game, int map_x, int map_y)
 			return ;
 		door->open = !door->open;
 		update_door_on_map(game, door, map_x, map_y);
-		if (door->open)
-			play_sound(game->door_open_thread, door_open);
-		else
-			play_sound(game->door_close_thread, door_close);
 	}
 }
