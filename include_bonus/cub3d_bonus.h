@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:13:28 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/29 10:24:46 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 10:51:54 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,5 @@ int				is_door_open(t_game *game, int x, int y);
 int				get_pxl_clr(mlx_texture_t *texture, int x, int y);
 mlx_texture_t	*get_texture(t_game *game, t_ray ray);
 double			get_step_size(t_game *game, mlx_texture_t *texture, int height);
-int				get_xpos(t_game *g, t_ray ray, mlx_texture_t *texture);
 
 #endif
