@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:03:02 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/10 13:57:01 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 10:36:46 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**split_and_trim(char *str, char s)
 	split = ft_split(str, s);
 	while (split && split[i])
 	{
-		tmp_trm = ft_strtrim(split[i], " ");
+		tmp_trm = ft_strtrim(split[i], " \t");
 		free(split[i]);
 		split[i] = tmp_trm;
 		i++;
@@ -85,8 +85,8 @@ void	set_textr_meta(int *err, char *line, t_game *g, char ornttn)
 	int		fd;
 	char	*tmp_path;
 
-	tmp_path = get_textr_path(line, 3, err);
-	path = ft_strtrim(tmp_path, " ");
+	tmp_path = get_textr_path(trim_whitespace_and_newline(line), 3, err);
+	path = ft_strtrim(tmp_path, " \t");
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		(*err)++;
