@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:59:37 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 17:13:07 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 10:58:11 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ int	calculate_tex_x(float wall_x, mlx_texture_t *tex, t_ray ray)
 
 	wall_x = fmodf(wall_x, CELL);
 	tex_x = (int)(wall_x * tex->width / CELL);
-	if ((ray.verlen <= ray.horlen && is_looking_east(ray.current_angle))
-		|| (ray.verlen > ray.horlen && is_looking_south(ray.current_angle)))
+	if ((ray.verlen <= ray.horlen && is_looking_west(ray.current_angle)))
 	{
 		tex_x = tex->width - tex_x - 1;
 	}
