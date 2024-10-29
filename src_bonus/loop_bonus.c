@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:57:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 17:14:28 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 11:56:04 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,6 @@ void	key_hook(mlx_key_data_t kd, void *param)
 	}
 	game->is_pressed = (kd.action == MLX_PRESS || kd.action == MLX_REPEAT);
 	key_listener(game, kd, distance);
-	if (kd.key == MLX_KEY_ENTER && kd.action == MLX_PRESS)
-	{
-		game->animating_hand = true;
-		ft_printf("MLX_KEY_ENTER\n");
-	}
 }
 
 void	update_game_state(void *param)
@@ -80,7 +75,6 @@ void	update_game_state(void *param)
 	ft_surface(game);
 	ray_calculation(game);
 	render_minimap(game);
-	render_hand(game);
 }
 
 void	mouse_rotate(void *g)

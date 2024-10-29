@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:58:14 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 17:21:26 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 11:55:55 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ void	call_exit_map_textrs(t_game *game)
 		mlx_delete_texture(game->map->tex_south);
 	if (game->map->tex_door)
 		mlx_delete_texture(game->map->tex_door);
-	if (game->map->hand_one)
-		mlx_delete_texture(game->map->hand_one);
-	if (game->map->hand_two)
-		mlx_delete_texture(game->map->hand_two);
-	if (game->map->hand_three)
-		mlx_delete_texture(game->map->hand_three);
-	if (game->map->hand_four)
-		mlx_delete_texture(game->map->hand_four);
-	if (game->map->hand_five)
-		mlx_delete_texture(game->map->hand_five);
-	if (game->map->hand_six)
-		mlx_delete_texture(game->map->hand_six);
 }
 
 void	call_exit_map_textrs_addon(t_game *game)

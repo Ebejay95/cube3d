@@ -6,7 +6,7 @@
 /*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:03:01 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/29 10:36:08 by ajehle           ###   ########.fr       */
+/*   Updated: 2024/10/29 11:55:50 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,6 @@ void	get_map(t_game *game, int argc, char **argv)
 		call_exit(game);
 		return ;
 	}
-	game->map->hand_one = mlx_load_png("assets/hand_1.png");
-	game->map->hand_two = mlx_load_png("assets/hand_2.png");
-	game->map->hand_three = mlx_load_png("assets/hand_3.png");
-	game->map->hand_four = mlx_load_png("assets/hand_4.png");
-	game->map->hand_five = mlx_load_png("assets/hand_5.png");
-	game->map->hand_six = mlx_load_png("assets/hand_6.png");
 	if (validate_map(game, argv[1]) > 0)
 		call_exit(game);
 }

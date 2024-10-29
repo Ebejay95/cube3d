@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:12:20 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 17:28:49 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 11:54:37 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,6 @@ typedef struct s_map
 	mlx_texture_t	*tex_north;
 	mlx_texture_t	*tex_south;
 	mlx_texture_t	*tex_door;
-	mlx_texture_t	*hand_one;
-	mlx_texture_t	*hand_two;
-	mlx_texture_t	*hand_three;
-	mlx_texture_t	*hand_four;
-	mlx_texture_t	*hand_five;
-	mlx_texture_t	*hand_six;
 	uint32_t		ceiling;
 	uint32_t		floor;
 	int				ceiling_set;
@@ -149,9 +143,6 @@ typedef struct s_game
 	float				deltax;
 	float				deltay;
 	float				angle;
-	mlx_image_t			*hand_images[6];
-	int					current_hand_frame;
-	bool				animating_hand;
 	bool				is_pressed;
 	int32_t				mouse_x;
 	int32_t				mouse_y;
