@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:56:58 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 15:38:37 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 11:13:00 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_leaks(void)
 {
-	system("leaks cub3d");
+	system("leaks cub3D");
 }
 
 int	main(int argc, char **argv)
