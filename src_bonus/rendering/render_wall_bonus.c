@@ -6,7 +6,7 @@
 /*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 23:59:37 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/29 11:30:52 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 12:29:12 by jeberle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,18 @@ float	calculate_wall_x(t_ray ray)
 	return (ray.wall_hit_x);
 }
 
-int calculate_tex_x(float wall_x, mlx_texture_t *tex, t_ray ray)
+int	calculate_tex_x(float wall_x, mlx_texture_t *tex, t_ray ray)
 {
-    int tex_x;
-    wall_x = fmodf(wall_x, CELL);
-    tex_x = (int)(wall_x * tex->width / CELL);
+	int	tex_x;
 
-    // Spiegele für West- und Nordwände
-    if ((ray.verlen <= ray.horlen && is_looking_west(ray.current_angle)) ||
-        (ray.verlen > ray.horlen && is_looking_south(ray.current_angle)))
-    {
-        tex_x = tex->width - tex_x - 1;
-    }
-    return tex_x;
+	wall_x = fmodf(wall_x, CELL);
+	tex_x = (int)(wall_x * tex->width / CELL);
+	if ((ray.verlen <= ray.horlen && is_looking_west(ray.current_angle))
+		|| (ray.verlen > ray.horlen && is_looking_south(ray.current_angle)))
+	{
+		tex_x = tex->width - tex_x - 1;
+	}
+	return (tex_x);
 }
 
 void	wallpxls(t_wall_data *d)
