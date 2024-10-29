@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+         #
+#    By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/08 15:31:09 by ajehle            #+#    #+#              #
-#    Updated: 2024/10/29 10:16:23 by jeberle          ###   ########.fr        #
+#    Updated: 2024/10/29 10:33:00 by ajehle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -234,7 +234,7 @@ init-mlx:
 	fi
 
 $(MLXFT_LIB): init-mlx
-	@cd $(MLXFT_DIR) && git checkout tags/v2.3.4
+#	@cd $(MLXFT_DIR) && git checkout tags/v2.3.4
 	@if [ ! -f "$(MLXFT_LIB)" ]; then \
 		echo "$(YELLOW)Building MLX42...$(X)"; \
 		mkdir -p $(MLXFT_BUILD_DIR); \

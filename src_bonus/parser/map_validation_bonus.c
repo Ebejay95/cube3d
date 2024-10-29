@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeberle <jeberle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ajehle <ajehle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 00:03:01 by jeberle           #+#    #+#             */
-/*   Updated: 2024/10/17 15:12:32 by jeberle          ###   ########.fr       */
+/*   Updated: 2024/10/29 10:36:08 by ajehle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,6 @@ int	validate_map(t_game *game, char *filename)
 	if (problem)
 	{
 		call_exit(game);
-		return (1);
-	}
-	return (0);
-}
-
-int	validate_sprite(void)
-{
-	if (access("assets/hand_1.png", R_OK) != 0
-		&& access("assets/hand_2.png", R_OK) != 0
-		&& access("assets/hand_3.png", R_OK) != 0
-		&& access("assets/hand_4.png", R_OK) != 0
-		&& access("assets/hand_5.png", R_OK) != 0
-		&& access("assets/hand_6.png", R_OK) != 0
-	)
-	{
-		ft_putstr_fd(2, RED"cannot read from hand sprite files\n"D);
 		return (1);
 	}
 	return (0);
@@ -94,11 +78,6 @@ void	get_map(t_game *game, int argc, char **argv)
 	if (!game->map)
 		return ;
 	setup_game_stuff(game);
-	if (validate_sprite() > 0)
-	{
-		call_exit(game);
-		return ;
-	}
 	if (validate_input(argc, argv) > 0)
 	{
 		call_exit(game);
